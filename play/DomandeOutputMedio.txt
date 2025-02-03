@@ -1,0 +1,56 @@
+codice:
+import java.util.Scanner;
+class ValoriValidi{
+	public static void main (String[] args){
+	Scanner scan = new Scanner(System.in);
+	
+	System.out.println("Dammi un numero intero e ti diro' se e' valido:");
+		int numero;
+		do{
+			numero = scan.nextInt();
+			
+			if (numero >= 0 && numero <= 100){
+				System.out.println("Congratulazioni, il tuo numero e' valido!");	
+			}else{	
+				System.out.println("Mi dispiace, il numero non e' valido!\nRitenta.");
+			}
+		}
+		while(numero < 0|| numero > 100);
+	}
+}
+domanda:
+Se inserisco il valore 5 stampa "Congratulazioni, il tuo tuo numero e' valido!"
+risposta:
+vero
+**** 
+codice:
+import java.util.Scanner;
+public class Esercizio5{
+	public static void main(String[] args) {
+	Scanner scan = new Scanner(System.in);
+	
+	  System.out.println("Inserisci un numero: ");
+	  int x1 = scan.nextInt(); 
+	  System.out.println("Inserisci un altro numero: ");
+	  int x2 = scan.nextInt(); 
+	  
+	  System.out.println("Quanti numeri dispari vuoi generare?");
+      int count = scan.nextInt();
+
+      int numeriGenerati = 0;
+        
+      while (numeriGenerati < count) {
+      	int num_cas = (int) (x1 + Math.random() * (x2 - x1 + 1));
+            
+        if (num_cas % 2 != 0) { 
+      		System.out.println(num_cas);
+            numeriGenerati++; 
+        } 	  
+	  }
+	}
+}
+domanda:
+
+risposta:
+
+****

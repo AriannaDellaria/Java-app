@@ -1,0 +1,96 @@
+codice:
+class Esercizio1{
+	public static void main(String[] args){
+		String nome = "ciao!";
+		System.out.println(nome.indexOf("ao"));
+	}
+}
+////
+domanda:
+Il codice stampa "2"?
+risposta:
+Vero
+****
+codice:
+import java.util.Scanner;
+class Esercizio2{
+	public static void main(String[] args){
+	Scanner scan = new Scanner(System.in);
+	
+		System.out.println("dammi un numero");
+		int x = scan.nextInt();
+		
+		if(x > 0){
+			System.out.println(x % 2);
+		}	
+	}
+}
+////
+domanda:
+Se inserisco da tastiera 4, l'output è 2? 
+risposta:
+Falso
+****
+codice:
+class Esercizio3{
+	public static void main(String[] args){
+	int baseMaggiore = 9;
+	int baseMinore = 6;
+	int altezza = 3;
+	double area;
+	
+	area = (baseMinore + baseMaggiore)*altezza/2;
+	System.out.prinltn(area);
+	}
+}
+////
+domanda:
+L'output è 22.0?
+risposta:
+Vero
+****
+codice:
+import java.util.Scanner;
+class Esercizio4{
+	public static void main(String[] args){
+	Scanner scan = new Scanner(System.in);
+	
+		System.out.println("dammi un numero");
+		double x = scan.nextDouble();
+		
+		if(x <= 0){
+			x--;
+		}else{
+			x = Math.sqrt(x);
+		}	
+		System.out.println("nuovo x: " + x);
+	}
+}
+////
+domanda:
+Se inserisco 9, l'output è "nuovo x: 81"?
+risposta:
+Falso
+****
+codice:
+import java.util.Scanner;
+public class Esercizio5{
+	public static void main(String[] args) {
+	Scanner scan = new Scanner(System.in);
+	
+	  System.out.println("Inserisci un numero: ");
+	  int x1 = scan.nextInt(); 
+	  System.out.println("Inserisci un altro numero: ");
+	  int x2 = scan.nextInt(); 
+        
+      int num_cas = (int) (x1 + Math.random() * (x2 - x1 + 1));
+
+      System.out.println(num_cas);
+	}
+}
+////
+domanda:
+Se x1=4 e x2=6, l'output è sicuramente 5?
+risposta:
+Falso
+****

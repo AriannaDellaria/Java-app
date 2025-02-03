@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane style="-fx-background-color: #d6f1ff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefinizioniLivelliController">
+   <top>
+      <HBox alignment="TOP_RIGHT" prefHeight="82.0" prefWidth="900.0" BorderPane.alignment="TOP_RIGHT">
+         <children>
+            <Button fx:id="indietro" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#paginaPrecedente" onMouseEntered="#colorChangeYellow" onMouseExited="#colorChangeBasic" text="🡸" translateX="-5.0" translateY="3.0">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="close" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#closeButton" onMouseEntered="#colorChangeRed" onMouseExited="#colorChangeBasic" text="✘" translateX="-3.0" translateY="3.0">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox alignment="CENTER" centerShape="false" prefHeight="390.0" prefWidth="908.0" spacing="33.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#aa67d4" stroke="#712f96" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" text="Definizioni" textAlignment="CENTER" wrappingWidth="448.5368003845215" VBox.vgrow="NEVER">
+               <font>
+                  <Font name="Georgia Bold" size="45.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="-55.0" />
+               </VBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="L'esercizio, composto da una serie di domande a risposta multipla, consiste nel riuscire a prevedere l'output di un blocco di codice. &#10;Aiuta nella comprensione del linguaggio java e delle istruzioni di un codice." textAlignment="CENTER" wrappingWidth="567.665283203125" VBox.vgrow="NEVER">
+               <font>
+                  <Font name="Lucida Sans Unicode" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="#aa67d4" layoutX="236.0" layoutY="51.0" stroke="#712f96" strokeLineJoin="ROUND" strokeType="INSIDE" text="Scegli la difficoltà" textAlignment="CENTER" wrappingWidth="448.5368003845215" VBox.vgrow="NEVER">
+               <font>
+                  <Font name="Georgia Bold" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="34.0" />
+               </VBox.margin>
+            </Text>
+            <HBox alignment="CENTER" prefHeight="58.0" prefWidth="702.0" spacing="167.0">
+               <children>
+                  <Text fill="#43ae2b" strokeType="INSIDE" strokeWidth="0.0" text="LIVELLO BASE" textAlignment="CENTER" wrappingWidth="95.46054077148438" HBox.hgrow="NEVER">
+                     <font>
+                        <Font name="Georgia Bold" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#ff8800" layoutX="21.0" layoutY="80.0" strokeType="INSIDE" strokeWidth="0.0" text="LIVELLO INTERMEDIO" textAlignment="CENTER" wrappingWidth="143.46054077148438" HBox.hgrow="NEVER">
+                     <font>
+                        <Font name="Georgia Bold" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#ff0d00" layoutX="10.0" layoutY="72.0" strokeType="INSIDE" strokeWidth="0.0" text="LIVELLO AVANZATO" textAlignment="CENTER" wrappingWidth="126.66055297851562" HBox.hgrow="NEVER">
+                     <font>
+                        <Font name="Georgia Bold" size="19.0" />
+                     </font>
+                  </Text>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets left="116.0" right="90.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="111.0" prefWidth="908.0" spacing="18.0" VBox.vgrow="NEVER">
+               <children>
+                  <HBox alignment="TOP_CENTER" prefHeight="111.0" prefWidth="190.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="livelloBase1" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-border-color: #43ae2b; -fx-border-width: 2; -fx-border-radius: 40;" text="1" textFill="#43ae2b" HBox.hgrow="NEVER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" layoutX="101.0" layoutY="10.0" prefHeight="111.0" prefWidth="342.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="livelloMedio1" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-border-color: #ff8800; -fx-border-width: 2; -fx-border-radius: 40;" text="1" textFill="#ff8800" HBox.hgrow="NEVER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" layoutX="721.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="livelloAvanzato1" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-border-color: #ff0d00; -fx-border-width: 2; -fx-border-radius: 40;" text="1" textFill="#ff0d00" HBox.hgrow="NEVER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="69.0" right="62.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

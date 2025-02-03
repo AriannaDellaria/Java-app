@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #d6f1ff;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeController">
+   <top>
+      <HBox alignment="TOP_RIGHT" prefHeight="100.0" BorderPane.alignment="TOP_RIGHT">
+         <children>
+            <Button fx:id="indietro" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#paginaPrecedente" onMouseEntered="#colorChangeYellow" onMouseExited="#colorChangeBasic" text="🡸" translateX="-5.0" translateY="3.0">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="close" alignment="CENTER_RIGHT" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#closeButton" onMouseEntered="#colorChangeRed" onMouseExited="#colorChangeBasic" text="✘" translateX="-3.0" translateY="3.0">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
+               <children>
+                  <Label fx:id="primoEsercizio" onMouseClicked="#paginaPrimoEsercizio" text="Label" />
+                  <Label fx:id="secondoEsercizio" onMouseClicked="#paginaSecondoEsercizio" text="Label" />
+                  <Label fx:id="terzoEserczio" onMouseClicked="#paginaTerzoEsercizio" text="Label" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="69.0">
+               <children>
+                  <ProgressBar fx:id="pb1" prefWidth="300.0" progress="0.0" />
+                  <ProgressBar fx:id="pb2" prefWidth="300.0" progress="0.0" />
+                  <ProgressBar fx:id="pb3" prefWidth="300.0" progress="0.0" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
