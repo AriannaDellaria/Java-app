@@ -11,4 +11,4 @@ public abstract class DomandaConCodice extends Domanda {
 	public String getCodice() {
 		return codice;
 	}
-}  
+}

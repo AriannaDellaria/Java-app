@@ -268,9 +268,5 @@ package controller;
 	            	return null;
 	        }
 	    }
-	    
-	    private String getRispostaSelezionata(ComboBox<String> combo) {
-	        return combo.getValue();  // Restituisce la risposta selezionata (ad esempio "Vero", "Falso", o l'opzione scelta)
-	    }
-	}
+}
 	

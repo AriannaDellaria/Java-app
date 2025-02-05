@@ -44,7 +44,7 @@
                <children>
                   <HBox alignment="CENTER" fillHeight="false" spacing="20.0">
                      <children>
-                        <Label fx:id="domanda1" prefHeight="502.0" prefWidth="526.0" text="label">
+                        <Label fx:id="domanda1" prefHeight="502.0" prefWidth="506.0" text="label" wrapText="true">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
@@ -60,7 +60,7 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="209.0" spacing="20.0">
                      <children>
-                        <Label fx:id="domanda2" prefHeight="502.0" prefWidth="514.0" text="Label">
+                        <Label fx:id="domanda2" prefHeight="502.0" prefWidth="514.0" text="Label" wrapText="true">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
@@ -76,7 +76,7 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="20.0">
                      <children>
-                        <Label fx:id="domanda3" prefHeight="502.0" prefWidth="514.0" text="Label">
+                        <Label fx:id="domanda3" prefHeight="502.0" prefWidth="514.0" text="Label" wrapText="true">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
@@ -92,7 +92,7 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="20.0">
                      <children>
-                        <Label fx:id="domanda4" prefHeight="502.0" prefWidth="514.0" text="Label">
+                        <Label fx:id="domanda4" prefHeight="502.0" prefWidth="514.0" text="Label" wrapText="true">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
@@ -108,7 +108,7 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="9.0" spacing="20.0">
                      <children>
-                        <Label fx:id="domanda5" prefHeight="502.0" prefWidth="514.0" text="Label">
+                        <Label fx:id="domanda5" prefHeight="502.0" prefWidth="514.0" text="Label" wrapText="true">
                            <font>
                               <Font size="18.0" />
                            </font></Label>

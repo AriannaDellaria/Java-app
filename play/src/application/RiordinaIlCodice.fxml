@@ -71,16 +71,6 @@
                            <font>
                               <Font size="16.0" />
                            </font></Button>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-border-color: #43ae2b; -fx-border-width: 2; -fx-border-radius: 40;" text="2" textFill="#43ae2b">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-border-color: #43ae2b; -fx-border-width: 2; -fx-border-radius: 40;" text="3" textFill="#43ae2b">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Button>
                      </children>
                   </HBox>
                   <HBox alignment="TOP_CENTER" prefHeight="111.0" prefWidth="342.0" spacing="20.0">
@@ -90,30 +80,10 @@
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-border-color: #ff8800; -fx-border-width: 2; -fx-border-radius: 40;" text="2" textFill="#ff8800">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-border-color: #ff8800; -fx-border-width: 2; -fx-border-radius: 40;" text="3" textFill="#ff8800">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Button>
                      </children></HBox>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-border-radius: 40; -fx-border-color: #ff0d00; -fx-border-width: 2; -fx-background-radius: 50;" text="1" textFill="#ff0d00">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-border-color: #ff0d00; -fx-border-width: 2; -fx-border-radius: 40;" text="2" textFill="#ff0d00">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Button>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-border-color: #ff0d00; -fx-border-width: 2; -fx-background-radius: 50; -fx-border-radius: 40;" text="3" textFill="#ff0d00">
                            <font>
                               <Font size="16.0" />
                            </font>

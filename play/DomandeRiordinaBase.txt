@@ -1,0 +1,150 @@
+codice1: 
+System.out.println(a); 
+}
+////
+codice2: 
+a = 10;
+////
+codice3:
+int a; 
+////
+codice4:  
+public class Variabili { 
+	public static void main(String args[]) { 
+////
+domanda: 
+Esercizio 1
+risposta:
+4321
+****
+codice5: 
+Scanner scan = new Scanner(System.in);
+////
+codice6: 
+import java.util.Scanner;
+public class Esercizio5{
+	public static void main(String[] args) {
+////
+codice7: 
+System.out.println("Inserisci un numero: ");
+int x1 = scan.nextInt(); 
+System.out.println("Inserisci un altro numero: ");
+int x2 = scan.nextInt(); 
+////
+codice8: 
+ 	int num_cas = (int) (x1 + Math.random() * (x2 - x1 + 1));
+ 	System.out.println(num_cas);
+	}
+}
+////
+domanda: 
+Esercizio 2
+risposta: 
+2134
+****
+codice9: 
+ if (voto >= 60) {
+   System.out.println("Congratulazioni, hai passato l'esame!");
+ }
+ ////  
+codice10: 
+else if (voto >= 50) {
+  System.out.println("Sei vicino a passare, continua a studiare.");
+}
+////
+codice11:
+import java.util.Scanner;
+public class VerificaVoto {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Inserisci il tuo voto: ");
+        int voto = scanner.nextInt();
+////
+codice12: 
+		else {
+  			System.out.println("Mi dispiace, non hai passato l'esame.");
+ 		}
+	}
+}
+////
+domanda: 
+Esercizio 3
+risposta:
+3124
+****
+codice13: 
+default:
+   nomeGiorno = "Numero non valido, per favore inserisci un numero tra 1 e 7.";
+   break;
+////
+codice14:
+import java.util.Scanner;
+public class GiornoDellaSettimana {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Inserisci un numero (1-7) per rappresentare un giorno della settimana: ");
+        int giorno = scanner.nextInt();
+        String nomeGiorno;
+////
+codice15: 
+}
+ System.out.println("Il giorno della settimana è: " + nomeGiorno);
+    }
+}
+////
+codice16: 
+switch (giorno) {
+            case 1:
+                nomeGiorno = "Lunedì";
+                break;
+            case 2:
+                nomeGiorno = "Martedì";
+                break;
+            case 3:
+                nomeGiorno = "Mercoledì";
+                break;
+            case 4:
+                nomeGiorno = "Giovedì";
+                break;
+            case 5:
+                nomeGiorno = "Venerdì";
+                break;
+            case 6:
+                nomeGiorno = "Sabato";
+                break;
+            case 7:
+                nomeGiorno = "Domenica";
+                break;
+////
+domanda: 
+Esercizio 4
+risposta: 
+2413
+****
+codice17: 
+import java.util.Scanner;
+class OrdineTesto{
+	public static void main (String[] args){
+	Scanner scan = new Scanner(System.in);
+////
+codice18: 
+String primaParola = frase.substring(0, indicePrimoSpazio);
+ 	String restoFrase = frase.substring(indicePrimoSpazio);       
+ 	String nuovaFrase = restoFrase + " " + primaParola;
+ 	System.out.println("La nuova frase e': " + nuovaFrase);
+	}
+}
+////
+codice19: 
+int indicePrimoSpazio = frase.indexOf(' ');
+////
+codice20: 
+System.out.println("Inserisci una frase di cui la prima parola si spostera alla fine, senza punteggiatura");
+	String bozza = scan.nextLine();
+	String frase = bozza.trim();
+////
+domanda: 
+Esercizio 5
+risposta: 
+1432
+****

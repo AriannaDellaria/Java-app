@@ -26,4 +26,3 @@ public class DomandaDefinizioni extends Domanda {
 	}
     
 }
-

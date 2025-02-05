@@ -124,7 +124,7 @@ public class HomeController {
     @FXML
     void paginaTerzoEsercizio(MouseEvent event) {
     	try {
-            Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/OrdinaCodiceLivelli.fxml"));
+            Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/RiordinaLivelli.fxml"));
 
             Stage scenaCorrente = (Stage)secondoEsercizio.getScene().getWindow();
             
