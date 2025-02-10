@@ -8,19 +8,73 @@ import java.util.Scanner;
 public class Utente {
     private String username;
     private String password;
+    private String nome; 
+    private String cognome; 
     private double pg1; 
     private double pg2;
     private double pg3;
     
-
-    public Utente(String username, String password) {
+   /* public Utente(String nome, String cognome, String username, String password) {
+    	this.nome = nome; 
+    	this.cognome = cognome;
     	this.username = username;
         this.password = password;
         this.setPg1(0);
         this.setPg2(0);  
         this.setPg3(0); 
     }
+  */
+	public Utente( String username, String password) {
+    	this.username = username;
+        this.password = password;
+        this.setPg1(0);
+        this.setPg2(0);  
+        this.setPg3(0); 
+    }
+   
+    public String getNome() { 
+    	try {
+    		Scanner scf = new Scanner(new File("utenti.csv"));
+    		
+    		while (scf.hasNextLine()) {
+                String riga = scf.nextLine();
+                String[] dati = riga.split(",");
+                
+                // Verifica se l'utente loggato è quello trovato nel file
+                if (dati[2].trim().equals(this.username.trim())) {
+                    // Se l'utente è trovato, aggiorna i punteggi
+                    this.nome  = dati[0].trim(); 
+                    break;  // Uscita dal ciclo, abbiamo trovato l'utente
+                }
+            }
+            scf.close();
+        } catch (IOException e) {
+            System.out.println("Errore nella lettura del file: " + e.getMessage());
+        }
+		return nome;
+    }
     
+    public String getCognome() { 
+     	try {
+    		Scanner scf = new Scanner(new File("utenti.csv"));
+    		
+    		while (scf.hasNextLine()) {
+                String riga = scf.nextLine();
+                String[] dati = riga.split(",");
+                
+                // Verifica se l'utente loggato è quello trovato nel file
+                if (dati[2].trim().equals(this.username.trim())) {
+                    // Se l'utente è trovato, aggiorna i punteggi
+                    this.cognome  = dati[1].trim(); 
+                    break;  // Uscita dal ciclo, abbiamo trovato l'utente
+                }
+            }
+            scf.close();
+        } catch (IOException e) {
+            System.out.println("Errore nella lettura del file: " + e.getMessage());
+        }
+		return cognome;
+    }
     public String getUsername() {
         return username;
     }
@@ -111,6 +165,5 @@ public class Utente {
             System.out.println("Errore nella scrittura del file: " + e.getMessage());
         }
     }
+	
 }
-
-

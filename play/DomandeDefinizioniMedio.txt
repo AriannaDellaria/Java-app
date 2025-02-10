@@ -1,0 +1,75 @@
+opzioni: 
+Ciclo while
+Matrice
+Switch
+Metodo ricorsivo
+Ciclo do-while
+ArrayList
+Ciclo for
+Array
+////
+domanda: 
+Metodo che chiama sé stesso per risolvere un problema
+risposta:
+Metodo ricorsivo
+****
+opzioni: 
+Ciclo while
+Matrice
+Switch
+Metodo ricorsivo
+Ciclo do-while
+ArrayList
+Ciclo for
+Array
+////
+domanda:
+Struttura di controllo che permette di ripetere un blocco di istruzioni un numero specificato di volte
+risposta: 
+Ciclo for
+****
+opzioni: 
+Ciclo while
+Matrice
+Switch
+Metodo ricorsivo
+Ciclo do-while
+ArrayList
+Ciclo for
+Array
+////
+domanda:
+Struttura di controllo che permette di ripetere un blocco di istruzioni finché una condizione specificata è vera
+risposta:
+Ciclo while
+****
+opzioni: 
+Ciclo while
+Matrice
+Switch
+Metodo ricorsivo
+Ciclo do-while
+ArrayList
+Ciclo for
+Array
+////
+domanda:
+Struttura dati bidimensionale
+risposta:
+Matrice
+****
+opzioni: 
+Ciclo while
+Matrice
+Switch
+Metodo ricorsivo
+Ciclo do-while
+ArrayList
+Ciclo for
+Array
+////
+domanda: 
+Struttura dati che rappresenta una lista ridimensionabile di elementi.
+risposta: 
+ArrayList
+****

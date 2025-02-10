@@ -121,24 +121,28 @@ package controller;
 	            Scanner scf = new Scanner(new File("DomandeDefinizioniBase.txt"));
 	            String domanda = "";
 	            String risposta = "";
+	            String codice= "";
 	            ArrayList<String> opzioni = new ArrayList<>();
 	            
 	            while (scf.hasNextLine()) {
 	                String line = scf.nextLine().trim();
 
 	                if (line.startsWith("opzioni:")) {
+	                	codice = "";
 	                    opzioni.clear(); // Pulisce la lista delle opzioni
 	                    while (scf.hasNextLine()) {
 	                        line = scf.nextLine().trim();
 	                        if (line.equals("////")) {
 	                            break; // Fine della domanda
 	                        }
+	                        domanda += line + '\n';
 	                        opzioni.add(line);  // Aggiungi le opzioni
 	                    }
 	                }
 	                
 	                if (line.startsWith("domanda:")) {
 	                    domanda = scf.nextLine(); // Prendi la riga successiva per la domanda
+	                    domanda += line + '\n';
 	                }
 	                
 	                if (line.startsWith("risposta:")) {

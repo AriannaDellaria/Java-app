@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #d6f1ff;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefinizioniBaseController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #d6f1ff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefinizioniBaseController">
    <top>
       <VBox alignment="CENTER" prefHeight="96.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
@@ -29,7 +29,7 @@
                   </Button>
                </children>
             </HBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizza un blocco di codice e cercando di prevedere quello che potrebbe essere l'output, &#10;scegli la risposta corretta in un periodo di tempo limitato. &#10;" textAlignment="CENTER" wrappingWidth="898.9368214607239">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Leggi la definizione fornita e dal menù a tendina seleziona il termine che corrisponde a quella definizione" textAlignment="CENTER" wrappingWidth="751.4368214607239">
                <font>
                   <Font name="Georgia" size="17.0" />
                </font>
@@ -38,7 +38,7 @@
       </VBox>
    </top>
    <center>
-      <ScrollPane prefHeight="600.0" prefWidth="900.0">
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="600.0" prefWidth="900.0">
          <content>
             <VBox alignment="CENTER" spacing="10.0">
                <children>
@@ -63,7 +63,8 @@
                         <Label fx:id="domanda2" prefHeight="502.0" prefWidth="514.0" text="Label" wrapText="true">
                            <font>
                               <Font size="18.0" />
-                           </font></Label>
+                           </font>
+                        </Label>
                         <VBox alignment="CENTER_LEFT" prefHeight="303.0" prefWidth="353.0" spacing="7.0">
                            <HBox.margin>
                               <Insets left="150.0" />

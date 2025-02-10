@@ -1,7 +1,7 @@
 package controller;
 
-import java.io.IOException;
 
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,15 +19,16 @@ public class GiocaController {
     @FXML
     private Label start;
 
+    //chiude la scena 
     @FXML
     void closeButton(MouseEvent event) {
-        Stage stage = (Stage) close.getScene().getWindow(); //riprende la scena e lo stage 
-        stage.close(); //chiude la scena 
+        Stage stage = (Stage) close.getScene().getWindow(); //prende la scena corrente
+        stage.close(); 
     }
     
     @FXML
     void colorChangeRed(MouseEvent event) {
-    	close.setStyle("-fx-background-color: red;");
+    	close.setStyle("-fx-background-color: red;"); 
     }
 
     @FXML
@@ -38,21 +39,17 @@ public class GiocaController {
     @FXML
     void startGame(MouseEvent event) {
         try {
-        	// Parent è il tipo della variabile, è il primo nodo
-        	//il loader carica il file dell'interfaccia corrispondente
-            Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
+        	// Parent è il primo nodo (BorderPane)
+            Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/Login.fxml")); //il loader carica il file dell'interfaccia successiva
 
-            // event.getSource fa riferimento al label
-            Stage scenaCorrente = (Stage) start.getScene().getWindow();
+            Stage scenaCorrente = (Stage) start.getScene().getWindow(); //prende la scena corrente
             
+            //Crea la nuova scena
             //Modifica la scena corrente
             Scene nuovaScena = new Scene(scenaSuccessiva);
             scenaCorrente.setScene(nuovaScena);
-            scenaCorrente.setFullScreen(true);
-            scenaCorrente.setFullScreenExitHint("");
             scenaCorrente.show();
-        } catch (NullPointerException | IOException e) {
-        	System.out.println(e.getMessage()); 
+        } catch (NullPointerException | IOException e) { 
             System.out.println("Errore nel caricamento della schermata successiva!");
         }
     }

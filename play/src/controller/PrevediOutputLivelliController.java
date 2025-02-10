@@ -8,7 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sessione.SessioneGioco;
 
@@ -28,6 +30,9 @@ public class PrevediOutputLivelliController {
 
     @FXML
     private Button livelloMedio1;
+    
+    @FXML
+    private Label utente; 
     
     // Ottieni l'utente loggato dalla sessione Singleton
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
@@ -111,5 +116,31 @@ public class PrevediOutputLivelliController {
             e.printStackTrace();
         }
     }
+    
+    
+    @FXML
+    void popUpUtente() {
+    	    try {
+    	        // Ottieni il palco (Stage) della finestra principale
+    	        Stage stagePrincipale = (Stage) utente.getScene().getWindow();
+
+    	        // Carica il pop-up
+    	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/PopUpUtente.fxml"));
+    	        Parent popUp = loader.load();
+    	        
+    	        // Crea una nuova finestra (Stage) per il pop-up
+    	        Stage popUpStage = new Stage();
+    	        popUpStage.setScene(new Scene(popUp));
+
+    	        // Modalità per evitare l'interazione con la finestra principale
+    	        popUpStage.initModality(Modality.WINDOW_MODAL); 
+    	        popUpStage.initOwner(stagePrincipale); // La finestra principale è il proprietario del pop-up
+
+    	        popUpStage.show();  // Mostra il pop-up
+    	    }
+    	    catch (NullPointerException | IOException e) {
+    	        System.out.println("Errore nel caricamento della schermata successiva!");
+    	    }   
+	}
 
 }

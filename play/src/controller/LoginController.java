@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
 
 import dati.Utente;
@@ -14,37 +15,46 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sessione.SessioneGioco;
 
 public class LoginController {
 
     @FXML
-    private Button close;
-
-    @FXML
-    private Button indietro;
+    private Button close, indietro, login;
     
     @FXML
-    private Label signIn;
-    
+    private Label signIn, erroreDatiLogin, passwordDimenticata;
+     
     @FXML
-    private Button login;
+    private TextField usernameUtente, textField;
     
     @FXML
     private PasswordField passwordUtente;
     
     @FXML
-    private TextField usernameUtente;
+    private ToggleButton toggle;
+ 
     
-    @FXML
-    private Label erroreCompilazioneLogin;
-    
-    @FXML
-    private Label erroreDatiLogin;
-    
+    // Carica e inizializza le immagini 
+    private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioAperto.png")));
+    private final Image occhioChiuso = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioChiuso.png")));
 
+    //initialize -> metodo che viene chiamato automaticamente da javaFX per inizializzare gli elementi dell'interfaccia
+    @FXML
+    private void initialize() {
+        ImageView icon = new ImageView(occhioAperto); //ImageView -> consente di visualizzare l'immagine nell'interfaccia 
+        icon.setFitWidth(20); //larghezza
+        icon.setFitHeight(20); //altezza 
+        toggle.setGraphic(icon); 
+    }
+    
+    
     @FXML
     void colorChangeYellow(MouseEvent event) {
     	indietro.setStyle("-fx-background-color: yellow;");	
@@ -67,6 +77,7 @@ public class LoginController {
         stage.close(); 
     }
 
+    //torna alla pagina precedente (Gioca)
     @FXML
     void paginaPrecedente(MouseEvent event) {
     	try {
@@ -76,8 +87,6 @@ public class LoginController {
 
             Scene vecchiaScena = new Scene(scenaPrecedente);
             scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.setFullScreen(true);
-            scenaCorrente.setFullScreenExitHint("");
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) {
             System.out.println("Errore nel caricamento della schermata precedente!");
@@ -87,36 +96,40 @@ public class LoginController {
     @FXML
     void accesso(MouseEvent event) {
     
-        String username = usernameUtente.getText();
+    	//recuperano username e password scritti nei textField
+        String username = usernameUtente.getText(); 
         String password = passwordUtente.getText();
         
+        //se uno dei due campi è vuoto, viene segnalato l'errore all'utente
     	if(username.isEmpty() || password.isEmpty()) {
-    		erroreCompilazioneLogin.setVisible(true); 
+    		erroreDatiLogin.setText("Attenzione! Tutti i campi devono essere compilati"); 
         	return;	
     	}
-        		
+        
+    	//se l'autenticazione non è andata a buon fine, viene segnalato all'utente
     	if(!autenticazione(username, password)) {
-    		erroreDatiLogin.setVisible(true); 
-    		usernameUtente.clear();
-            passwordUtente.clear();
+    		erroreDatiLogin.setText("Attenzione! Username o password errati"); 
+    		usernameUtente.clear(); //pulisce il campo dell'username 
+            passwordUtente.clear(); //pulisce il campo della password
     	    return;
-    	}else{
+    	}
+    	
+    	else{
     		// Login riuscito, crea l'oggetto Utente e salva nella sessione
     	    Utente utente = new Utente(username, password);
-    	    SessioneGioco sessioneGioco = SessioneGioco.getInstance(); // Ottieni la sessione Singleton
+    	    //getIstance() -> metodo che restituisce una e una sola istanza della classe 
+    	    SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     	    sessioneGioco.setUtenteLoggato(utente);
     	    utente.recuperaSalvataggio();
 
             //passa alla schermata succcessiva
             try {
-                Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/Home.fxml")); //da modificare nome filefxml
+                Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/Home.fxml")); 
 
                 Stage scenaCorrente = (Stage) login.getScene().getWindow();
                 
                 Scene nuovaScena = new Scene(scenaSuccessiva);
                 scenaCorrente.setScene(nuovaScena);
-                scenaCorrente.setFullScreen(true);
-                scenaCorrente.setFullScreenExitHint("");
                 scenaCorrente.show();
             } catch (NullPointerException | IOException e) {
                 System.out.println("Errore nel caricamento della schermata successiva!");
@@ -136,7 +149,7 @@ public class LoginController {
     			String passwordFile = tokens[3];
     			
     			if (usernameFile.equals(username) && passwordFile.equals(password)) {
-                    return true; // Login riuscito
+                    return true;
                 }
     		}
     		scf.close();
@@ -147,6 +160,7 @@ public class LoginController {
     	return false;
     }
     
+    
     @FXML
     void registrazione(MouseEvent event) {
     	try {
@@ -156,13 +170,49 @@ public class LoginController {
 
             Scene nuovaScena = new Scene(scenaSuccessiva);
             scenaCorrente.setScene(nuovaScena);
-            scenaCorrente.setFullScreen(true);
-            scenaCorrente.setFullScreenExitHint("");
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) {
             System.out.println("Errore nel caricamento della schermata successiva!");
         }
     }
+   
+    //il bottone consente di visualizzare o meno la password inserita dall'utente
+    @FXML
+    void visibilita(MouseEvent event) {
+        if(toggle.isSelected()) { 
+        	 passwordUtente.setVisible(false); 
+        	 ImageView icon1 = new ImageView(occhioChiuso);
+        	 icon1.setFitWidth(20);
+             icon1.setFitHeight(20);
+        	 toggle.setGraphic(icon1); 
+        	 textField.setText(passwordUtente.getText()); 
+        	 textField.setVisible(true);
+        }
+        else { 
+        	passwordUtente.setVisible(true); 
+       	 	ImageView icon2 = new ImageView(occhioAperto);
+       	 	icon2.setFitWidth(20);
+            icon2.setFitHeight(20);
+       	 	toggle.setGraphic(icon2); 
+       	 	textField.setVisible(false);
+        }
+    }
+    
+    @FXML
+    void recuperaPassword(MouseEvent event) {
+    	try {
+	        Stage stagePrincipale = (Stage) passwordDimenticata.getScene().getWindow();
+	        
+	        Parent popUp =  FXMLLoader.load(getClass().getResource("/application/PopUpRecuperaPassword.fxml"));// Carica il popUp
+	       
+	        Stage popUpStage = new Stage();
+	        popUpStage.setScene(new Scene(popUp));
+	        popUpStage.initModality(Modality.WINDOW_MODAL); //non permette l'interazione con la finestra sottostante
+	        popUpStage.initOwner(stagePrincipale); //la finestra sottostante è il genitore del popUp
+	        popUpStage.show();
+	    }
+	    catch (NullPointerException | IOException e) {
+	        System.out.println("Errore nel caricamento della schermata successiva!" + e.getMessage());
+	    }  
+    }
 }
-
-//ciao a tutti

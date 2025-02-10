@@ -1,0 +1,128 @@
+codice1: 
+import java.util.Scanner; 
+public class While { 
+	public static void main(String[] args) { 
+	Scanner scan = new Scanner(System.in); 
+	int conteggio, n; 
+////
+codice2: 
+System.out.println("inserisci un numero"); 
+n = scan.nextInt(); 
+conteggio = 1; 
+////
+codice3: 
+while(conteggio<=n) { 
+	System.out.println(conteggio + ','); 
+	conteggio++; 
+} 
+////
+codice4:
+System.out.println("Sorpresa!"); 
+} 
+} 
+////
+domanda: 
+Esercizio 1
+risposta: 
+1234
+****
+codice5:
+int i = 11; 
+//// 
+codice6: 
+	while(i<10); 
+	} 
+ } 
+}
+////
+codice7:
+do { 
+System.out.println(i); 
+i++; 
+} 
+////
+codice8: 
+public class doWhile { 
+	public static void main(String[] args) { 
+////
+domanda: 
+Esercizio 2
+risposta: 
+4132
+****
+codice9: 
+public class for {
+	public static void main(String[] args) {  
+////
+codice10: 
+System.out.println("il numero pari è " + i); 
+	}
+   }
+  }
+ }
+////
+codice11: 
+if(i % 2 == 0)  {
+////
+codice12: 
+for(int i = -7; i <= 7; i++) {	
+////
+domanda: 
+Esercizio 3
+risposta: 
+1432
+****
+codice13: 
+if (i == 5) 
+break; 
+System.out.println(i); 
+////
+codice14:
+for(int i = 1; i <= 10; i++) { 
+////
+codice15:
+public class EsercizioFor { 
+	public static void main(String[] args) {
+	for(int j = 1; j <= 10; j++) {
+////
+codice16:
+	}
+	System.out.println("Fuori dal ciclo interno"); 
+   } 
+System.out.println("Fuori dal ciclo"); 
+}
+}
+////
+domanda: 
+Esercizio 4
+risposta: 
+3214
+****
+codice17: 
+for(int i = 0; i < a.length; i++) { 
+	System.out.println("inseirsci un numero nella posizione i " + i + " dell'array"); 
+	a[i] = scan.nextInt(); 
+} 
+////
+codice18: 
+int a[] = new int [N]; 
+////
+codice19:
+System.out.println(Arrays.toString(a)); 
+} 
+} 
+////
+codice20: 
+import java.util.Scanner; 
+import java.util.Arrays; 
+public class EserciziArray { 
+	public static void main(String[] args) { 
+	Scanner scan = new Scanner(System.in); 
+	System.out.println("inserisci la lunghezza del vettore: "); 
+	int a[] = new int[N]; 
+////
+domanda:
+Esercizio 5
+risposta: 
+4213
+****

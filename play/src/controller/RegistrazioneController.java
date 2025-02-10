@@ -1,50 +1,55 @@
 package controller;
 
 import java.io.*;
-import java.util.Scanner;
-
+import java.util.Objects;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class RegistrazioneController {
 
-	   @FXML
-	    private Button close;
+	@FXML
+    private TextField nomeUtente,cognomeUtente,usernameUtente,textField;
 
-	    @FXML
-	    private TextField cognomeUtente;
+    @FXML
+    private Text erroreCompilazioneRegistrazione, errorePassword, usernameEsistente;
 
-	    @FXML
-	    private Button indietro;
+    @FXML
+    private PasswordField passwordField, passwordUtente;
 
-	    @FXML
-	    private TextField nomeUtente;
+    @FXML
+    private Button salvaButton, close, indietro;
 
-	    @FXML
-	    private TextField passwordUtente;
+    @FXML
+    private ToggleButton toggle;
 
-	    @FXML
-	    private Button salvaButton;
+    private File file = new File("utenti.csv"); 
 
-	    @FXML
-	    private TextField usernameUtente;
     
-	    @FXML
-	    private Label erroreCompilazioneRegistrazione;
-	    
-	    @FXML
-	    private Label errorePassword; 
-	    
-	    private File file = new File("utenti.csv"); 
+    // Caricamento immagini
+    private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioAperto.png")));
+    private final Image occhioChiuso = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioChiuso.png")));
 
+    @FXML
+    private void initialize() {
+        // Crea e imposta l'icona iniziale (occhio chiuso)
+        ImageView icon = new ImageView(occhioAperto);
+        icon.setFitWidth(20);
+        icon.setFitHeight(20);
+        toggle.setGraphic(icon); 
+    }
+    
     @FXML
     void closeButton(MouseEvent event) {
         Stage stage = (Stage) close.getScene().getWindow();  
@@ -67,17 +72,7 @@ public class RegistrazioneController {
     	close.setStyle("");
     	salvaButton.setStyle("");
     }
-     
-     @FXML
-     void colorChangeGreen(MouseEvent event) {
-    	 salvaButton.setStyle("-fx-background-color: #0fcc58;");
-     }
-     
-     @FXML
-     void colorChangeBasic2(MouseEvent event) {
-     	salvaButton.setStyle("");
-     }
-     
+  
     @FXML
     void paginaPrecedente(MouseEvent event) {
     	try {
@@ -87,8 +82,6 @@ public class RegistrazioneController {
 
             Scene vecchiaScena = new Scene(scenaPrecedente);
             scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.setFullScreen(true);
-            scenaCorrente.setFullScreenExitHint("");
             scenaCorrente.show();
         } catch (IOException e) {
             System.out.println("Errore nel caricamento della schermata precedente!");
@@ -102,96 +95,101 @@ public class RegistrazioneController {
         String cognome = cognomeUtente.getText();
         String username = usernameUtente.getText();
         String password = passwordUtente.getText();
+        String confermaPassword = passwordField.getText(); 
         
-        if (nome.isEmpty() || cognome.isEmpty() || username.isEmpty() || password.isEmpty()) {
+        
+        boolean vuoto = false; 
+        if (nome.isEmpty() || cognome.isEmpty() || username.isEmpty() || password.isEmpty() || confermaPassword.isEmpty()) {
         	erroreCompilazioneRegistrazione.setVisible(true); 
-        	return; // Ferma l'esecuzione se ci sono errori
+        	vuoto = true; 
+        }else { 
+        	erroreCompilazioneRegistrazione.setVisible(false); 
         }
        
-        else if(password.length() <= 8) { 
+        
+        boolean uguali = false; 
+        if(password.length() <= 7 || !password.equals(confermaPassword)) { 
         	errorePassword.setVisible(true); 
-        	return;
+        	uguali = true; 
+        }else { 
+        	errorePassword.setVisible(false); 
         }
         
-        else {
-        	if(saveToFile(nome, cognome, username, password)) {
-				nomeUtente.clear();
-				cognomeUtente.clear();
-				usernameUtente.clear();
-				passwordUtente.clear();
-				erroreCompilazioneRegistrazione.setVisible(false); 
-				errorePassword.setVisible(false);
-				
-				try {
-		           
-					Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
-
-		            Stage scenaCorrente = (Stage) salvaButton.getScene().getWindow();
-
-		            Scene vecchiaScena = new Scene(scenaPrecedente);
-		            scenaCorrente.setScene(vecchiaScena);
-		            scenaCorrente.setFullScreen(true);
-		            scenaCorrente.setFullScreenExitHint("");
-		            scenaCorrente.show();
-		            
-		            Parent popUp = FXMLLoader.load(getClass().getResource("/application/PopUp.fxml")); 
-
-		            Stage popUpStage = new Stage();
-		            popUpStage.setScene(new Scene(popUp));
-		            
-		            popUpStage.initModality(Modality.WINDOW_MODAL); //non permette all'utente di interagire con ila finestra principale
-		            popUpStage.initOwner(scenaCorrente); //mantiene il popup in primo piano e lo chiude se viene chiusa la scena genitore
-		            popUpStage.show();
-		            
-		        } catch (NullPointerException | IOException e) {
-		            System.out.println("Errore nel caricamento della schermata successiva!");
-		        }
-			}else{
-				erroreCompilazioneRegistrazione.setText("Username già esistente.");
-			    erroreCompilazioneRegistrazione.setVisible(true);
-			    return;
-			}
-        }
         
-    }
+        boolean trovato = false; 
+        File file = new File("utenti.csv");	
         
-    // Metodo per salvare i dati nel file
-     boolean saveToFile(String nome, String cognome, String username, String password){
-    	 
-    	if (usernameGiaPreso(username)) {
-             return false; // Username già esistente
-        } 
-    	
-        try (PrintWriter writer = new PrintWriter(new FileWriter(file, true))) { //scrive sul file
-            writer.write(nome + "," + cognome + "," + username + "," + password + "," + 0.0 + "," + 0.0 + "," + 0.0);
-            writer.println(); // Aggiungi una nuova riga
-        }
-        catch(IOException e) {
-        	System.out.println("Errore nel salvataggio");
-        }
-        return true;
-    }
-
-    private boolean usernameGiaPreso(String username){
-    	
-    	if (!file.exists()) {
-            return false; // Se il file non esiste, l'username è disponibile
-        }
-        try {
-        	Scanner scf = new Scanner(new File("utenti.csv"));
-            while (scf.hasNextLine()) {
-                String riga = scf.nextLine();
-                String[] tokens = riga.split(",");
-                if (tokens[2].equals(username)) { 
-                    return true; // Username già esistente
-                }  
+        try(BufferedReader reader = new BufferedReader(new FileReader("utenti.csv"))) {
+   		 String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] dati = linea.split(",");
+                
+                if (dati[2].equals(username)) {
+                	trovato = true;
+                	usernameEsistente.setVisible(true);
+                	break;
+                }
             }
-           scf.close(); 
-        }catch (IOException e) {
-            System.out.println("errore lettura file, user");
+            if(trovato == false) { 
+            	usernameEsistente.setVisible(false);
+            }
+        }catch(IOException e) {
+            System.out.println("Errore nella lettura del file!"); 
         }
-        return false; // Username disponibile
-    }   
+                
+        
+       if(vuoto == false && uguali == false && trovato == false) {
+				
+    	   try (PrintWriter writer = new PrintWriter(new FileWriter(file, true))) { //scrive sul file
+               writer.println(); // Aggiungi una nuova riga
+               writer.write(nome + "," + cognome + "," + username + "," + password + "," + 0.0 + "," + 0.0 + "," + 0.0);
+           
+    	   } catch(IOException e) {
+           		System.out.println("Errore nel salvataggio");
+           }
+           
+    	   try {    
+				Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
+
+	            Stage scenaCorrente = (Stage) salvaButton.getScene().getWindow();
+
+	            Scene vecchiaScena = new Scene(scenaPrecedente);
+	            scenaCorrente.setScene(vecchiaScena);
+	            scenaCorrente.show();
+	            
+	            Parent popUp = FXMLLoader.load(getClass().getResource("/application/PopUp.fxml")); 
+
+	            Stage popUpStage = new Stage();
+	            popUpStage.setScene(new Scene(popUp));
+	            popUpStage.initModality(Modality.WINDOW_MODAL); 
+	            popUpStage.initOwner(scenaCorrente); 
+	            popUpStage.show();
+	            
+	        } catch (NullPointerException | IOException e) {
+	            System.out.println("Errore nel caricamento della schermata successiva!");
+	        }
+        } 
+    }
+    
+    @FXML
+    void visibilita(MouseEvent event) {
+        if(toggle.isSelected()) { 
+        	 passwordField.setVisible(false); 
+        	 ImageView icon1 = new ImageView(occhioChiuso);
+        	 icon1.setFitWidth(20);
+             icon1.setFitHeight(20);
+        	 toggle.setGraphic(icon1); 
+        	 textField.setText(passwordField.getText()); 
+        	 textField.setVisible(true);
+        }else { 
+        	passwordField.setVisible(true); 
+       	 	ImageView icon2 = new ImageView(occhioAperto);
+       	 	icon2.setFitWidth(20);
+            icon2.setFitHeight(20);
+       	 	toggle.setGraphic(icon2); 
+       	 	textField.setVisible(false);
+        }
+    }
 }
 
 
