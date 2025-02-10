@@ -2,7 +2,7 @@ codice:
 
 ////
 domanda:
-
+file leggere
 opzioni:
 
 ++++
@@ -13,7 +13,7 @@ codice:
 
 ////
 domanda:
-
+file scrivere
 opzioni:
 
 ++++
@@ -24,7 +24,7 @@ codice:
 
 ////
 domanda:
-
+classi semplice
 opzioni:
 
 ++++
@@ -35,7 +35,7 @@ codice:
 
 ////
 domanda:
-
+eccezioni
 opzioni:
 
 ++++
@@ -46,7 +46,7 @@ codice:
 
 ////
 domanda:
-
+arraylist
 opzioni:
 
 ++++
