@@ -3,9 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Scanner;
-
 import dati.Utente;
-
 import java.io.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +39,7 @@ public class LoginController {
     private ToggleButton toggle;
  
     
-    // Carica e inizializza le immagini 
+    //carica e inizializza le immagini 
     private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioAperto.png")));
     private final Image occhioChiuso = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioChiuso.png")));
 
@@ -51,9 +49,19 @@ public class LoginController {
         ImageView icon = new ImageView(occhioAperto); //ImageView -> consente di visualizzare l'immagine nell'interfaccia 
         icon.setFitWidth(20); //larghezza
         icon.setFitHeight(20); //altezza 
-        toggle.setGraphic(icon); 
-    }
-    
+        toggle.setGraphic(icon);
+       
+        //metodo che consente di sincronizzare passwordField e textField
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+        	 passwordUtente.setText(newValue);
+        });
+        
+        passwordUtente.textProperty().addListener((observable, oldValue, newValue) -> {
+                if (!toggle.isSelected()) {
+                    textField.setText(newValue);
+                }
+        });
+     }
     
     @FXML
     void colorChangeYellow(MouseEvent event) {
@@ -102,15 +110,18 @@ public class LoginController {
         
         //se uno dei due campi è vuoto, viene segnalato l'errore all'utente
     	if(username.isEmpty() || password.isEmpty()) {
-    		erroreDatiLogin.setText("Attenzione! Tutti i campi devono essere compilati"); 
+    		erroreDatiLogin.setText("Attenzione! Tutti i campi devono essere compilati");
+    		erroreDatiLogin.setVisible(true); 
         	return;	
     	}
         
     	//se l'autenticazione non è andata a buon fine, viene segnalato all'utente
     	if(!autenticazione(username, password)) {
     		erroreDatiLogin.setText("Attenzione! Username o password errati"); 
+    		erroreDatiLogin.setVisible(true); 
     		usernameUtente.clear(); //pulisce il campo dell'username 
             passwordUtente.clear(); //pulisce il campo della password
+            textField.clear(); 
     	    return;
     	}
     	
@@ -154,7 +165,7 @@ public class LoginController {
     		}
     		scf.close();
     		
-    	}catch(IOException e) {
+    	} catch(IOException e) {
         	System.out.println("Errore nella lettura del file");
         }
     	return false;
@@ -184,11 +195,9 @@ public class LoginController {
         	 ImageView icon1 = new ImageView(occhioChiuso);
         	 icon1.setFitWidth(20);
              icon1.setFitHeight(20);
-        	 toggle.setGraphic(icon1); 
-        	 textField.setText(passwordUtente.getText()); 
+        	 toggle.setGraphic(icon1);  
         	 textField.setVisible(true);
-        }
-        else { 
+        } else { 
         	passwordUtente.setVisible(true); 
        	 	ImageView icon2 = new ImageView(occhioAperto);
        	 	icon2.setFitWidth(20);
@@ -210,8 +219,7 @@ public class LoginController {
 	        popUpStage.initModality(Modality.WINDOW_MODAL); //non permette l'interazione con la finestra sottostante
 	        popUpStage.initOwner(stagePrincipale); //la finestra sottostante è il genitore del popUp
 	        popUpStage.show();
-	    }
-	    catch (NullPointerException | IOException e) {
+    	} catch (NullPointerException | IOException e) {
 	        System.out.println("Errore nel caricamento della schermata successiva!" + e.getMessage());
 	    }  
     }

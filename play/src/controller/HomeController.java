@@ -18,37 +18,16 @@ import sessione.SessioneGioco;
 public class HomeController {
 
     @FXML
-    private Button close;
+    private Button close, indietro;
+    
+    @FXML
+    private ProgressBar pb1, pb2, pb3;
 
     @FXML
-    private Button indietro;
-    
-    @FXML
-    private ProgressBar pb1;
-
-    @FXML
-    private ProgressBar pb2;
-
-    @FXML
-    private ProgressBar pb3;
-    
-    @FXML
-    private Label primoEsercizio;
-
-    @FXML
-    private Label secondoEsercizio;
-
-    @FXML
-    private Label terzoEsercizio;
-    
-    @FXML
-    private Label utente;
-    
-    
-    
- // Ottieni l'utente loggato dalla sessione Singleton
-    SessioneGioco sessioneGioco = SessioneGioco.getInstance();
-    Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
+    private Label primoEsercizio, secondoEsercizio, terzoEsercizio, utente;
+  
+    SessioneGioco sessioneGioco = SessioneGioco.getInstance();  //getIstance() -> restituisce una e una sola istanza della classe
+    Utente utenteCorrente = sessioneGioco.getUtenteLoggato(); //recupera i dati dell'utente che ha effettuato il login
     
     
     @FXML
@@ -82,8 +61,6 @@ public class HomeController {
 
             Scene vecchiaScena = new Scene(scenaPrecedente);
             scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.setFullScreen(true);
-            scenaCorrente.setFullScreenExitHint("");
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) {
             System.out.println("Errore nel caricamento della schermata precedente!");
@@ -91,7 +68,6 @@ public class HomeController {
     }
  
     
-
     @FXML
     void paginaPrimoEsercizio(MouseEvent event) {
     	try {
@@ -111,7 +87,7 @@ public class HomeController {
     @FXML
     void paginaSecondoEsercizio(MouseEvent event) {
     	  try {
-              Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/PrevediOutputLivelli.fxml"));
+              Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/OutputLivelli.fxml"));
 
               Stage scenaCorrente = (Stage)secondoEsercizio.getScene().getWindow();
               
@@ -147,39 +123,29 @@ public class HomeController {
     }
 
     private void aggiornaProgressBar() {
-    	 // Recupera i punteggi
-        double progresso1 = utenteCorrente.getPg1(); // Recupera pg1
-        double progresso2 = utenteCorrente.getPg2(); // Recupera pg2
-        double progresso3 = utenteCorrente.getPg3(); // Recupera pg3 (aggiunto per esempio)
+        double progresso1 = utenteCorrente.getPg1(); //recupera il punteggio pg1 -> (pg indica il punteggio globale)
+        double progresso2 = utenteCorrente.getPg2(); 
+        double progresso3 = utenteCorrente.getPg3(); 
 
-        // Imposta i valori nelle ProgressBar corrispondenti
-        pb1.setProgress(progresso1); // Aggiorna la ProgressBar per pg1
-        pb2.setProgress(progresso2); // Aggiorna la ProgressBar per pg2
-        pb3.setProgress(progresso3); // Aggiorna la ProgressBar per pg3 (se hai una ProgressBar per pg3) 	 
+        pb1.setProgress(progresso1); //aggiorna la progress bar pb1
+        pb2.setProgress(progresso2); 
+        pb3.setProgress(progresso3);  
     }
     
     @FXML
     void popUpUtente() {
     	    try {
-    	        // Ottieni il palco (Stage) della finestra principale
-    	        Stage stagePrincipale = (Stage) utente.getScene().getWindow();
+    	        Stage paginaCorrente = (Stage) utente.getScene().getWindow();
 
-    	        // Carica il pop-up
-    	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/PopUpUtente.fxml"));
-    	        Parent popUp = loader.load();
+    	        Parent popUp = FXMLLoader.load(getClass().getResource("/application/PopUpUtente.fxml"));
     	        
-    	        // Crea una nuova finestra (Stage) per il pop-up
     	        Stage popUpStage = new Stage();
     	        popUpStage.setScene(new Scene(popUp));
-
-    	        // Modalità per evitare l'interazione con la finestra principale
     	        popUpStage.initModality(Modality.WINDOW_MODAL); 
-    	        popUpStage.initOwner(stagePrincipale); // La finestra principale è il proprietario del pop-up
-
-    	        popUpStage.show();  // Mostra il pop-up
-    	    }
-    	    catch (NullPointerException | IOException e) {
-    	        System.out.println("Errore nel caricamento della schermata successiva!");
+    	        popUpStage.initOwner(paginaCorrente); 
+    	        popUpStage.show(); 
+    	    } catch (NullPointerException | IOException e) {
+    	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
     	    }   
 	}
 }

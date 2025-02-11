@@ -7,16 +7,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class PopUpPunteggioOutputController {
+public class PopUpPunteggioController {
 
     @FXML
     private Button close;
     
     @FXML
-    private Label fraseEsito;
-
-    @FXML
-    private Label frasePunteggio;
+    private Label fraseEsito, frasePunteggio;
     
     @FXML
     private BorderPane sfondo;
@@ -45,7 +42,7 @@ public class PopUpPunteggioOutputController {
     		fraseEsito.setText("Congratulazioni!\n Esercizio superato con successo.");
     		frasePunteggio.setTextFill(javafx.scene.paint.Color.web("#399c51"));
     		
-    	}else {
+    	} else {
     		sfondo.setStyle("-fx-background-color: #ffcccc");
     		fraseEsito.setTextFill(javafx.scene.paint.Color.web("red"));
     		fraseEsito.setText("Mi dispiace!\n Esercizio non superato.");

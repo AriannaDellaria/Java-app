@@ -1,18 +1,16 @@
 package domanda;
 
-import java.util.ArrayList;
-
-public class DomandaRiordina extends Domanda {
+public class DomandaClassica extends Domanda {
 	private String rispostaCorretta; 
 	
-	public DomandaRiordina(String testoDomanda, String rispostaCorretta) {
+	public DomandaClassica(String testoDomanda, String rispostaCorretta) {
         super(testoDomanda);
         this.rispostaCorretta = rispostaCorretta; 
     }
 	
 	@Override
 	public boolean verificaRisposta(String rispostaUtente) {
-		return rispostaUtente.equals(this.rispostaCorretta);
+		return rispostaUtente.equalsIgnoreCase(this.rispostaCorretta);
 	}
 	
 	public String getRispostaCorretta() { 

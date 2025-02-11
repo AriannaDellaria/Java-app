@@ -1,55 +1,224 @@
 codice:
+class Greeter {
+    private String name;
 
+    Greeter() {
+        this("World");
+    }
+
+    Greeter(String name) {
+        this.name = formattazioneNome(name);
+    }
+
+    public String sayHello() {
+        return "Hello, " + this.name + "!";
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = formattazioneNome(name);
+    }
+
+    private static String formattazioneNome(String name) {
+        if (name == null || name.isBlank()) {
+            return "World";
+        }
+        return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+    }
+}
+
+public class Esercizio1 {
+    public static void main(String[] args) {
+        Greeter g1 = new Greeter("paolo");
+        System.out.print(g1.sayHello());
+
+        Greeter g2 = new Greeter();
+        System.out.print(g2.sayHello());
+
+        Greeter g3 = new Greeter("GiOvAnNa");
+        g3.setName("maRia");
+        System.out.print(g3.sayHello());
+
+        Greeter g4 = new Greeter("");
+        System.out.print(g4.sayHello());
+    }
+}
 ////
 domanda:
-file leggere
+Chi verrà salutato dal programma?
 opzioni:
-
+Hello, Paolo!Hello, World!Hello, Maria!Hello, !
+Hello, paolo!Hello, World!Hello, maria!Hello, World!
+Hello, Paolo!Hello, World!Hello, Maria!Hello, World!
+Hello, Paolo!Hello, World!Hello, Giovanna!Hello, World!
 ++++
 risposta:
-
+Hello, Paolo!Hello, World!Hello, Maria!Hello, World!
 ****
 codice:
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
+public class Esercizio2 {
+    public static void main(String[] args) {
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Quanti anni hai?");
+            String inputLine = in.readLine();
+            int age = Integer.parseInt(inputLine);
+            age++;
+            System.out.println("Il prossimo anno avrai " + age + " anni");
+        } 
+        catch (IOException exception) {
+            System.out.println("I/O exception " + exception);
+        } 
+        catch (NumberFormatException exception) {
+            System.out.println("Input was not a number");
+        } 
+        finally {
+            System.out.println("Programma concluso.");
+        }
+    }
+}
 ////
 domanda:
-file scrivere
+Se l'utente inserisce "venti", quale sarà l'output?
 opzioni:
-
+Quanti anni hai? Il prossimo anno avrai 21 anni Programma concluso.
+Quanti anni hai? Input was not a number Programma concluso.
+Quanti anni hai? I/O exception java.io.IOException Programma concluso.
+Quanti anni hai? Il prossimo anno avrai venti anni Programma concluso.
 ++++
 risposta:
-
+Quanti anni hai? Input was not a number Programma concluso.
 ****
 codice:
+import java.util.Scanner;
+import java.util.ArrayList;
 
+class Esercizio3{
+	public static void main(String[] args){
+	Scanner scan = new Scanner(System.in);
+	ArrayList<Integer> X = new ArrayList<Integer>();
+		
+		while(true){
+			System.out.println("Dammi un numero");
+			int x = scan.nextInt();
+				if(x > 0){
+					X.add(x);
+				}else{
+					break;
+				}
+		}
+
+		System.out.println("Array principale: ");
+		for(int i = 0; i < X.size(); i++){
+			System.out.println(X.get(i)); 
+		}
+		
+		System.out.println("Array modificato: ");
+		int indice = 0;
+		for(int i = 0; i < X.size() && indice < X.size(); i++){
+			System.out.println(X.get(indice));
+			indice = X.get(indice);
+		}
+	}
+}
 ////
 domanda:
-classi semplice
+Cosa otteniamo se l'utente inserice i numeri 3 2 4 5 -1 ?
 opzioni:
-
+Array principale: 3 2 4 5 Array modificato: 3 4 5
+Array principale: 3 2 4 5 -1 Array modificato: 3 2 4 5
+Il programma non funziona perché un ArrayList ha una dimensione massima e non può contenere troppi numeri.
+Array principale: 3 2 4 5 Array modificato: 3 5
 ++++
 risposta:
-
+Array principale: 3 2 4 5 Array modificato: 3 5
 ****
 codice:
+dati_meteo.txt
+Roma, 22.5, 65
+Milano, 18.2, 70
 
+import java.io.*;
+import java.util.*;
+
+public class Esercizio4{
+    public static void main(String[] args) {
+        String nomeFile = "dati_meteo.txt";
+
+        try (Scanner scanner = new Scanner(new File(nomeFile))) {
+            while (scanner.hasNextLine()) {
+                String riga = scanner.nextLine();
+                String[] dati = riga.split(", ");
+                
+                String citta = dati[0];
+                double temperatura = Double.parseDouble(dati[1]);
+                int umidita = Integer.parseInt(dati[2]);
+
+                System.out.println("Città: " + citta + " | Temperatura: " + temperatura + "°C | Umidità: " + umidita + "%");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Errore: Il file non è stato trovato.");
+        }
+    }
+}
 ////
 domanda:
-eccezioni
+Dato il file "dati_meteo.txt", quale sarà l'output?
 opzioni:
-
+Errore: Il file non è stato trovato.
+Città: Roma Temperatura: 22.5°C Umidità: 65% Città: Milano Temperatura: 18.2°C Umidità: 70%
+Il programma non funziona, mancano informazioni nel file.
+Città: Roma Temperatura: 22.5 Umidità: 65% Città: Milano Temperatura: 18.2 Umidità: 70%
 ++++
 risposta:
-
+Città: Roma Temperatura: 22.5°C Umidità: 65% Città: Milano Temperatura: 18.2°C Umidità: 70%
 ****
 codice:
+import java.io.*;
+import java.util.*;
 
+public class ScritturaFileVoti {
+    public static void main(String[] args) {
+        String nomeFile = "registro_voti.txt";
+        Scanner scanner = new Scanner(System.in);
+        
+        try (PrintWriter writer = new PrintWriter(new File(nomeFile))) {
+            System.out.println("Quanti studenti vuoi registrare?");
+            int numStudenti = scanner.nextInt();
+            scanner.nextLine(); 
+
+            for (int i = 0; i < numStudenti; i++) {
+                System.out.println("Inserisci il nome dello studente:");
+                String nome = scanner.nextLine();
+                System.out.println("Inserisci il voto:");
+                double voto = scanner.nextDouble();
+                scanner.nextLine(); 
+                
+                writer.println("Studente: " + nome + ", " + voto);
+            }
+
+            System.out.println("Dati salvati su file.");
+        } catch (FileNotFoundException e) {
+            System.out.println("Errore: impossibile creare il file.");
+        }
+    }
+}
 ////
 domanda:
-arraylist
+Quale sarà l'output del file se si inserisce: 2; Alice; 28; Marco; 24 ?
 opzioni:
-
+Errore: Il file non può essere scritto.
+Studente: Alice, 28.0 Studente: Marco, 24.0
+Alice 28.0 Marco 24.0
+Il programma non funziona, serve almeno un altro studente.
 ++++
 risposta:
-
+Studente: Alice, 28.0 Studente: Marco, 24.0
 ****

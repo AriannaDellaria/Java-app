@@ -11,66 +11,29 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #d6f1ff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefinizioniBaseController">
-   <top>
-      <VBox alignment="CENTER" prefHeight="96.0" prefWidth="900.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="TOP_RIGHT" prefHeight="48.0" prefWidth="900.0">
-               <children>
-                  <Button fx:id="indietro" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#paginaPrecedente" onMouseEntered="#colorChangeYellow" onMouseExited="#colorChangeBasic" text="🡸" translateX="-5.0" translateY="3.0">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="close" alignment="CENTER_RIGHT" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#closeButton" onMouseEntered="#colorChangeRed" onMouseExited="#colorChangeBasic" text="✘" translateX="-3.0" translateY="3.0">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Leggi la definizione fornita e dal menù a tendina seleziona il termine che corrisponde a quella definizione" textAlignment="CENTER" wrappingWidth="751.4368214607239">
-               <font>
-                  <Font name="Georgia" size="17.0" />
-               </font>
-            </Text>
-         </children>
-      </VBox>
-   </top>
+<BorderPane prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefinizioniAvanzatoController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="600.0" prefWidth="900.0">
          <content>
             <VBox alignment="CENTER" spacing="10.0">
                <children>
-                  <HBox alignment="CENTER" fillHeight="false" prefWidth="649.0" spacing="20.0">
-                     <children>
-                        <Label fx:id="domanda1" prefHeight="502.0" prefWidth="506.0" text="label" wrapText="true">
-                           <font>
-                              <Font size="18.0" />
-                           </font></Label>
-                        <VBox alignment="CENTER_LEFT" prefHeight="87.0" prefWidth="290.0" spacing="7.0">
-                           <HBox.margin>
-                              <Insets left="150.0" />
-                           </HBox.margin>
-                        </VBox>
-                        <TextField fx:id="risposta1" onMouseClicked="#R1" prefHeight="25.0" prefWidth="420.0" translateX="-40.0" />
-                     </children>
-                  </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="209.0" spacing="20.0">
                      <children>
-                        <Label fx:id="domanda2" prefHeight="502.0" prefWidth="514.0" text="Label" wrapText="true">
+                        <Label fx:id="domanda1" prefHeight="502.0" prefWidth="514.0" text="Label" wrapText="true">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <VBox alignment="CENTER_LEFT" prefHeight="303.0" prefWidth="353.0" spacing="7.0">
-                           <HBox.margin>
-                              <Insets left="150.0" />
-                           </HBox.margin>
-                           <children>
-                              <TextField fx:id="risposta2" alignment="CENTER" onMouseClicked="#R2" prefHeight="25.0" prefWidth="309.0" translateX="-40.0" />
-                           </children>
-                        </VBox>
+                        <TextField fx:id="risposta1" alignment="CENTER" maxWidth="340.0" prefHeight="30.0" prefWidth="244.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="20.0">
+                     <children>
+                        <Label fx:id="domanda2" prefHeight="502.0" prefWidth="514.0" text="Label" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Label>
+                        <TextField fx:id="risposta2" alignment="CENTER" maxWidth="340.0" prefHeight="30.0" prefWidth="244.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="20.0">
@@ -79,46 +42,26 @@
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <VBox alignment="CENTER_LEFT" prefHeight="303.0" prefWidth="353.0" spacing="7.0">
-                           <HBox.margin>
-                              <Insets left="150.0" />
-                           </HBox.margin>
-                           <children>
-                              <TextField fx:id="risposta3" alignment="CENTER" onMouseClicked="#R3" prefHeight="25.0" prefWidth="309.0" translateX="-40.0" />
-                           </children>
-                        </VBox>
+                        <TextField fx:id="risposta3" alignment="CENTER" maxWidth="340.0" prefHeight="30.0" prefWidth="244.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="20.0">
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="9.0" spacing="20.0">
                      <children>
                         <Label fx:id="domanda4" prefHeight="502.0" prefWidth="514.0" text="Label" wrapText="true">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <VBox alignment="CENTER_LEFT" prefHeight="303.0" prefWidth="353.0" spacing="7.0">
-                           <HBox.margin>
-                              <Insets left="150.0" />
-                           </HBox.margin>
-                           <children>
-                              <TextField fx:id="risposta4" alignment="CENTER" onMouseClicked="#R4" prefHeight="25.0" prefWidth="309.0" translateX="-40.0" />
-                           </children>
-                        </VBox>
+                        <TextField fx:id="risposta4" alignment="CENTER" maxWidth="340.0" prefHeight="30.0" prefWidth="244.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="9.0" spacing="20.0">
+                  <HBox alignment="CENTER" layoutX="210.0" layoutY="136.0" spacing="20.0">
                      <children>
                         <Label fx:id="domanda5" prefHeight="502.0" prefWidth="514.0" text="Label" wrapText="true">
                            <font>
                               <Font size="18.0" />
-                           </font></Label>
-                        <VBox alignment="CENTER_LEFT" prefHeight="303.0" prefWidth="353.0" spacing="7.0">
-                           <HBox.margin>
-                              <Insets left="150.0" />
-                           </HBox.margin>
-                           <children>
-                              <TextField fx:id="risposta5" alignment="CENTER" onMouseClicked="#R5" prefHeight="25.0" prefWidth="309.0" translateX="-40.0" />
-                           </children>
-                        </VBox>
+                           </font>
+                        </Label>
+                        <TextField fx:id="risposta5" alignment="CENTER" maxWidth="340.0" prefHeight="30.0" prefWidth="244.0" />
                      </children>
                   </HBox>
                </children>
@@ -132,4 +75,38 @@
    <bottom>
       <Button fx:id="terminaCorreggi" mnemonicParsing="false" onMouseClicked="#salvaPunteggio" text="Termina e correggi" BorderPane.alignment="CENTER" />
    </bottom>
+   <top>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="352.0">
+               <children>
+                  <Label fx:id="utente" onMouseClicked="#popUpUtente" text="Label" translateX="12.0" translateY="10.0" underline="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Leggi la definizione fornita e dal menù a tendina seleziona il termine che corrisponde a quella definizione" textAlignment="CENTER" wrappingWidth="751.4368214607239">
+               <font>
+                  <Font name="Georgia" size="17.0" />
+               </font>
+            </Text>
+            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="348.0">
+               <children>
+                  <Button fx:id="indietro" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#paginaPrecedente" onMouseEntered="#colorChangeYellow" onMouseExited="#colorChangeBasic" text="🡸" translateX="-5.0" translateY="3.0">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="close" alignment="CENTER_RIGHT" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#closeButton" onMouseEntered="#colorChangeRed" onMouseExited="#colorChangeBasic" text="✘" translateX="-3.0" translateY="3.0">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
 </BorderPane>

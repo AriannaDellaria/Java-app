@@ -24,65 +24,25 @@ import sessione.SessioneGioco;
 public class OutputBaseController {
 
 	@FXML
-    private ToggleGroup Gruppo1;
+    private ToggleGroup Gruppo1, Gruppo2, Gruppo3, Gruppo4, Gruppo5;
 
     @FXML
-    private ToggleGroup Gruppo2;
+    private Button close, indietro, terminaCorreggi;
 
     @FXML
-    private ToggleGroup Gruppo3;
+    private Label codice1, codice2, codice3, codice4, codice5, domanda1, domanda2, domanda3, domanda4, domanda5, utente;
 
-    @FXML
-    private ToggleGroup Gruppo4;
-
-    @FXML
-    private ToggleGroup Gruppo5;
-
-    @FXML
-    private Button close;
-
-    @FXML
-    private Label codice1;
-
-    @FXML
-    private Label codice2;
-
-    @FXML
-    private Label codice3;
-
-    @FXML
-    private Label codice4;
-
-    @FXML
-    private Label codice5;
-
-    @FXML
-    private Label domanda1;
-
-    @FXML
-    private Label domanda2;
-
-    @FXML
-    private Label domanda3;
-
-    @FXML
-    private Label domanda4;
-
-    @FXML
-    private Label domanda5;
-
-    @FXML
-    private Button indietro;
-    
-    @FXML
-    private Button terminaCorreggi;
-    
     private ArrayList<DomandaVeroFalso> domandeVeroFalso;
     
- // Ottieni l'utente loggato dalla sessione Singleton
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
 
+    @FXML
+    public void initialize() {
+        letturaDaFile(); 
+        utente.setText(utenteCorrente.getUsername()); 
+    }
+    
     @FXML
     void closeButton(MouseEvent event) {
     	Stage stage = (Stage) close.getScene().getWindow(); 
@@ -108,28 +68,23 @@ public class OutputBaseController {
     @FXML
     void paginaPrecedente(MouseEvent event) {
     	try {
-            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/PrevediOutputLivelli.fxml"));
+            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/OutputLivelli.fxml"));
 
             Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
 
             Scene vecchiaScena = new Scene(scenaPrecedente);
             scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.setFullScreen(true);
-            scenaCorrente.setFullScreenExitHint("");
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata precedente!");
+            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
         }
     }
     
-    @FXML
-    public void initialize() {
-        letturaDaFile(); 
-    }
-  
+    //legge il file e recupera le varie parti dell'esercizio
+    //la struttura del file stesso consente la divisione delle parti
     void letturaDaFile() {
-        domandeVeroFalso = new ArrayList<>(); // Inizializza la lista
-
+        domandeVeroFalso = new ArrayList<>(); 
+        
         try {
             Scanner scf = new Scanner(new File("DomandeOutputBase.txt"));
             String codice = "";
@@ -152,21 +107,18 @@ public class OutputBaseController {
                 }
                 
                 if (line.startsWith("domanda:")) {
-                    domanda = scf.nextLine(); // Prendi la riga successiva per la domanda
+                    domanda = scf.nextLine(); 
                 }
-                
                 
                 if (line.startsWith("risposta:")) {
-                    risposta = scf.nextLine(); // Prendi la riga successiva per la risposta
+                    risposta = scf.nextLine(); 
                 }
                 
-                if (line.equals("****")) {
-                    // Quando trovi il separatore, crea una nuova domanda
+                if (line.equals("****")) { //"****" permette di separare la domanda successiva dalla corrente
                     if (!codice.isEmpty() && !domanda.isEmpty() && !risposta.isEmpty()) {
                         DomandaVeroFalso D = new DomandaVeroFalso(codice, domanda, risposta);
                         domandeVeroFalso.add(D);
-
-                        // Reset delle variabili per la prossima domanda
+                        
                         codice = "";
                         domanda = "";
                         risposta = "";
@@ -174,19 +126,17 @@ public class OutputBaseController {
                 }
             }
             scf.close();
-
-            // Aggiorna le label con i dati delle domande
-           aggiornaLabel();
+           aggiornaLabel();//scrive nelle label corrispondenti quello che legge da file
         } catch (IOException e) {
             System.out.println("Errore nella lettura del file: " + e.getMessage());
         }
     }
     
+    //tramite lo switch trova il label in cui scrivere la domanda inserita precedentemente nell'arrayList
     void aggiornaLabel() {
         for (int i = 0; i < domandeVeroFalso.size(); i++) {
             DomandaVeroFalso domanda = domandeVeroFalso.get(i);
 
-            // Usa un if o switch per aggiornare le label
             switch (i) {
                 case 0:
                     codice1.setText(domanda.getCodice());
@@ -215,57 +165,66 @@ public class OutputBaseController {
     @FXML
     void salvaPunteggio(MouseEvent event) {
     	int punteggioLocale = 0;
-        
-        // Verifica le risposte per ogni domanda
         for (int i = 0; i < domandeVeroFalso.size(); i++) {
             DomandaVeroFalso domanda = domandeVeroFalso.get(i);
-            ToggleGroup gruppo = getGruppoDaIndice(i); // Ottieni il ToggleGroup associato alla domanda
-            String rispostaUtente = getRispostaSelezionata(gruppo); // Ottieni la risposta selezionata
+            ToggleGroup gruppo = getGruppoDaIndice(i); 
+            String rispostaUtente = getRispostaSelezionata(gruppo); 
 
-            // Se una risposta è selezionata e corretta, incrementa il punteggio
             if (rispostaUtente != null && domanda.verificaRisposta(rispostaUtente)) {
-                punteggioLocale++;
+                punteggioLocale++; //se la risposta è corretta incrementa il punteggio locale 
             }
         }
         
         if(utenteCorrente != null && utenteCorrente.getPg2() == 0 && punteggioLocale >= 3) {
-    		utenteCorrente.setPg2(0.33);
+    		utenteCorrente.setPg2(0.33); //punteggio globale incrementato se l'esercizio viene superato
     		utenteCorrente.salvaSuFile();
         } 
 
         try {
 	           
-			Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/PrevediOutputLivelli.fxml"));
+			Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/OutputLivelli.fxml"));
 
             Stage scenaCorrente = (Stage) terminaCorreggi.getScene().getWindow();
 
             Scene vecchiaScena = new Scene(scenaPrecedente);
             scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.setFullScreen(true);
-            scenaCorrente.setFullScreenExitHint("");
             scenaCorrente.show();
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/PopUpPunteggio.fxml"));
             Parent popUpPunteggio = loader.load();
 
-            PopUpPunteggioOutputController popUp = loader.getController();
+            PopUpPunteggioController popUp = loader.getController();
             popUp.modificaMessaggio(punteggioLocale);
             
             Stage popUpStage = new Stage();
             popUpStage.setScene(new Scene(popUpPunteggio));
             
-            popUpStage.initModality(Modality.WINDOW_MODAL); //non permette all'utente di interagire con ila finestra principale
-            popUpStage.initOwner(scenaCorrente); //mantiene il popup in primo piano e lo chiude se viene chiusa la scena genitore
-            popUpStage.show();
-            
+            popUpStage.initModality(Modality.WINDOW_MODAL); 
+            popUpStage.initOwner(scenaCorrente); 
+            popUpStage.show();      
         } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata successiva!");
-            e.printStackTrace();
+            System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
         }
     }
     
+    @FXML
+    void popUpUtente() {
+    	    try {
+    	        Stage paginaPrincipale = (Stage) utente.getScene().getWindow();
+
+    	        Parent popUp = FXMLLoader.load(getClass().getResource("/application/PopUpUtente.fxml"));
+    	        
+    	        Stage popUpStage = new Stage();
+    	        popUpStage.setScene(new Scene(popUp));
+    	        popUpStage.initModality(Modality.WINDOW_MODAL); 
+    	        popUpStage.initOwner(paginaPrincipale);
+    	        popUpStage.show(); 
+    	    } catch (NullPointerException | IOException e) {
+    	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+    	    }   
+	}
+    
     private ToggleGroup getGruppoDaIndice(int indice) {
-        // Restituisce il ToggleGroup in base all'indice
         switch (indice) {
             case 0:
                 return Gruppo1;
@@ -283,12 +242,11 @@ public class OutputBaseController {
     }
     
     private String getRispostaSelezionata(ToggleGroup gruppo) {
-        // Restituisce la risposta selezionata (Vero o Falso) da un ToggleGroup
-        Toggle selezionato = gruppo.getSelectedToggle();
+        Toggle selezionato = gruppo.getSelectedToggle(); //restituisce il toggle selezionato
         if (selezionato != null) {
             RadioButton rb = (RadioButton) selezionato;
-            return rb.getText(); // Vero o Falso
+            return rb.getText(); 
         }
-        return null; // Se non è selezionata nessuna risposta
+        return null; //se non viene selezionata alcuna risposta restituisce null
     }
 }

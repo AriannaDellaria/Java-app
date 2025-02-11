@@ -9,8 +9,8 @@ codice3:
 int a; 
 ////
 codice4:  
-public class Variabili { 
-	public static void main(String args[]) { 
+public class Variabili {
+	public static void main(String args[]) {
 ////
 domanda: 
 Esercizio 1
@@ -37,19 +37,19 @@ codice8:
 	}
 }
 ////
-domanda: 
+domanda:
 Esercizio 2
-risposta: 
+risposta:
 2134
 ****
-codice9: 
+codice9:
  if (voto >= 60) {
    System.out.println("Congratulazioni, hai passato l'esame!");
  }
- ////  
-codice10: 
+////
+codice10:
 else if (voto >= 50) {
-  System.out.println("Sei vicino a passare, continua a studiare.");
+  System.out.println("Sei vicino a passare, continua a studiare");
 }
 ////
 codice11:
@@ -60,7 +60,7 @@ public class VerificaVoto {
         System.out.print("Inserisci il tuo voto: ");
         int voto = scanner.nextInt();
 ////
-codice12: 
+codice12:
 		else {
   			System.out.println("Mi dispiace, non hai passato l'esame.");
  		}

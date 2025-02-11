@@ -4,21 +4,19 @@ import dati.Utente;
 
 public class SessioneGioco {
 
-    private static SessioneGioco instance; // Unica istanza della classe
-    private Utente utenteLoggato; // Utente loggato
+	//la SessioneGioco è unica e riferita a un giocatore alla volta 
+    private static SessioneGioco instance; 
+    private Utente utenteLoggato;
 
-    // Costruttore privato per impedire istanze multiple
     private SessioneGioco() {}
 
-    // Metodo statico per ottenere l'istanza unica
-    public static SessioneGioco getInstance() {
+    public static SessioneGioco getInstance() { //questo metodo permette di ottenere l'istanza della classe. Se non c'è un'istanza la crea
         if (instance == null) {
             instance = new SessioneGioco();
         }
         return instance;
     }
 
-    // Getter e setter per l'utente loggato
     public void setUtenteLoggato(Utente utente) {
         this.utenteLoggato = utente;
     }

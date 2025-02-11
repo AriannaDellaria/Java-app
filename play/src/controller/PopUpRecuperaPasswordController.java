@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
 import dati.Utente;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,13 +65,13 @@ public class PopUpRecuperaPasswordController {
 	                         scenaCorrente.setScene(nuovaScena);
 	                         scenaCorrente.show();
 	              	    } catch (NullPointerException | IOException e) {
-	              	        System.out.println("Errore nel caricamento della schermata successiva!" + e.getMessage());
+	              	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
 	              	    }     
                      break; 
                  }
              }
     	 }catch (NullPointerException | IOException e) {
-       	    System.out.println("Errore nel caricamento della schermata successiva!" + e.getMessage());
+       	    System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
          }
     	
     	if(!trovato) { 
@@ -94,7 +93,7 @@ public class PopUpRecuperaPasswordController {
             scenaCorrente.setScene(nuovaScena);
             scenaCorrente.show();
  	    } catch (NullPointerException | IOException e) {
- 	        System.out.println("Errore nel caricamento della schermata successiva!" + e.getMessage());
+ 	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
  	    }        
     }
 
@@ -105,7 +104,7 @@ public class PopUpRecuperaPasswordController {
             Stage scenaCorrente = (Stage) annulla.getScene().getWindow();
             scenaCorrente.close();  
         } catch (NullPointerException e) {
-            System.out.println("Errore nel caricamento della schermata precedente!");
+            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
         }
     }
 

@@ -92,7 +92,7 @@
                <children>
                   <HBox alignment="TOP_CENTER" prefHeight="111.0" prefWidth="190.0" spacing="20.0">
                      <children>
-                        <Button fx:id="livelloBase1" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-border-color: #43ae2b; -fx-border-width: 2; -fx-border-radius: 40;" text="1" textFill="#43ae2b" HBox.hgrow="NEVER">
+                        <Button fx:id="base" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-border-color: #43ae2b; -fx-border-width: 2; -fx-border-radius: 40;" text="1" textFill="#43ae2b" HBox.hgrow="NEVER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -104,7 +104,7 @@
                   </HBox>
                   <HBox alignment="TOP_CENTER" layoutX="101.0" layoutY="10.0" prefHeight="111.0" prefWidth="342.0" spacing="20.0">
                      <children>
-                        <Button fx:id="livelloMedio1" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-border-color: #ff8800; -fx-border-width: 2; -fx-border-radius: 40;" text="1" textFill="#ff8800" HBox.hgrow="NEVER">
+                        <Button fx:id="medio" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-border-color: #ff8800; -fx-border-width: 2; -fx-border-radius: 40;" text="1" textFill="#ff8800" HBox.hgrow="NEVER">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -113,7 +113,7 @@
                   </HBox>
                   <HBox alignment="TOP_CENTER" layoutX="721.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <Button fx:id="livelloAvanzato1" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-border-color: #ff0d00; -fx-border-width: 2; -fx-border-radius: 40;" text="1" textFill="#ff0d00" HBox.hgrow="NEVER">
+                        <Button fx:id="avanzato" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" prefHeight="40.0" prefWidth="40.0" style="-fx-background-radius: 50; -fx-border-color: #ff0d00; -fx-border-width: 2; -fx-border-radius: 40;" text="1" textFill="#ff0d00" HBox.hgrow="NEVER">
                            <font>
                               <Font size="16.0" />
                            </font>

@@ -20,51 +20,26 @@ import sessione.SessioneGioco;
 
 public class DefinizioniMedioController {
     @FXML
-    private Button close;
+    private Button close, indietro, terminaCorreggi;
 
     @FXML
-    private ComboBox<String> ComboBox1;
-
+    private ComboBox<String> ComboBox1, ComboBox2, ComboBox3, ComboBox4, ComboBox5;
+ 
     @FXML
-    private ComboBox<String> ComboBox2;
-
-    @FXML
-    private ComboBox<String> ComboBox3;
-
-    @FXML
-    private ComboBox<String> ComboBox4;
-
-    @FXML
-    private ComboBox<String> ComboBox5;
-
-    
-    @FXML
-    private Label domanda1;
-
-    @FXML
-    private Label domanda2;
-
-    @FXML
-    private Label domanda3;
-
-    @FXML
-    private Label domanda4;
-
-    @FXML
-    private Label domanda5;
-
-    @FXML
-    private Button indietro;
-    
-    @FXML
-    private Button terminaCorreggi;
+    private Label domanda1, domanda2, domanda3, domanda4, domanda5, utente;
     
     private ArrayList<DomandaDefinizioni> domandeDefinizioni;
     
- // Ottieni l'utente loggato dalla sessione Singleton
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
 
+    
+    @FXML
+    public void initialize() {
+            letturaDaFile();  
+            utente.setText(utenteCorrente.getUsername()); 
+    }
+    
     @FXML
     void closeButton(MouseEvent event) {
     	Stage stage = (Stage) close.getScene().getWindow(); 
@@ -96,65 +71,52 @@ public class DefinizioniMedioController {
 
             Scene vecchiaScena = new Scene(scenaPrecedente);
             scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.setFullScreen(true);
-            scenaCorrente.setFullScreenExitHint("");
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) {
             System.out.println("Errore nel caricamento della schermata precedente!");
         }
     }
     
-    @FXML
-    public void initialize() {
-    	if (domanda1 == null || domanda2 == null || domanda3 == null || domanda4 == null || domanda5 == null) {
-            System.out.println("Alcune etichette non sono state inizializzate correttamente.");
-        } else {
-            letturaDaFile();  // Solo se le etichette sono correttamente inizializzate
-        }
-    }
   
+    //legge il file e recupera le varie parti dell'esercizio
+    //la struttura del file stesso consente la divisione delle parti 
     void letturaDaFile() {
-        domandeDefinizioni = new ArrayList<>(); // Inizializza la lista
+        domandeDefinizioni = new ArrayList<>();
 
         try {
             Scanner scf = new Scanner(new File("DomandeDefinizioniMedio.txt"));
             String domanda = "";
             String risposta = "";
-            String codice= "";
             ArrayList<String> opzioni = new ArrayList<>();
             
             while (scf.hasNextLine()) {
                 String line = scf.nextLine().trim();
 
                 if (line.startsWith("opzioni:")) {
-                	codice = "";
-                    opzioni.clear(); // Pulisce la lista delle opzioni
+                    opzioni.clear(); 
                     while (scf.hasNextLine()) {
                         line = scf.nextLine().trim();
                         if (line.equals("////")) {
-                            break; // Fine della domanda
+                            break; 
                         }
-                        domanda += line + '\n';
-                        opzioni.add(line);  // Aggiungi le opzioni
+                        opzioni.add(line);  
                     }
                 }
                 
                 if (line.startsWith("domanda:")) {
-                    domanda = scf.nextLine(); // Prendi la riga successiva per la domanda
+                    domanda = scf.nextLine(); 
                 }
                 
                 if (line.startsWith("risposta:")) {
-                    risposta = scf.nextLine(); // Prendi la riga successiva per la risposta
+                    risposta = scf.nextLine(); 
                 }
                 
                 
-                if (line.equals("****")) {
-                    // Quando trovi il separatore, crea una nuova domanda
+                if (line.equals("****")) {  //"****" permette di separare la domanda successiva dalla corrente
                     if (!domanda.isEmpty() && !risposta.isEmpty()) {
                         DomandaDefinizioni D = new DomandaDefinizioni(domanda, opzioni, risposta);
                         domandeDefinizioni.add(D);
 
-                        // Reset delle variabili per la prossima domanda
                         domanda = "";
                         opzioni = new ArrayList<>();
                         risposta = "";
@@ -162,24 +124,21 @@ public class DefinizioniMedioController {
                 }
             }
             scf.close();
-
-            // Aggiorna le label con i dati delle domande
-           aggiornaLabel();
-        } 
-            catch (IOException e) {
+           aggiornaLabel();  //scrive nelle label corrispondenti quello che legge da file
+        } catch (IOException e) {
             System.out.println("Errore nella lettura del file: " + e.getMessage());
         }
     }
     
+  //tramite lo switch trova il label in cui scrivere la domanda inserita precedentemente nell'arrayList
     void aggiornaLabel() {
         for (int i = 0; i < domandeDefinizioni.size(); i++) {
             DomandaDefinizioni domanda = domandeDefinizioni.get(i);
-
-            // Usa un if o switch per aggiornare le label
+            
             switch (i) {
             case 0:
                 domanda1.setText(domanda.getTestoDomanda());
-                ComboBox1.getItems().setAll(domanda.getOpzioni()); // Imposta le opzioni nel ComboBox
+                ComboBox1.getItems().setAll(domanda.getOpzioni()); 
                 break;
             case 1:
                 domanda2.setText(domanda.getTestoDomanda());
@@ -197,29 +156,24 @@ public class DefinizioniMedioController {
                 domanda5.setText(domanda.getTestoDomanda());
                 ComboBox5.getItems().setAll(domanda.getOpzioni());
                 break;
-        }
+            }
         }
     }
 
     @FXML
     void salvaPunteggio(MouseEvent event) {
     	int punteggioLocale = 0;
-        
-        // Verifica le risposte per ogni domanda
         for (int i = 0; i < domandeDefinizioni.size(); i++) {
             DomandaDefinizioni domanda = domandeDefinizioni.get(i);
-            ComboBox<String> combo = getComboBoxByIndex(i);
-            String rispostaUtente = combo.getValue(); // Ottieni la risposta selezionata
-
-            // Se una risposta è selezionata e corretta, incrementa il punteggio
+            ComboBox<String> combo = getCombo(i);
+            String rispostaUtente = combo.getValue(); 
             if (rispostaUtente != null && domanda.verificaRisposta(rispostaUtente)) {
-                punteggioLocale++;
+                punteggioLocale++; //se la risposta è corretta incrementa il punteggio locale 
             }
         }
         
         if(utenteCorrente != null && utenteCorrente.getPg1() == 0.33 && punteggioLocale >= 3) {
-    		utenteCorrente.setPg1(0.66);
-    		//utenteCorrente.stampaPg1();
+    		utenteCorrente.setPg1(0.66); //punteggio globale incrementato se l'esercizio viene superato
     		utenteCorrente.salvaSuFile();
         } 
 
@@ -231,14 +185,12 @@ public class DefinizioniMedioController {
 
             Scene vecchiaScena = new Scene(scenaPrecedente);
             scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.setFullScreen(true);
-            scenaCorrente.setFullScreenExitHint("");
             scenaCorrente.show();
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/PopUpPunteggio.fxml"));
             Parent popUpPunteggio = loader.load();
 
-            PopUpPunteggioOutputController popUp = loader.getController();
+            PopUpPunteggioController popUp = loader.getController();
             popUp.modificaMessaggio(punteggioLocale);
             
             Stage popUpStage = new Stage();
@@ -247,14 +199,30 @@ public class DefinizioniMedioController {
             popUpStage.initModality(Modality.WINDOW_MODAL); //non permette all'utente di interagire con ila finestra principale
             popUpStage.initOwner(scenaCorrente); //mantiene il popup in primo piano e lo chiude se viene chiusa la scena genitore
             popUpStage.show();
-            
         } catch (NullPointerException | IOException e) {
             System.out.println("Errore nel caricamento della schermata successiva!");
             e.printStackTrace();
         }
     }
     
-    private ComboBox<String> getComboBoxByIndex(int indice) {
+    @FXML
+    void popUpUtente() {
+    	    try {
+    	        Stage paginaPrincipale = (Stage) utente.getScene().getWindow();
+
+    	        Parent popUp = FXMLLoader.load(getClass().getResource("/application/PopUpUtente.fxml"));
+    	        
+    	        Stage popUpStage = new Stage();
+    	        popUpStage.setScene(new Scene(popUp));
+    	        popUpStage.initModality(Modality.WINDOW_MODAL); 
+    	        popUpStage.initOwner(paginaPrincipale);
+    	        popUpStage.show(); 
+    	    } catch (NullPointerException | IOException e) {
+    	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+    	    }   
+	}
+    
+    private ComboBox<String> getCombo(int indice) {
         switch (indice) {
             case 0: 
             	return ComboBox1;

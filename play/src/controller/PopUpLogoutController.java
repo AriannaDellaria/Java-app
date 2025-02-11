@@ -1,52 +1,35 @@
 package controller;
 
 import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class PopUpLogoutController {
 
     @FXML
-    private Button annulla;
+    private Button annulla, conferma;
 
-    @FXML
-    private Button conferma;
-
-    
     @FXML
     void procediAlLogout(MouseEvent event) {
     	try {
-    		// Ottieni il riferimento al palco del popup di logout
-            Stage stageLogout = (Stage) conferma.getScene().getWindow();
+            Stage popUpCorrente = (Stage) conferma.getScene().getWindow();
+            Stage popUpUtente = (Stage) popUpCorrente.getOwner(); 
+            Stage genitore = (Stage) popUpUtente.getOwner(); 
             
-            // Ottieni il riferimento alla finestra principale (Home) da cui è stato aperto il popup
-            Stage stagePopUpUtente = (Stage) stageLogout.getOwner(); // La finestra principale (Home) è il "genitore" del popup
+            genitore.close();
+            popUpUtente.close();
             
-            // Chiudi la finestra principale di Home
-            stagePopUpUtente.close();
-            stageLogout.close();
-            
-            // Carica la scena di Login
             Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
-            
-            // Ottieni il riferimento alla finestra principale (Home) per cambiarle la scena
-            Stage scenaCorrente = (Stage) stagePopUpUtente.getOwner();  // La finestra principale è il "genitore" del popup di "utente"
-            
             Scene nuovaScena = new Scene(scenaSuccessiva);
-            scenaCorrente.setScene(nuovaScena);
-            scenaCorrente.setFullScreen(true);
-            scenaCorrente.setFullScreenExitHint("");
-            scenaCorrente.show();  // Mostra la finestra di login
- 	    }
- 	    catch (NullPointerException | IOException e) {
- 	        System.out.println("Errore nel caricamento della schermata successiva!");
+            popUpCorrente.setScene(nuovaScena);
+            popUpCorrente.show();  
+ 	    } catch (NullPointerException | IOException e) {
+ 	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
  	    }   
     }
 
@@ -56,7 +39,7 @@ public class PopUpLogoutController {
             Stage scenaCorrente = (Stage) annulla.getScene().getWindow();
            scenaCorrente.close();     
         } catch (NullPointerException e) {
-            System.out.println("Errore nel caricamento della schermata precedente!");
+            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
         }
     }
 

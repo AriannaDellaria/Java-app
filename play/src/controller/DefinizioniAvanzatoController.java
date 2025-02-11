@@ -5,66 +5,41 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import dati.Utente;
-import domanda.DomandaDefinizioni;
+import domanda.DomandaClassica;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sessione.SessioneGioco;
 
 public class DefinizioniAvanzatoController {
-    @FXML
-    private Button close;
 
     @FXML
-    private ComboBox<String> ComboBox1;
-
-    @FXML
-    private ComboBox<String> ComboBox2;
-
-    @FXML
-    private ComboBox<String> ComboBox3;
-
-    @FXML
-    private ComboBox<String> ComboBox4;
-
-    @FXML
-    private ComboBox<String> ComboBox5;
-
+    private Label domanda1, domanda2, domanda3, domanda4, domanda5, utente;
     
     @FXML
-    private Label domanda1;
-
-    @FXML
-    private Label domanda2;
-
-    @FXML
-    private Label domanda3;
-
-    @FXML
-    private Label domanda4;
-
-    @FXML
-    private Label domanda5;
-
-    @FXML
-    private Button indietro;
+    private Button close, indietro, terminaCorreggi;
     
     @FXML
-    private Button terminaCorreggi;
+    private TextField risposta1, risposta2, risposta3, risposta4, risposta5;
     
-    private ArrayList<DomandaDefinizioni> domandeDefinizioni;
+    private ArrayList<DomandaClassica> domandeClassiche;
     
- // Ottieni l'utente loggato dalla sessione Singleton
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
 
+    @FXML
+    public void initialize() {
+            letturaDaFile();  
+            utente.setText(utenteCorrente.getUsername()); 
+    }
+    
     @FXML
     void closeButton(MouseEvent event) {
     	Stage stage = (Stage) close.getScene().getWindow(); 
@@ -96,129 +71,92 @@ public class DefinizioniAvanzatoController {
 
             Scene vecchiaScena = new Scene(scenaPrecedente);
             scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.setFullScreen(true);
-            scenaCorrente.setFullScreenExitHint("");
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) {
             System.out.println("Errore nel caricamento della schermata precedente!");
         }
     }
-    
-    @FXML
-    public void initialize() {
-    	if (domanda1 == null || domanda2 == null || domanda3 == null || domanda4 == null || domanda5 == null) {
-            System.out.println("Alcune etichette non sono state inizializzate correttamente.");
-        } else {
-            letturaDaFile();  // Solo se le etichette sono correttamente inizializzate
-        }
-    }
   
+    //legge il file e recupera le varie parti dell'esercizio
+    //la struttura del file stesso consente la divisione delle parti
     void letturaDaFile() {
-        domandeDefinizioni = new ArrayList<>(); // Inizializza la lista
+        domandeClassiche = new ArrayList<>(); 
 
         try {
-            Scanner scf = new Scanner(new File("DomandeDefinizioniMedio.txt"));
+            Scanner scf = new Scanner(new File("DomandeDefinizioniAvanzato.txt"));
             String domanda = "";
             String risposta = "";
-            String codice= "";
-            ArrayList<String> opzioni = new ArrayList<>();
             
             while (scf.hasNextLine()) {
                 String line = scf.nextLine().trim();
-
-                if (line.startsWith("opzioni:")) {
-                	codice = "";
-                    opzioni.clear(); // Pulisce la lista delle opzioni
-                    while (scf.hasNextLine()) {
-                        line = scf.nextLine().trim();
-                        if (line.equals("////")) {
-                            break; // Fine della domanda
-                        }
-                        domanda += line + '\n';
-                        opzioni.add(line);  // Aggiungi le opzioni
-                    }
-                }
                 
                 if (line.startsWith("domanda:")) {
-                    domanda = scf.nextLine(); // Prendi la riga successiva per la domanda
+                    domanda = scf.nextLine(); 
                 }
                 
                 if (line.startsWith("risposta:")) {
-                    risposta = scf.nextLine(); // Prendi la riga successiva per la risposta
+                    risposta = scf.nextLine(); 
                 }
                 
-                
-                if (line.equals("****")) {
-                    // Quando trovi il separatore, crea una nuova domanda
+                if (line.equals("****")) { //"****" permette di separare la domanda successiva dalla corrente
                     if (!domanda.isEmpty() && !risposta.isEmpty()) {
-                        DomandaDefinizioni D = new DomandaDefinizioni(domanda, opzioni, risposta);
-                        domandeDefinizioni.add(D);
+                        DomandaClassica D = new DomandaClassica(domanda, risposta);
+                        domandeClassiche.add(D);
 
-                        // Reset delle variabili per la prossima domanda
                         domanda = "";
-                        opzioni = new ArrayList<>();
                         risposta = "";
                     }
                 }
             }
             scf.close();
-
-            // Aggiorna le label con i dati delle domande
-           aggiornaLabel();
+           aggiornaLabel();//scrive nelle label corrispondenti quello che legge da file
         } 
             catch (IOException e) {
             System.out.println("Errore nella lettura del file: " + e.getMessage());
         }
     }
     
+    //tramite lo switch trova il label in cui scrivere la domanda inserita precedentemente nell'arrayList
     void aggiornaLabel() {
-        for (int i = 0; i < domandeDefinizioni.size(); i++) {
-            DomandaDefinizioni domanda = domandeDefinizioni.get(i);
+        for (int i = 0; i < domandeClassiche.size(); i++) {
+            DomandaClassica domanda = domandeClassiche.get(i);
 
-            // Usa un if o switch per aggiornare le label
             switch (i) {
             case 0:
-                domanda1.setText(domanda.getTestoDomanda());
-                ComboBox1.getItems().setAll(domanda.getOpzioni()); // Imposta le opzioni nel ComboBox
+                domanda1.setText(domanda.getTestoDomanda()); 
                 break;
             case 1:
                 domanda2.setText(domanda.getTestoDomanda());
-                ComboBox2.getItems().setAll(domanda.getOpzioni());
                 break;
             case 2:
                 domanda3.setText(domanda.getTestoDomanda());
-                ComboBox3.getItems().setAll(domanda.getOpzioni());
                 break;
             case 3:
                 domanda4.setText(domanda.getTestoDomanda());
-                ComboBox4.getItems().setAll(domanda.getOpzioni());
                 break;
             case 4:
                 domanda5.setText(domanda.getTestoDomanda());
-                ComboBox5.getItems().setAll(domanda.getOpzioni());
                 break;
-        }
+            }
         }
     }
 
+  //corregge l'esercizio ottenendo un punteggio per verificare il superamento dell'esercizio
     @FXML
     void salvaPunteggio(MouseEvent event) {
     	int punteggioLocale = 0;
-        
-        // Verifica le risposte per ogni domanda
-        for (int i = 0; i < domandeDefinizioni.size(); i++) {
-            DomandaDefinizioni domanda = domandeDefinizioni.get(i);
-            ComboBox<String> combo = getComboBoxByIndex(i);
-            String rispostaUtente = combo.getValue(); // Ottieni la risposta selezionata
-
-            // Se una risposta è selezionata e corretta, incrementa il punteggio
+        for (int i = 0; i < domandeClassiche.size(); i++) {
+            DomandaClassica domanda = domandeClassiche.get(i);
+            TextField text = getTextField(i);
+            String rispostaUtente = text.getText(); 
+            
             if (rispostaUtente != null && domanda.verificaRisposta(rispostaUtente)) {
-                punteggioLocale++;
+                punteggioLocale++; //se la risposta è corretta incrementa il punteggio locale 
             }
         }
         
         if(utenteCorrente != null && utenteCorrente.getPg1() == 0.66 && punteggioLocale >= 3) {
-    		utenteCorrente.setPg1(1.00);
+    		utenteCorrente.setPg1(1.00); //punteggio globale incrementato se l'esercizio viene superato
     		utenteCorrente.salvaSuFile();
         } 
 
@@ -230,41 +168,54 @@ public class DefinizioniAvanzatoController {
 
             Scene vecchiaScena = new Scene(scenaPrecedente);
             scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.setFullScreen(true);
-            scenaCorrente.setFullScreenExitHint("");
             scenaCorrente.show();
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/PopUpPunteggio.fxml"));
             Parent popUpPunteggio = loader.load();
 
-            PopUpPunteggioOutputController popUp = loader.getController();
+            PopUpPunteggioController popUp = loader.getController();
             popUp.modificaMessaggio(punteggioLocale);
             
             Stage popUpStage = new Stage();
             popUpStage.setScene(new Scene(popUpPunteggio));
             
-            popUpStage.initModality(Modality.WINDOW_MODAL); //non permette all'utente di interagire con ila finestra principale
-            popUpStage.initOwner(scenaCorrente); //mantiene il popup in primo piano e lo chiude se viene chiusa la scena genitore
-            popUpStage.show();
-            
+            popUpStage.initModality(Modality.WINDOW_MODAL); 
+            popUpStage.initOwner(scenaCorrente); 
+            popUpStage.show(); 
         } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata successiva!");
-            e.printStackTrace();
+            System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
         }
     }
     
-    private ComboBox<String> getComboBoxByIndex(int indice) {
+    @FXML
+    void popUpUtente() {
+    	    try {
+    	        Stage paginaPrincipale = (Stage) utente.getScene().getWindow();
+
+    	        Parent popUp = FXMLLoader.load(getClass().getResource("/application/PopUpUtente.fxml"));
+    	        
+    	        Stage popUpStage = new Stage();
+    	        popUpStage.setScene(new Scene(popUp));
+    	        popUpStage.initModality(Modality.WINDOW_MODAL); 
+    	        popUpStage.initOwner(paginaPrincipale);
+    	        popUpStage.show(); 
+    	    } catch (NullPointerException | IOException e) {
+    	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+    	    }   
+	}
+    
+    private TextField getTextField(int indice) {
         switch (indice) {
             case 0: 
-            	return ComboBox1;
+            	return risposta1;
             case 1: 
-            	return ComboBox2;
+            	return risposta2;
             case 2: 
-            	return ComboBox3;
+            	return risposta3;
             case 3: 
-            	return ComboBox4;
+            	return risposta4;
             case 4:
-            	return ComboBox5;
+            	return risposta5;
             default: 
             	return null;
         }

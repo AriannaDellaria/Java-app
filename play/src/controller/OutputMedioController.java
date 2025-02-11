@@ -30,13 +30,8 @@ public class OutputMedioController {
     private Button close, indietro, terminaCorreggi;
 
     @FXML
-    private Label codice1, codice2, codice3, codice4, codice5;
+    private Label codice1, codice2, codice3, codice4, codice5, domanda1, domanda2, domanda3, domanda4, domanda5, utente;
 
-    @FXML
-    private Label domanda1, domanda2, domanda3, domanda4, domanda5;
-
-    private ArrayList<DomandaMultipla> domandeMultiple;
-    
     @FXML
     private RadioButton opzione1_1, opzione1_2, opzione1_3, opzione1_4;
     @FXML
@@ -48,10 +43,9 @@ public class OutputMedioController {
     @FXML
     private RadioButton opzione5_1, opzione5_2, opzione5_3, opzione5_4;
     
-    @FXML
-    private Label utente;
+    private ArrayList<DomandaMultipla> domandeMultiple;
+ 
     
- // Ottieni l'utente loggato dalla sessione Singleton
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
 
@@ -86,45 +80,37 @@ public class OutputMedioController {
     @FXML
     void paginaPrecedente(MouseEvent event) {
     	try {
-            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/PrevediOutputLivelli.fxml"));
+            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/OutputLivelli.fxml"));
 
             Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
 
             Scene vecchiaScena = new Scene(scenaPrecedente);
             scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.show();
-            
+            scenaCorrente.show();  
         } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata precedente!");
+            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
         }
     }
     
     @FXML
     void popUpUtente() {
     	    try {
-    	        // Ottieni il palco (Stage) della finestra principale
     	        Stage stagePrincipale = (Stage) utente.getScene().getWindow();
 
-    	        // Carica il pop-up
     	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/PopUpUtente.fxml"));
     	        Parent popUp = loader.load();
     	        
-    	        // Crea una nuova finestra (Stage) per il pop-up
     	        Stage popUpStage = new Stage();
     	        popUpStage.setScene(new Scene(popUp));
-
-    	        // Modalità per evitare l'interazione con la finestra principale
     	        popUpStage.initModality(Modality.WINDOW_MODAL); 
-    	        popUpStage.initOwner(stagePrincipale); // La finestra principale è il proprietario del pop-up
-
-    	        popUpStage.show();  // Mostra il pop-up
-    	    }
-    	    catch (NullPointerException | IOException e) {
+    	        popUpStage.initOwner(stagePrincipale); 
+    	        popUpStage.show();
+    	    } catch (NullPointerException | IOException e) {
     	        System.out.println("Errore nel caricamento della schermata successiva!");
     	    }   
 	}
   
-    //legge il file e recupera del varie parti dell'esercizio
+    //legge il file e recupera le varie parti dell'esercizio
     //la struttura del file stesso consente la divisione delle parti 
     void letturaDaFile() {
         domandeMultiple = new ArrayList<>(); //crea una lista di domande (di tipo DomandaMultipla)
@@ -169,13 +155,11 @@ public class OutputMedioController {
                     risposta = scf.nextLine(); 
                 }
                 
-                if (line.equals("****")) {
-                    //il separatore '****' permette di individuare la domanda successiva
+                if (line.equals("****")) { //il separatore '****' permette di individuare la domanda successiva
                     if (!codice.isEmpty() && !domanda.isEmpty() && !opzioni.isEmpty()) {
                         DomandaMultipla D = new DomandaMultipla(codice, domanda, opzioni, risposta);
                         domandeMultiple.add(D);
 
-                        // Reset delle variabili per la prossima domanda
                         codice = "";
                         domanda = "";
                         opzioni = new ArrayList<>();
@@ -185,10 +169,9 @@ public class OutputMedioController {
             }
             scf.close();            
            aggiornaLabel();//scrive nelle label corrispondenti quello che legge nel file
-           aggiornaRadioButton(); //scrive le varie opzioni dei button corrispondenti
-           
+           aggiornaRadioButton(); //scrive le varie opzioni dei button corrispondenti  
         } catch (IOException e) {
-            System.out.println("Errore nella lettura del file");
+            System.out.println("Errore nella lettura del file! " + e.getMessage());
         }
     }
     
@@ -228,7 +211,7 @@ public class OutputMedioController {
             DomandaMultipla domanda = domandeMultiple.get(i);
             ArrayList<String> opzioni = domanda.getOpzioni();
 
-            if (opzioni.size() < 4) continue; // Assicura che ci siano almeno 4 opzioni
+            if (opzioni.size() < 4) continue;
 
             switch (i) {
                 case 0:
@@ -271,51 +254,46 @@ public class OutputMedioController {
     	int punteggioLocale = 0;
         for (int i = 0; i < domandeMultiple.size(); i++) {
             DomandaMultipla domanda = domandeMultiple.get(i);
-            ToggleGroup gruppo = getGruppoDaIndice(i); //prende il toggle group in cui si trova la domanda
-            String rispostaUtente = getRispostaSelezionata(gruppo); //ottiene il bottone selezionato
+            ToggleGroup gruppo = getGruppoDaIndice(i); 
+            String rispostaUtente = getRispostaSelezionata(gruppo); 
 
-            //se la risposta è corretta incrementa il punteggio
             if (rispostaUtente != null && domanda.verificaRisposta(rispostaUtente)) {
-                punteggioLocale++;
+                punteggioLocale++; //se la risposta è corretta incrementa il punteggio locale
             }
         }
         
-        if(utenteCorrente != null && utenteCorrente.getPg2() == 0 && punteggioLocale >= 3) {
+        if(utenteCorrente != null && utenteCorrente.getPg2() == 0.33 && punteggioLocale >= 3) {
     		utenteCorrente.setPg2(0.66); //punteggio globale incrementato solo se viene superato l'esercizio
     		utenteCorrente.salvaSuFile();
         } 
 
-        try {
-	           
-			Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/PrevediOutputLivelli.fxml"));
+        try {      
+			Parent paginaPrecedente = FXMLLoader.load(getClass().getResource("/application/PrevediOutputLivelli.fxml"));
 
-            Stage scenaCorrente = (Stage) terminaCorreggi.getScene().getWindow();
+            Stage paginaCorrente = (Stage) terminaCorreggi.getScene().getWindow();
 
-            Scene vecchiaScena = new Scene(scenaPrecedente);
-            scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.show();
+            Scene vecchiaScena = new Scene(paginaPrecedente);
+            paginaCorrente.setScene(vecchiaScena);
+            paginaCorrente.show();
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/PopUpPunteggio.fxml"));
             Parent popUpPunteggio = loader.load();
 
-            PopUpPunteggioOutputController popUp = loader.getController();
+            PopUpPunteggioController popUp = loader.getController();
             popUp.modificaMessaggio(punteggioLocale);
             
             Stage popUpStage = new Stage();
             popUpStage.setScene(new Scene(popUpPunteggio));
             
-            popUpStage.initModality(Modality.WINDOW_MODAL); //non permette all'utente di interagire con ila finestra principale
-            popUpStage.initOwner(scenaCorrente); //mantiene il popup in primo piano e lo chiude se viene chiusa la scena genitore
-            popUpStage.show();
-            
+            popUpStage.initModality(Modality.WINDOW_MODAL);
+            popUpStage.initOwner(paginaCorrente); 
+            popUpStage.show();          
         } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata successiva!");
-            e.printStackTrace();
+            System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
         }
     }
     
     private ToggleGroup getGruppoDaIndice(int indice) {
-        // Restituisce il ToggleGroup in base all'indice
         switch (indice) {
             case 0:
                 return Gruppo1;
@@ -333,12 +311,11 @@ public class OutputMedioController {
     }
     
     private String getRispostaSelezionata(ToggleGroup gruppo) {
-        // Restituisce la risposta selezionata (Vero o Falso) da un ToggleGroup
-        Toggle selezionato = gruppo.getSelectedToggle();
+        Toggle selezionato = gruppo.getSelectedToggle();//restituisce il toggle selezionato
         if (selezionato != null) {
             RadioButton rb = (RadioButton) selezionato;
-            return rb.getText(); // Vero o Falso
+            return rb.getText(); 
         }
-        return null; // Se non è selezionata nessuna risposta
+        return null; //se non viene selezionata alcuna risposta restituisce null
     }
 }

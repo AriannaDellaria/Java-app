@@ -6,25 +6,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Utente {
-    private String username;
-    private String password;
-    private String nome; 
-    private String cognome; 
-    private double pg1; 
-    private double pg2;
-    private double pg3;
-    
-   /* public Utente(String nome, String cognome, String username, String password) {
-    	this.nome = nome; 
-    	this.cognome = cognome;
-    	this.username = username;
-        this.password = password;
-        this.setPg1(0);
-        this.setPg2(0);  
-        this.setPg3(0); 
-    }
-  */
-	public Utente( String username, String password) {
+	
+    private String nome, cognome, username, password;
+    //punteggi globali
+    private double pg1, pg2, pg3; 
+
+	public Utente( String username, String password) { //costruttore
     	this.username = username;
         this.password = password;
         this.setPg1(0);
@@ -36,24 +23,23 @@ public class Utente {
     	try {
     		Scanner scf = new Scanner(new File("utenti.csv"));
     		
-    		while (scf.hasNextLine()) {
-                String riga = scf.nextLine();
+    		while (scf.hasNextLine()) { //legge il file 
+                String riga = scf.nextLine(); 
                 String[] dati = riga.split(",");
                 
-                // Verifica se l'utente loggato è quello trovato nel file
-                if (dati[2].trim().equals(this.username.trim())) {
-                    // Se l'utente è trovato, aggiorna i punteggi
-                    this.nome  = dati[0].trim(); 
-                    break;  // Uscita dal ciclo, abbiamo trovato l'utente
+                if (dati[2].trim().equals(this.username.trim())) { //controlla se l'username inserito esiste nel file 
+                    this.nome  = dati[0].trim(); //restituisce il nome dell'utente loggato
+                    break;  
                 }
             }
             scf.close();
         } catch (IOException e) {
-            System.out.println("Errore nella lettura del file: " + e.getMessage());
+            System.out.println("Errore nella lettura del file! " + e.getMessage());
         }
 		return nome;
     }
     
+    //metodo uguale a getNome() 
     public String getCognome() { 
      	try {
     		Scanner scf = new Scanner(new File("utenti.csv"));
@@ -62,19 +48,18 @@ public class Utente {
                 String riga = scf.nextLine();
                 String[] dati = riga.split(",");
                 
-                // Verifica se l'utente loggato è quello trovato nel file
                 if (dati[2].trim().equals(this.username.trim())) {
-                    // Se l'utente è trovato, aggiorna i punteggi
                     this.cognome  = dati[1].trim(); 
-                    break;  // Uscita dal ciclo, abbiamo trovato l'utente
+                    break;  
                 }
             }
             scf.close();
         } catch (IOException e) {
-            System.out.println("Errore nella lettura del file: " + e.getMessage());
+            System.out.println("Errore nella lettura del file! " + e.getMessage());
         }
 		return cognome;
     }
+    
     public String getUsername() {
         return username;
     }
@@ -82,6 +67,7 @@ public class Utente {
     public String getPassword() {
         return password;
     }
+    
     public double getPg1() {
 		return pg1;
 	}
@@ -114,28 +100,24 @@ public class Utente {
                 String riga = scf.nextLine();
                 String[] dati = riga.split(",");
                 
-                // Verifica se l'utente loggato è quello trovato nel file
                 if (dati[2].trim().equals(this.username.trim())) {
-                    // Se l'utente è trovato, aggiorna i punteggi
-                    this.pg1 = Double.parseDouble(dati[4].trim()); 
+                    this.pg1 = Double.parseDouble(dati[4].trim()); //parseDouble -> converte la stringa in double
                     this.pg2 = Double.parseDouble(dati[5].trim()); 
                     this.pg3 = Double.parseDouble(dati[6].trim()); 
-                    break;  // Uscita dal ciclo, abbiamo trovato l'utente
+                    break;  
                 }
             }
             scf.close();
         } catch (IOException e) {
-            System.out.println("Errore nella lettura del file: " + e.getMessage());
+            System.out.println("Errore nella lettura del file! " + e.getMessage());
         }
     }
 	
+	//salva su file i punteggi globali aggiornati
 	public void salvaSuFile() {
-		
-		
         List<String> righe = new ArrayList<>();
         boolean trovato = false;
 
-        // Leggi il file e aggiorna l'utente
         File file = new File("utenti.csv");
         try (BufferedReader reader = new BufferedReader(new FileReader("utenti.csv"))) {
             String linea;
@@ -143,8 +125,7 @@ public class Utente {
             while ((linea = reader.readLine()) != null) {
                 String[] dati = linea.split(",");
                 if (dati[2].equals(this.username)) {
-                    // Aggiorna il punteggio per l'utente trovato
-                	dati[4] = String.valueOf(this.pg1);  // Aggiorna pg1
+                	dati[4] = String.valueOf(this.pg1);  //aggiorna pg1. String.valueOf -> prende l'oggetto e lo converte in stringa
                     dati[5] = String.valueOf(this.pg2);
                     dati[6] = String.valueOf(this.pg3); 
                     trovato = true;
@@ -155,14 +136,13 @@ public class Utente {
             System.out.println("Errore nella lettura del file: " + e.getMessage());
         }
 
-        // Riscrivi il file con i dati aggiornati
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) { //viene riscritto il file con i dati che sono stati aggiornati
             for (String riga : righe) {
                 writer.write(riga);
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Errore nella scrittura del file: " + e.getMessage());
+            System.out.println("Errore nella scrittura del file! " + e.getMessage());
         }
     }
 	

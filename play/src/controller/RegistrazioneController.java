@@ -48,6 +48,17 @@ public class RegistrazioneController {
         icon.setFitWidth(20);
         icon.setFitHeight(20);
         toggle.setGraphic(icon); 
+      
+        //metodo che consente di sincronizzare passwordField e textField
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+        	 passwordField.setText(newValue);
+        });
+        
+        passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
+                if (!toggle.isSelected()) {
+                    textField.setText(newValue);
+                }
+        });
     }
     
     @FXML
@@ -179,7 +190,6 @@ public class RegistrazioneController {
         	 icon1.setFitWidth(20);
              icon1.setFitHeight(20);
         	 toggle.setGraphic(icon1); 
-        	 textField.setText(passwordField.getText()); 
         	 textField.setVisible(true);
         }else { 
         	passwordField.setVisible(true); 

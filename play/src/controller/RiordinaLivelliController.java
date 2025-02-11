@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.IOException;
-
+import javafx.scene.control.Label;
 import dati.Utente;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,28 +9,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sessione.SessioneGioco;
 
 public class RiordinaLivelliController {
 	@FXML
-    private Button close;
+    private Button close, indietro, base, medio, avanzato;
 
-    @FXML
-    private Button indietro;
-    
-    @FXML
-    private Button livelloAvanzato1;
-
-    @FXML
-    private Button livelloBase1;
-
-    @FXML
-    private Button livelloMedio1;
-    
-    // Ottieni l'utente loggato dalla sessione Singleton
+	@FXML
+	private Label utente; 
+	
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
+    
+    
+    @FXML
+    public void initialize() {
+        utente.setText(utenteCorrente.getUsername());    
+    }
     
     @FXML
     void closeButton(MouseEvent event) {
@@ -63,8 +60,6 @@ public class RiordinaLivelliController {
 
             Scene vecchiaScena = new Scene(scenaPrecedente);
             scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.setFullScreen(true);
-            scenaCorrente.setFullScreenExitHint("");
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) {
             System.out.println("Errore nel caricamento della schermata precedente!");
@@ -73,21 +68,18 @@ public class RiordinaLivelliController {
 
     @FXML
     void paginaSuccessiva(MouseEvent event) {
-        // Riconosci il bottone che ha generato l'evento
         Button bottoneCliccato = (Button) event.getSource();
         
-        // variabile per il file fxml
         String nomeFileFXML = "";
 
-        // Sceglie il file fxml in base al bottone cliccato che trova tramite il suo id
         switch (bottoneCliccato.getId()) {
-            case "livelloBase1":
+            case "base":
             	nomeFileFXML = "/application/RiordinaBase.fxml";
                 break;
-            case "livelloMedio1":
+            case "medio":
             	nomeFileFXML = "/application/RiordinaMedio.fxml";
                 break;
-            case "livelloAvanzato1":
+            case "avanzato":
             	nomeFileFXML = "/application/RiordinaAvanzato.fxml";
                 break;
             default:
@@ -95,21 +87,34 @@ public class RiordinaLivelliController {
                 return;
         }
 
-        // Carica la scena successiva
         try {
             Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource(nomeFileFXML));
 
             Stage scenaCorrente = (Stage) bottoneCliccato.getScene().getWindow();
             Scene nuovaScena = new Scene(scenaSuccessiva);
             scenaCorrente.setScene(nuovaScena);
-            scenaCorrente.setFullScreen(true);
-            scenaCorrente.setFullScreenExitHint("");
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata successiva!");
-            e.printStackTrace();
+            System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
         }
     }
+    
+    @FXML
+    void popUpUtente() {
+    	    try {
+    	        Stage paginaCorrente = (Stage) utente.getScene().getWindow();
+
+    	        Parent popUp = FXMLLoader.load(getClass().getResource("/application/PopUpUtente.fxml"));
+    	        
+    	        Stage popUpStage = new Stage();
+    	        popUpStage.setScene(new Scene(popUp));
+    	        popUpStage.initModality(Modality.WINDOW_MODAL); 
+    	        popUpStage.initOwner(paginaCorrente); 
+    	        popUpStage.show(); 
+    	    } catch (NullPointerException | IOException e) {
+    	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+    	    }   
+	}
 
 }
 

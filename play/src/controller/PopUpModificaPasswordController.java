@@ -13,36 +13,24 @@ import javafx.stage.Stage;
 public class PopUpModificaPasswordController {
 
     @FXML
-    private Button annulla;
-
-    @FXML
-    private Button conferma;
+    private Button annulla, conferma;
 
     @FXML
     void procediAllaModifica(MouseEvent event) {
     	try {
-    		// Ottieni il riferimento al palco del popup di logout
-            Stage stageLogout = (Stage) conferma.getScene().getWindow();
+            Stage popUpCorrente = (Stage) conferma.getScene().getWindow();
+            Stage popUpUtente = (Stage) popUpCorrente.getOwner(); 
+            Stage genitore = (Stage) popUpUtente.getOwner(); 
+             
+            genitore.close();
+            popUpUtente.close();
             
-            // Ottieni il riferimento alla finestra principale (Home) da cui è stato aperto il popup
-            Stage stagePopUpUtente = (Stage) stageLogout.getOwner(); // La finestra principale (Home) è il "genitore" del popup
-            
-            // Chiudi la finestra principale di Home
-            stagePopUpUtente.close();
-            stageLogout.close();
-            
-            // Carica la scena di Login
             Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/ModificaPassword.fxml"));
-            
-            // Ottieni il riferimento alla finestra principale (Home) per cambiarle la scena
-            Stage scenaCorrente = (Stage) stagePopUpUtente.getOwner();  // La finestra principale è il "genitore" del popup di "utente"
-            
             Scene nuovaScena = new Scene(scenaSuccessiva);
-            scenaCorrente.setScene(nuovaScena);
-            scenaCorrente.show();  // Mostra la finestra di login
- 	    }
- 	    catch (NullPointerException | IOException e) {
- 	        System.out.println("Errore nel caricamento della schermata successiva!" + e.getMessage());
+            popUpCorrente.setScene(nuovaScena);
+            popUpCorrente.show();
+ 	    } catch (NullPointerException | IOException e) {
+ 	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
  	    }   
     }
 
@@ -52,7 +40,7 @@ public class PopUpModificaPasswordController {
             Stage scenaCorrente = (Stage) annulla.getScene().getWindow();
             scenaCorrente.close();  
         } catch (NullPointerException e) {
-            System.out.println("Errore nel caricamento della schermata precedente!");
+            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
         }
     }
 
