@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import dati.Utente;
@@ -44,14 +45,39 @@ public class OutputMedioController {
     private RadioButton opzione5_1, opzione5_2, opzione5_3, opzione5_4;
     
     private ArrayList<DomandaMultipla> domandeMultiple;
- 
     
+    private ArrayList<Label> codiciLabel = new ArrayList<>();
+    private ArrayList<Label> domandeLabel = new ArrayList<>();
+    private ArrayList<ToggleGroup> gruppiToggle = new ArrayList<>();
+    private ArrayList<ArrayList<RadioButton>> radioButtons = new ArrayList<>();
+ 
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
 
     @FXML
     public void initialize() {
+        // Inizializzazione della lista di ToggleGroup
+        gruppiToggle = new ArrayList<>(Arrays.asList(Gruppo1, Gruppo2, Gruppo3, Gruppo4, Gruppo5));
+
+        // Inizializzazione della lista di Label per i codici
+        codiciLabel = new ArrayList<>(Arrays.asList(codice1, codice2, codice3, codice4, codice5));
+
+        // Inizializzazione della lista di Label per le domande
+        domandeLabel = new ArrayList<>(Arrays.asList(domanda1, domanda2, domanda3, domanda4, domanda5));
+
+        // Inizializzazione della lista di RadioButton per ciascun gruppo
+        radioButtons = new ArrayList<>(Arrays.asList(
+            new ArrayList<>(Arrays.asList(opzione1_1, opzione1_2, opzione1_3, opzione1_4)),
+            new ArrayList<>(Arrays.asList(opzione2_1, opzione2_2, opzione2_3, opzione2_4)),
+            new ArrayList<>(Arrays.asList(opzione3_1, opzione3_2, opzione3_3, opzione3_4)),
+            new ArrayList<>(Arrays.asList(opzione4_1, opzione4_2, opzione4_3, opzione4_4)),
+            new ArrayList<>(Arrays.asList(opzione5_1, opzione5_2, opzione5_3, opzione5_4))
+        ));
+
+        // Esegui la lettura del file
         letturaDaFile();
+
+        // Imposta il nome dell'utente
         utente.setText(utenteCorrente.getUsername());
     }
     
@@ -176,74 +202,20 @@ public class OutputMedioController {
     }
     
     void aggiornaLabel() {
-        for (int i = 0; i < domandeMultiple.size(); i++) {
+        for (int i = 0; i < domandeMultiple.size() && i < codiciLabel.size(); i++) {
             DomandaMultipla domanda = domandeMultiple.get(i);
-
-            //tramite lo switch trova il label in cui scrivere la domanda inserita precedentemente nell'arraylist
-            switch (i) {
-                case 0:
-                    codice1.setText(domanda.getCodice());
-                    domanda1.setText(domanda.getTestoDomanda());
-                    break;
-                case 1:
-                    codice2.setText(domanda.getCodice());
-                    domanda2.setText(domanda.getTestoDomanda());
-                    break;
-                case 2:
-                    codice3.setText(domanda.getCodice());
-                    domanda3.setText(domanda.getTestoDomanda());
-                    break;
-                case 3:
-                    codice4.setText(domanda.getCodice());
-                    domanda4.setText(domanda.getTestoDomanda());
-                    break;
-                case 4:
-                    codice5.setText(domanda.getCodice());
-                    domanda5.setText(domanda.getTestoDomanda());
-                    break;
-            }
+            codiciLabel.get(i).setText(domanda.getCodice());
+            domandeLabel.get(i).setText(domanda.getTestoDomanda());
         }
     }
     
-    //tramite lo switch trova il radioButton in cui scrivere le opzioni prese dal file
     void aggiornaRadioButton() {
-        for (int i = 0; i < domandeMultiple.size(); i++) {
-            DomandaMultipla domanda = domandeMultiple.get(i);
-            ArrayList<String> opzioni = domanda.getOpzioni();
-
-            if (opzioni.size() < 4) continue;
-
-            switch (i) {
-                case 0:
-                    opzione1_1.setText(opzioni.get(0));
-                    opzione1_2.setText(opzioni.get(1));
-                    opzione1_3.setText(opzioni.get(2));
-                    opzione1_4.setText(opzioni.get(3));
-                    break;
-                case 1:
-                    opzione2_1.setText(opzioni.get(0));
-                    opzione2_2.setText(opzioni.get(1));
-                    opzione2_3.setText(opzioni.get(2));
-                    opzione2_4.setText(opzioni.get(3));
-                    break;
-                case 2:
-                    opzione3_1.setText(opzioni.get(0));
-                    opzione3_2.setText(opzioni.get(1));
-                    opzione3_3.setText(opzioni.get(2));
-                    opzione3_4.setText(opzioni.get(3));
-                    break;
-                case 3:
-                    opzione4_1.setText(opzioni.get(0));
-                    opzione4_2.setText(opzioni.get(1));
-                    opzione4_3.setText(opzioni.get(2));
-                    opzione4_4.setText(opzioni.get(3));
-                    break;
-                case 4:
-                    opzione5_1.setText(opzioni.get(0));
-                    opzione5_2.setText(opzioni.get(1));
-                    opzione5_3.setText(opzioni.get(2));
-                    opzione5_4.setText(opzioni.get(3));
-                    break;
+        for (int i = 0; i < domandeMultiple.size() && i < radioButtons.size(); i++) {
+            ArrayList<RadioButton> opzioniBottoni = radioButtons.get(i);
+            ArrayList<String> opzioniTesto = domandeMultiple.get(i).getOpzioni();
+            
+            for (int j = 0; j < opzioniBottoni.size() && j < opzioniTesto.size(); j++) {
+                opzioniBottoni.get(j).setText(opzioniTesto.get(j));
             }
         }
     }
@@ -268,7 +240,7 @@ public class OutputMedioController {
         } 
 
         try {      
-			Parent paginaPrecedente = FXMLLoader.load(getClass().getResource("/application/PrevediOutputLivelli.fxml"));
+			Parent paginaPrecedente = FXMLLoader.load(getClass().getResource("/application/OutputLivelli.fxml"));
 
             Stage paginaCorrente = (Stage) terminaCorreggi.getScene().getWindow();
 
@@ -294,21 +266,9 @@ public class OutputMedioController {
     }
     
     private ToggleGroup getGruppoDaIndice(int indice) {
-        switch (indice) {
-            case 0:
-                return Gruppo1;
-            case 1:
-                return Gruppo2;
-            case 2:
-                return Gruppo3;
-            case 3:
-                return Gruppo4;
-            case 4:
-                return Gruppo5;
-            default:
-                return null;
-        }
+        return (indice >= 0 && indice < gruppiToggle.size()) ? gruppiToggle.get(indice) : null;
     }
+
     
     private String getRispostaSelezionata(ToggleGroup gruppo) {
         Toggle selezionato = gruppo.getSelectedToggle();//restituisce il toggle selezionato
