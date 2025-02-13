@@ -19,15 +19,10 @@ public class OutputLivelliController {
     private Button close, indietro, base, medio, avanzato;
     
     @FXML
-    private Label utente; 
+    private Label utente,erroreEsercizi; 
 
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
-    
-    @FXML
-    public void initialize() {
-        utente.setText(utenteCorrente.getUsername());
-    }
     
     @FXML
     void closeButton(MouseEvent event) {
@@ -77,10 +72,22 @@ public class OutputLivelliController {
             	nomeFileFXML = "/application/OutputBase.fxml";
                 break;
             case "medio":
-            	nomeFileFXML = "/application/OutputMedio.fxml";
+            	if(utenteCorrente.getPg2() == 0.33) { 
+            		nomeFileFXML = "/application/OutputMedio.fxml";
+            	}
+            	else { 
+            		nomeFileFXML = ""; 
+            		erroreEsercizi.setVisible(true); 
+            	}
                 break;
             case "avanzato":
-            	nomeFileFXML = "/application/OutputAvanzato.fxml";
+            	if(utenteCorrente.getPg2() == 0.66) { 
+            		nomeFileFXML = "/application/OutputAvanzato.fxml";
+            	}
+            	else { 
+            		nomeFileFXML = ""; 
+            		erroreEsercizi.setVisible(true); 
+            	}
                 break;
             default:
                 System.out.println("Nessun livello corrispondente trovato!");

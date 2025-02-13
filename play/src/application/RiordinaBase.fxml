@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -16,7 +17,6 @@
          <content>
             <VBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Label fx:id="d1" text="Label" />
                   <HBox alignment="CENTER" fillHeight="false" spacing="20.0">
                      <children>
                         <Label fx:id="codice1" prefHeight="502.0" prefWidth="522.0" text="label">
@@ -43,12 +43,8 @@
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="text1" />
-                        <TextField fx:id="text11" layoutX="10.0" layoutY="10.0" />
-                        <TextField fx:id="text111" layoutX="160.0" layoutY="10.0" />
-                        <TextField fx:id="text1111" layoutX="309.0" layoutY="10.0" />
                      </children>
                   </HBox>
-                  <Label fx:id="d2" text="Label" />
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="209.0" spacing="20.0">
                      <children>
                         <Label fx:id="codice5" prefHeight="502.0" prefWidth="514.0" text="Label">
@@ -75,12 +71,8 @@
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="text2" />
-                        <TextField fx:id="text22" layoutX="10.0" layoutY="10.0" />
-                        <TextField fx:id="text222" layoutX="10.0" layoutY="10.0" />
-                        <TextField fx:id="text2222" layoutX="309.0" layoutY="10.0" />
                      </children>
                   </HBox>
-                  <Label fx:id="d3" layoutX="545.0" layoutY="124.0" text="Label" />
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="20.0">
                      <children>
                         <Label fx:id="codice9" prefHeight="502.0" prefWidth="514.0" text="Label">
@@ -107,12 +99,8 @@
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="text3" />
-                        <TextField fx:id="text33" layoutX="10.0" layoutY="10.0" />
-                        <TextField fx:id="text333" layoutX="160.0" layoutY="10.0" />
-                        <TextField fx:id="text3333" layoutX="309.0" layoutY="10.0" />
                      </children>
                   </HBox>
-                  <Label fx:id="d4" text="Label" />
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="20.0">
                      <children>
                         <Label fx:id="codice13" prefHeight="502.0" prefWidth="514.0" text="Label">
@@ -139,12 +127,8 @@
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="text4" />
-                        <TextField fx:id="text44" layoutX="10.0" layoutY="10.0" />
-                        <TextField fx:id="text444" layoutX="160.0" layoutY="10.0" />
-                        <TextField fx:id="text4444" layoutX="309.0" layoutY="10.0" />
                      </children>
                   </HBox>
-                  <Label fx:id="d5" text="Label" />
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="9.0" spacing="20.0">
                      <children>
                         <Label fx:id="codice17" prefHeight="502.0" prefWidth="514.0" text="Label">
@@ -171,9 +155,6 @@
                   <HBox layoutX="210.0" layoutY="393.0" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="text5" />
-                        <TextField fx:id="text55" layoutX="10.0" layoutY="10.0" />
-                        <TextField fx:id="text555" layoutX="160.0" layoutY="10.0" />
-                        <TextField fx:id="text5555" layoutX="309.0" layoutY="10.0" />
                      </children>
                   </HBox>
                </children>
@@ -196,11 +177,25 @@
                   </Label>
                </children>
             </HBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizza un blocco di codice e cercando di prevedere quello che potrebbe essere l'output, &#10;scegli la risposta corretta in un periodo di tempo limitato. &#10;" textAlignment="CENTER" wrappingWidth="898.9368214607239">
-               <font>
-                  <Font name="Georgia" size="17.0" />
-               </font>
-            </Text>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizza un blocco di codice e cercando di prevedere quello che potrebbe essere l'output, &#10;scegli la risposta corretta in un periodo di tempo limitato. &#10;" textAlignment="CENTER" wrappingWidth="898.9368214607239">
+                     <font>
+                        <Font name="Georgia" size="17.0" />
+                     </font>
+                  </Text>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="immagine" fitHeight="40.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="timer" prefHeight="30.0" prefWidth="90.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
             <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button fx:id="indietro" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#paginaPrecedente" onMouseEntered="#colorChangeYellow" onMouseExited="#colorChangeBasic" text="🡸" translateX="-5.0" translateY="3.0">

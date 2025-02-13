@@ -3,9 +3,11 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 import dati.Utente;
 import domanda.DomandaClassica;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,7 +25,7 @@ import sessione.SessioneGioco;
 public class DefinizioniAvanzatoController {
 
     @FXML
-    private Label domanda1, domanda2, domanda3, domanda4, domanda5, utente;
+    private Label domanda1, domanda2, domanda3, domanda4, domanda5, utente, timer;
     
     @FXML
     private Button close, indietro, terminaCorreggi;
@@ -29,16 +33,69 @@ public class DefinizioniAvanzatoController {
     @FXML
     private TextField risposta1, risposta2, risposta3, risposta4, risposta5;
     
-    private ArrayList<DomandaClassica> domandeClassiche;
+    @FXML
+    private ImageView immagine; 
     
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
 
+    private ArrayList<Label> domande = new ArrayList<>();
+    private ArrayList<TextField> risposte = new ArrayList<>();
+    private ArrayList<DomandaClassica> domandeClassiche = new ArrayList<>();
+    
+    private int tempoRestante = 120; //2 minuti
+
+    //carica immagine dell'orologio per il timer
+	private final Image orologio = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/orologio.png")));
+	
+  
     @FXML
     public void initialize() {
-            letturaDaFile();  
-            utente.setText(utenteCorrente.getUsername()); 
+        domande.add(domanda1);
+        domande.add(domanda2);
+        domande.add(domanda3);
+        domande.add(domanda4);
+        domande.add(domanda5);
+
+        risposte.add(risposta1);
+        risposte.add(risposta2);
+        risposte.add(risposta3);
+        risposte.add(risposta4);
+        risposte.add(risposta5);
+        
+        letturaDaFile();  
+        utente.setText(utenteCorrente.getUsername());
+        avvioTimer();
+        
+        immagine.setImage(orologio); 
+        immagine.setFitWidth(20); //larghezza
+        immagine.setFitHeight(20); //altezza
     }
+    
+    private void avvioTimer() {
+	    Thread t = new Thread(() -> { //viene creato un thread secondario, parallelo a quello principale (interfaccia grafica), che permette di gestire il timer 
+	    	while (tempoRestante > 0 ) {
+	            try {
+	                Thread.sleep(1000); //fa scorrere il timer di secondo in secondo (1000 millisecondi) 
+	                tempoRestante--; //timer decrescente
+	                Platform.runLater(() -> { //platform -> permette al thread secondario di interagire con quello principale (modifica l'interfaccia e mostra  lo scorrere del timer) 
+	                    int minuti = tempoRestante / 60;
+	                    int secondi = tempoRestante % 60;
+	                    timer.setText(String.format("%02d:%02d", minuti, secondi)); //viene aggiornata la label
+	                });
+	            } catch (InterruptedException e) {
+	            	System.out.println("Attenzione! L'operazione si è interrotta nel thread! " +e.getMessage()); 
+	            }
+	        }
+	        if (tempoRestante == 0) {
+	            Platform.runLater(() -> {
+	            	salvaPunteggio(null);//il timer è scaduto ma il bottone non è stato cliccato -> effettua comunque la correzione degli esercizi fatti fino a quel momento e salva il punteggio 
+	            });
+	        }
+	    });
+	    t.setDaemon(true);//consente all'utente di finire l'esercizio anche prima dello scadere del timer
+	    t.start();//consente di avviare il thread secondario
+   }
     
     @FXML
     void closeButton(MouseEvent event) {
@@ -98,7 +155,7 @@ public class DefinizioniAvanzatoController {
                     risposta = scf.nextLine(); 
                 }
                 
-                if (line.equals("****")) { //"****" permette di separare la domanda successiva dalla corrente
+                if (line.equals("****")) { //"*" permette di separare la domanda successiva dalla corrente
                     if (!domanda.isEmpty() && !risposta.isEmpty()) {
                         DomandaClassica D = new DomandaClassica(domanda, risposta);
                         domandeClassiche.add(D);
@@ -116,30 +173,12 @@ public class DefinizioniAvanzatoController {
         }
     }
     
-    //tramite lo switch trova il label in cui scrivere la domanda inserita precedentemente nell'arrayList
     void aggiornaLabel() {
-        for (int i = 0; i < domandeClassiche.size(); i++) {
-            DomandaClassica domanda = domandeClassiche.get(i);
-
-            switch (i) {
-            case 0:
-                domanda1.setText(domanda.getTestoDomanda()); 
-                break;
-            case 1:
-                domanda2.setText(domanda.getTestoDomanda());
-                break;
-            case 2:
-                domanda3.setText(domanda.getTestoDomanda());
-                break;
-            case 3:
-                domanda4.setText(domanda.getTestoDomanda());
-                break;
-            case 4:
-                domanda5.setText(domanda.getTestoDomanda());
-                break;
-            }
+        for (int i = 0; i < domandeClassiche.size() && i < domande.size(); i++) {
+            domande.get(i).setText(domandeClassiche.get(i).getTestoDomanda());
         }
     }
+
 
   //corregge l'esercizio ottenendo un punteggio per verificare il superamento dell'esercizio
     @FXML
@@ -205,24 +244,10 @@ public class DefinizioniAvanzatoController {
 	}
     
     private TextField getTextField(int indice) {
-        switch (indice) {
-            case 0: 
-            	return risposta1;
-            case 1: 
-            	return risposta2;
-            case 2: 
-            	return risposta3;
-            case 3: 
-            	return risposta4;
-            case 4:
-            	return risposta5;
-            default: 
-            	return null;
+        if (indice < risposte.size()) {
+            return risposte.get(indice);
         }
+        return null;
     }
     
 }
-
-
-
-

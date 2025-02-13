@@ -38,7 +38,7 @@ public class RegistrazioneController {
 
     
     // Caricamento immagini
-    private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioAperto.png")));
+    private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/foto2.png")));
     private final Image occhioChiuso = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioChiuso.png")));
 
     @FXML
@@ -59,7 +59,29 @@ public class RegistrazioneController {
                     textField.setText(newValue);
                 }
         });
+        
+        nomeUtente.setOnKeyPressed(event -> {
+            if (event.getCode().toString().equals("ENTER")) {
+                cognomeUtente.requestFocus(); // Sposta il focus sulla password
+            }
+        });  
+        cognomeUtente.setOnKeyPressed(event -> {
+            if (event.getCode().toString().equals("ENTER")) {
+                usernameUtente.requestFocus(); // Sposta il focus sulla password
+            }
+        });  
+        usernameUtente.setOnKeyPressed(event -> {
+            if (event.getCode().toString().equals("ENTER")) {
+                passwordUtente.requestFocus(); // Sposta il focus sulla password
+            }
+        });  
+        passwordUtente.setOnKeyPressed(event -> {
+            if (event.getCode().toString().equals("ENTER")) {
+                passwordField.requestFocus(); // Sposta il focus sulla password
+            }
+        });  
     }
+    
     
     @FXML
     void closeButton(MouseEvent event) {
@@ -100,8 +122,9 @@ public class RegistrazioneController {
     }
     
     @FXML
-    void salvaEContinua(MouseEvent event) throws IOException { 
+    void salvaEContinua(MouseEvent event) { 
     
+        
     	String nome = nomeUtente.getText();
         String cognome = cognomeUtente.getText();
         String username = usernameUtente.getText();
@@ -179,7 +202,7 @@ public class RegistrazioneController {
 	        } catch (NullPointerException | IOException e) {
 	            System.out.println("Errore nel caricamento della schermata successiva!");
 	        }
-        } 
+        }  	
     }
     
     @FXML
@@ -201,6 +224,3 @@ public class RegistrazioneController {
         }
     }
 }
-
-
-

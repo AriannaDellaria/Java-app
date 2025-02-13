@@ -18,7 +18,7 @@ public class RiordinaLivelliController {
     private Button close, indietro, base, medio, avanzato;
 
 	@FXML
-	private Label utente; 
+	private Label utente, erroreEsercizi; 
 	
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
@@ -77,10 +77,22 @@ public class RiordinaLivelliController {
             	nomeFileFXML = "/application/RiordinaBase.fxml";
                 break;
             case "medio":
-            	nomeFileFXML = "/application/RiordinaMedio.fxml";
+            	if(utenteCorrente.getPg3() == 0.33) { 
+            		nomeFileFXML = "/application/RiordinaMedio.fxml";
+            	}
+            	else { 
+            		nomeFileFXML = ""; 
+            		erroreEsercizi.setVisible(true); 
+            	}
                 break;
             case "avanzato":
-            	nomeFileFXML = "/application/RiordinaAvanzato.fxml";
+            	if(utenteCorrente.getPg3() == 0.66) { 
+            		nomeFileFXML = "/application/RiordinaAvanzato.fxml";
+            	}
+            	else { 
+            		nomeFileFXML = ""; 
+            		erroreEsercizi.setVisible(true); 
+            	}
                 break;
             default:
                 System.out.println("Nessun livello corrispondente trovato!");

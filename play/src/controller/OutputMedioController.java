@@ -3,11 +3,11 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
-
 import dati.Utente;
 import domanda.DomandaMultipla;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +17,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -31,7 +33,7 @@ public class OutputMedioController {
     private Button close, indietro, terminaCorreggi;
 
     @FXML
-    private Label codice1, codice2, codice3, codice4, codice5, domanda1, domanda2, domanda3, domanda4, domanda5, utente;
+    private Label codice1, codice2, codice3, codice4, codice5, domanda1, domanda2, domanda3, domanda4, domanda5, utente, timer;
 
     @FXML
     private RadioButton opzione1_1, opzione1_2, opzione1_3, opzione1_4;
@@ -44,43 +46,118 @@ public class OutputMedioController {
     @FXML
     private RadioButton opzione5_1, opzione5_2, opzione5_3, opzione5_4;
     
-    private ArrayList<DomandaMultipla> domandeMultiple;
-    
-    private ArrayList<Label> codiciLabel = new ArrayList<>();
-    private ArrayList<Label> domandeLabel = new ArrayList<>();
-    private ArrayList<ToggleGroup> gruppiToggle = new ArrayList<>();
-    private ArrayList<ArrayList<RadioButton>> radioButtons = new ArrayList<>();
- 
-    SessioneGioco sessioneGioco = SessioneGioco.getInstance();
-    Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
-
     @FXML
+    private ImageView immagine;
+    
+     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
+    Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
+    
+    private ArrayList<DomandaMultipla> domandeMultiple;
+    private ArrayList<Label> codici = new ArrayList<>();
+    private ArrayList<Label> domande = new ArrayList<>();
+    private ArrayList<ToggleGroup> gruppiToggle = new ArrayList<>();
+    private ArrayList<ArrayList<RadioButton>> opzioni = new ArrayList<>();
+    
+    private int tempoRestante = 120;  //2 minuti per eseguire l'esercizio
+    
+    //carica immagine dell'orologio per il timer
+	private final Image orologio = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/orologio.png")));
+    
+	@FXML
     public void initialize() {
-        // Inizializzazione della lista di ToggleGroup
-        gruppiToggle = new ArrayList<>(Arrays.asList(Gruppo1, Gruppo2, Gruppo3, Gruppo4, Gruppo5));
 
-        // Inizializzazione della lista di Label per i codici
-        codiciLabel = new ArrayList<>(Arrays.asList(codice1, codice2, codice3, codice4, codice5));
-
-        // Inizializzazione della lista di Label per le domande
-        domandeLabel = new ArrayList<>(Arrays.asList(domanda1, domanda2, domanda3, domanda4, domanda5));
-
-        // Inizializzazione della lista di RadioButton per ciascun gruppo
-        radioButtons = new ArrayList<>(Arrays.asList(
-            new ArrayList<>(Arrays.asList(opzione1_1, opzione1_2, opzione1_3, opzione1_4)),
-            new ArrayList<>(Arrays.asList(opzione2_1, opzione2_2, opzione2_3, opzione2_4)),
-            new ArrayList<>(Arrays.asList(opzione3_1, opzione3_2, opzione3_3, opzione3_4)),
-            new ArrayList<>(Arrays.asList(opzione4_1, opzione4_2, opzione4_3, opzione4_4)),
-            new ArrayList<>(Arrays.asList(opzione5_1, opzione5_2, opzione5_3, opzione5_4))
-        ));
-
+        codici.add(codice1);     
+        codici.add(codice2);     
+        codici.add(codice3);     
+        codici.add(codice4);     
+        codici.add(codice5);     
+        
+        domande.add(domanda1);     
+        domande.add(domanda2);     
+        domande.add(domanda3);     
+        domande.add(domanda4);     
+        domande.add(domanda5);     
+        
+        gruppiToggle.add(Gruppo1);     
+        gruppiToggle.add(Gruppo2);     
+        gruppiToggle.add(Gruppo3);     
+        gruppiToggle.add(Gruppo4);     
+        gruppiToggle.add(Gruppo5);
+     
+        ArrayList<RadioButton> gruppo1 = new ArrayList<>();
+        gruppo1.add(opzione1_1);
+        gruppo1.add(opzione1_2);
+        gruppo1.add(opzione1_3);
+        gruppo1.add(opzione1_4);
+        
+        ArrayList<RadioButton> gruppo2 = new ArrayList<>();
+        gruppo2.add(opzione2_1);
+        gruppo2.add(opzione2_2);
+        gruppo2.add(opzione2_3);
+        gruppo2.add(opzione2_4);
+     
+        ArrayList<RadioButton> gruppo3 = new ArrayList<>();
+        gruppo3.add(opzione3_1);
+        gruppo3.add(opzione3_2);
+        gruppo3.add(opzione3_3);
+        gruppo3.add(opzione3_4);
+     
+        ArrayList<RadioButton> gruppo4 = new ArrayList<>();
+        gruppo4.add(opzione4_1);
+        gruppo4.add(opzione4_2);
+        gruppo4.add(opzione4_3);
+        gruppo4.add(opzione4_4);
+     
+        ArrayList<RadioButton> gruppo5 = new ArrayList<>();
+        gruppo5.add(opzione5_1);
+        gruppo5.add(opzione5_2);
+        gruppo5.add(opzione5_3);
+        gruppo5.add(opzione5_4);
+     
+        // Aggiungi tutto alla lista principale
+        opzioni.add(gruppo1);
+        opzioni.add(gruppo2);
+        opzioni.add(gruppo3);
+        opzioni.add(gruppo4);
+        opzioni.add(gruppo5);
+        
         // Esegui la lettura del file
         letturaDaFile();
 
         // Imposta il nome dell'utente
         utente.setText(utenteCorrente.getUsername());
+        
+        avvioTimer();
+        immagine.setImage(orologio); 
+        immagine.setFitWidth(20); //larghezza
+        immagine.setFitHeight(20); //altezza
     }
-    
+	
+	private void avvioTimer() {
+	    Thread t = new Thread(() -> { //viene creato un thread secondario, parallelo a quello principale (interfaccia grafica), che permette di gestire il timer 
+	    	while (tempoRestante > 0 ) {
+	            try {
+	                Thread.sleep(1000); //fa scorrere il timer di secondo in secondo (1000 millisecondi) 
+	                tempoRestante--; //timer decrescente
+	                Platform.runLater(() -> { //platform -> permette al thread secondario di interagire con quello principale (modifica l'interfaccia e mostra  lo scorrere del timer) 
+	                    int minuti = tempoRestante / 60;
+	                    int secondi = tempoRestante % 60;
+	                    timer.setText(String.format("%02d:%02d", minuti, secondi)); //viene aggiornata la label
+	                });
+	            } catch (InterruptedException e) {
+	            	System.out.println("Attenzione! L'operazione si è interrotta nel thread! " +e.getMessage()); 
+	            }
+	        }
+	        if (tempoRestante == 0) {
+	            Platform.runLater(() -> {
+	            	salvaPunteggio(null);//il timer è scaduto ma il bottone non è stato cliccato -> effettua comunque la correzione degli esercizi fatti fino a quel momento e salva il punteggio 
+	            });
+	        }
+	    });
+	    t.setDaemon(true);//consente all'utente di finire l'esercizio anche prima dello scadere del timer
+	    t.start();//consente di avviare il thread secondario
+	}
+	
     @FXML
     void closeButton(MouseEvent event) {
     	Stage stage = (Stage) close.getScene().getWindow(); 
@@ -201,17 +278,19 @@ public class OutputMedioController {
         }
     }
     
+    //scrive nelle label i vari codici e le varie domande recuperate dall'arrayList 
     void aggiornaLabel() {
-        for (int i = 0; i < domandeMultiple.size() && i < codiciLabel.size(); i++) {
+        for (int i = 0; i < domandeMultiple.size() && i < codici.size(); i++) {
             DomandaMultipla domanda = domandeMultiple.get(i);
-            codiciLabel.get(i).setText(domanda.getCodice());
-            domandeLabel.get(i).setText(domanda.getTestoDomanda());
+            codici.get(i).setText(domanda.getCodice());
+            domande.get(i).setText(domanda.getTestoDomanda());
         }
     }
     
+    //inserisce nei RadioButton dell'interfaccia grafica le opzioni di risposta lette dal file
     void aggiornaRadioButton() {
-        for (int i = 0; i < domandeMultiple.size() && i < radioButtons.size(); i++) {
-            ArrayList<RadioButton> opzioniBottoni = radioButtons.get(i);
+        for (int i = 0; i < domandeMultiple.size() && i < opzioni.size(); i++) {
+            ArrayList<RadioButton> opzioniBottoni = opzioni.get(i);
             ArrayList<String> opzioniTesto = domandeMultiple.get(i).getOpzioni();
             
             for (int j = 0; j < opzioniBottoni.size() && j < opzioniTesto.size(); j++) {

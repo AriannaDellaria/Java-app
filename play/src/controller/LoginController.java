@@ -40,7 +40,7 @@ public class LoginController {
  
     
     //carica e inizializza le immagini 
-    private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioAperto.png")));
+    private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/foto2.png")));
     private final Image occhioChiuso = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioChiuso.png")));
 
     //initialize -> metodo che viene chiamato automaticamente da javaFX per inizializzare gli elementi dell'interfaccia
@@ -61,6 +61,27 @@ public class LoginController {
                     textField.setText(newValue);
                 }
         });
+        
+        //se l'utente si trova in password field, e preme enter da tastiera, viene richiamato il metodo accesso 
+        passwordUtente.setOnKeyPressed(event -> {
+            if (event.getCode().toString().equals("ENTER")) {
+                accesso(null);
+            }
+        });
+        
+        //se l'utente si trova in password field, e preme enter da tastiera, viene richiamato il metodo accesso 
+        textField.setOnKeyPressed(event -> {
+            if (event.getCode().toString().equals("ENTER")) {
+                accesso(null);
+            }
+        });
+        
+        // Quando premi "Enter" in usernameUtente, passa al campo passwordUtente
+        usernameUtente.setOnKeyPressed(event -> {
+            if (event.getCode().toString().equals("ENTER")) {
+                passwordUtente.requestFocus(); // Sposta il focus sulla password
+            }
+        });  
      }
     
     @FXML
@@ -84,7 +105,36 @@ public class LoginController {
         Stage stage = (Stage) close.getScene().getWindow(); 
         stage.close(); 
     }
-
+    /*
+    public void onEnterPressed(KeyEvent event) {
+        // Verifica se il tasto premuto è "Invio"
+        if (event.getCode().toString().equals("ENTER")) {
+            // Imposta il focus sul TextField successivo
+            if (event.getSource() == textField1) {
+                textField2.requestFocus();
+            } else if (event.getSource() == textField2) {
+                textField3.requestFocus();
+            }
+        }
+    }
+ // Metodo per gestire l'evento di pressione del tasto
+    public void invio(KeyEvent event) {
+        // Verifica se il tasto premuto è "Invio"
+        if (event.getCode().toString().equals("ENTER")) {
+            // Simula il clic del bottone quando l'utente preme "Invio" nel PasswordField
+            login.fire();  // Questo eseguirà l'azione associata al bottone
+        }
+    }*/
+ 
+/*
+    // Metodo che simula l'azione del bottone
+    public void handleSubmitButtonAction() {
+        // Codice per gestire l'azione del bottone
+        System.out.println("Password inviata: " + passwordField.getText());
+        // Qui puoi aggiungere la logica di autenticazione o altre azioni
+    }
+ */   
+    
     //torna alla pagina precedente (Gioca)
     @FXML
     void paginaPrecedente(MouseEvent event) {

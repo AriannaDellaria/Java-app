@@ -29,7 +29,7 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="close" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#closeButton" onMouseEntered="#colorChangeRed" onMouseExited="#colorChangeBasic" scaleZ="0.0" text="✘" translateX="-3.0" translateY="3.0">
+                  <Button fx:id="close" mnemonicParsing="false" onMouseClicked="#closeButton" onMouseEntered="#colorChangeRed" onMouseExited="#colorChangeBasic" text="✘" translateX="-3.0" translateY="3.0">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -125,6 +125,11 @@
                   <Insets left="69.0" right="62.0" />
                </VBox.margin>
             </HBox>
+            <Label fx:id="erroreEsercizi" text="Per svolgere gli esercizi di livello superiore, è necessario superare con successo gli esercizi precedenti! " translateY="-45.0" visible="false">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
    </center>

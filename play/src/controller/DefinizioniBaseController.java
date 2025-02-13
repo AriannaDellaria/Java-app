@@ -1,23 +1,26 @@
 package controller;
 
-	import java.io.File;
-	import java.io.IOException;
-	import java.util.ArrayList;
-	import java.util.Scanner;
-	import dati.Utente;
-	import domanda.DomandaDefinizioni;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Scanner;
+import dati.Utente;
+import domanda.DomandaDefinizioni;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-	import javafx.fxml.FXMLLoader;
-	import javafx.scene.Parent;
-	import javafx.scene.Scene;
-	import javafx.scene.control.Button;
-	import javafx.scene.control.ComboBox;
-	import javafx.scene.control.Label;
-	import javafx.scene.input.MouseEvent;
-	import javafx.stage.Modality;
-	import javafx.stage.Stage;
-	import sessione.SessioneGioco;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import sessione.SessioneGioco;
 	
 	public class DefinizioniBaseController {
 
@@ -25,60 +28,74 @@ import javafx.fxml.FXML;
 	    private ComboBox<String> ComboBox1, ComboBox2, ComboBox3, ComboBox4, ComboBox5;
 
 	    @FXML
-	    private Label domanda1, domanda2, domanda3, domanda4, domanda5, utente, timerLabel;
+	    private Label domanda1, domanda2, domanda3, domanda4, domanda5, utente, timer;
 
 	    @FXML
 	    private Button close, indietro, terminaCorreggi;
-
-	    private ArrayList<DomandaDefinizioni> domandeDefinizioni;
-	     
-	    //
-	    private int tempoRimanente = 60; // 10 minuti (600 secondi)
-	    private boolean timerAttivo = false;
-	    // 
+	    
+	    @FXML
+	    private ImageView immagine;
 	    
 	    SessioneGioco sessioneGioco = SessioneGioco.getInstance();
 	    Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
+	   
+	    private ArrayList<DomandaDefinizioni> domandeDefinizioni;
+	    private ArrayList<Label> domande = new ArrayList<>();
+	    private ArrayList<ComboBox<String>> opzioni = new ArrayList<>();
+	   
+	    private int tempoRestante = 120; //2 minuti
 
+	    //carica immagine dell'orologio per il timer
+		private final Image orologio = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/orologio.png")));
+		
 	    @FXML
 	    public void initialize() {
-	            letturaDaFile();  
-	            utente.setText(utenteCorrente.getUsername()); 
-	            //
-	            startTimer();  // Avvia il timer all'inizio
+	        domande.add(domanda1);
+	        domande.add(domanda2);
+	        domande.add(domanda3);
+	        domande.add(domanda4);
+	        domande.add(domanda5);
+
+	        opzioni.add(ComboBox1);
+	        opzioni.add(ComboBox2);
+	        opzioni.add(ComboBox3);
+	        opzioni.add(ComboBox4);
+	        opzioni.add(ComboBox5);
+
+	        letturaDaFile();  
+	        utente.setText(utenteCorrente.getUsername());
+	        avvioTimer();
+	        
+	        immagine.setImage(orologio); 
+	        immagine.setFitWidth(20); //larghezza
+	        immagine.setFitHeight(20); //altezza
 	    }
 	    
-	    // *** Metodo per avviare il timer (Countdown) ***
-	    private void startTimer() {
-	        timerAttivo = true;
-	        Thread timerThread = new Thread(() -> {
-	            while (tempoRimanente > 0 && timerAttivo) {
-	                try {
-	                    Thread.sleep(1000); // Una pausa di 1 secondo tra ogni iterazione
-	                    tempoRimanente--; // Decrementa il tempo rimanente
-	                    Platform.runLater(() -> {
-	                        int minuti = tempoRimanente / 60;
-	                        int secondi = tempoRimanente % 60;
-	                        timerLabel.setText(String.format("%02d:%02d", minuti, secondi)); // Aggiorna la label del timer
-	                    });
-	                } catch (InterruptedException e) {
-	                    e.printStackTrace();
-	                }
-	            }
-	            if (tempoRimanente == 0) {
-	                Platform.runLater(() -> {
-	                    terminaEsercizio(); // Quando il tempo scade, ferma l'esercizio
-	                });
-	            }
-	        });
-	        timerThread.setDaemon(true); // Assicurati che il thread si chiuda quando l'applicazione termina
-	        timerThread.start();
-	    }
-
-	    // *** Metodo che termina l'esercizio quando il timer finisce ***
-	    private void terminaEsercizio() {
-	        salvaPunteggio(null); // Una volta finito il timer, ferma l'esercizio e calcola il punteggio
-	    }
+	    
+	    private void avvioTimer() {
+		    Thread t = new Thread(() -> { //viene creato un thread secondario, parallelo a quello principale (interfaccia grafica), che permette di gestire il timer 
+		    	while (tempoRestante > 0 ) {
+		            try {
+		                Thread.sleep(1000); //fa scorrere il timer di secondo in secondo (1000 millisecondi) 
+		                tempoRestante--; //timer decrescente
+		                Platform.runLater(() -> { //platform -> permette al thread secondario di interagire con quello principale (modifica l'interfaccia e mostra  lo scorrere del timer) 
+		                    int minuti = tempoRestante / 60;
+		                    int secondi = tempoRestante % 60;
+		                    timer.setText(String.format("%02d:%02d", minuti, secondi)); //viene aggiornata la label
+		                });
+		            } catch (InterruptedException e) {
+		            	System.out.println("Attenzione! L'operazione si è interrotta nel thread! " +e.getMessage()); 
+		            }
+		        }
+		        if (tempoRestante == 0) {
+		            Platform.runLater(() -> {
+		            	salvaPunteggio(null);//il timer è scaduto ma il bottone non è stato cliccato -> effettua comunque la correzione degli esercizi fatti fino a quel momento e salva il punteggio 
+		            });
+		        }
+		    });
+		    t.setDaemon(true);//consente all'utente di finire l'esercizio anche prima dello scadere del timer
+		    t.start();//consente di avviare il thread secondario
+	   }
 	    
 	    @FXML
 	    void closeButton(MouseEvent event) {
@@ -151,7 +168,7 @@ import javafx.fxml.FXML;
 	                }
 	                
 	                
-	                if (line.equals("****")) { //"****" permette di separare la domanda successiva dalla corrente
+	                if (line.equals("****")) { //"*" permette di separare la domanda successiva dalla corrente
 	                    if (!domanda.isEmpty() && !risposta.isEmpty()) {
 	                        DomandaDefinizioni D = new DomandaDefinizioni(domanda, opzioni, risposta);
 	                        domandeDefinizioni.add(D);
@@ -169,33 +186,11 @@ import javafx.fxml.FXML;
 	        }
 	    }
 	    
-	    //tramite lo switch trova il label in cui scrivere la domanda inserita precedentemente nell'arrayList
+	    //recupera dall'arrayList le varie domande e le varie opzioni
 	    void aggiornaLabel() {
-	        for (int i = 0; i < domandeDefinizioni.size(); i++) {
-	            DomandaDefinizioni domanda = domandeDefinizioni.get(i);
-
-	            switch (i) {
-                case 0:
-                    domanda1.setText(domanda.getTestoDomanda());
-                    ComboBox1.getItems().setAll(domanda.getOpzioni());
-                    break;
-                case 1:
-                    domanda2.setText(domanda.getTestoDomanda());
-                    ComboBox2.getItems().setAll(domanda.getOpzioni());
-                    break;
-                case 2:
-                    domanda3.setText(domanda.getTestoDomanda());
-                    ComboBox3.getItems().setAll(domanda.getOpzioni());
-                    break;
-                case 3:
-                    domanda4.setText(domanda.getTestoDomanda());
-                    ComboBox4.getItems().setAll(domanda.getOpzioni());
-                    break;
-                case 4:
-                    domanda5.setText(domanda.getTestoDomanda());
-                    ComboBox5.getItems().setAll(domanda.getOpzioni());
-                    break;
-	            }
+	        for (int i = 0; i < domandeDefinizioni.size() && i < domande.size(); i++) {
+	            domande.get(i).setText(domandeDefinizioni.get(i).getTestoDomanda());
+	            opzioni.get(i).getItems().setAll(domandeDefinizioni.get(i).getOpzioni());
 	        }
 	    }
 	    
@@ -261,22 +256,10 @@ import javafx.fxml.FXML;
 	    	    }   
 		}
 	    
-	    
 	    private ComboBox<String> getCombo(int indice) {
-	        switch (indice) {
-	            case 0: 
-	            	return ComboBox1;
-	            case 1: 
-	            	return ComboBox2;
-	            case 2: 
-	            	return ComboBox3;
-	            case 3: 
-	            	return ComboBox4;
-	            case 4:
-	            	return ComboBox5;
-	            default: 
-	            	return null;
-	        }
+	        return (indice >= 0 && indice < opzioni.size()) ? opzioni.get(indice) : null;
 	    }
 }
+
+
 	

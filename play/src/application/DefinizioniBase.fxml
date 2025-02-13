@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -121,11 +122,25 @@
                   </Label>
                </children>
             </HBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Leggi la definizione fornita e dal menù a tendina seleziona il termine che corrisponde a quella definizione" textAlignment="CENTER" translateY="31.0" wrappingWidth="751.4368214607239">
-               <font>
-                  <Font name="Georgia" size="17.0" />
-               </font>
-            </Text>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Leggi la definizione fornita e dal menù a tendina seleziona il termine che corrisponde a quella definizione" textAlignment="CENTER" wrappingWidth="751.4368214607239">
+                     <font>
+                        <Font name="Georgia" size="17.0" />
+                     </font>
+                  </Text>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="immagine" fitHeight="40.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="timer" prefHeight="30.0" prefWidth="90.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
             <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="254.0">
                <children>
                   <Button fx:id="indietro" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#paginaPrecedente" onMouseEntered="#colorChangeYellow" onMouseExited="#colorChangeBasic" text="🡸" translateX="-5.0" translateY="3.0">
@@ -143,7 +158,4 @@
          </children>
       </HBox>
    </top>
-   <left>
-      <Label fx:id="timerLabel" text="Label" BorderPane.alignment="CENTER" />
-   </left>
 </BorderPane>

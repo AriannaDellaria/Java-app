@@ -19,7 +19,7 @@ public class DefinizioniLivelliController {
     private Button close, indietro, base, medio, avanzato;
 
     @FXML
-    private Label utente;
+    private Label utente, erroreEsercizi;
     
   
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
@@ -79,25 +79,40 @@ public class DefinizioniLivelliController {
             	nomeFileFXML = "/application/DefinizioniBase.fxml";
                 break;
             case "medio":
-            	nomeFileFXML = "/application/DefinizioniMedio.fxml";
+            	if(utenteCorrente.getPg1() == 0.33) { 
+            		nomeFileFXML = "/application/DefinizioniMedio.fxml";
+            	}
+            	else { 
+            		nomeFileFXML = ""; 
+            		erroreEsercizi.setVisible(true); 
+            	}
                 break;
             case "avanzato":
-            	nomeFileFXML = "/application/DefinizioniAvanzato.fxml";
+            	if(utenteCorrente.getPg1() == 0.66) { 
+            		nomeFileFXML = "/application/DefinizioniAvanzato.fxml";
+            	}
+            	else { 
+            		nomeFileFXML = ""; 
+            		erroreEsercizi.setVisible(true); 
+            	}
                 break;
             default:
                 System.out.println("Nessun livello corrispondente trovato!");
                 return;
         }
+        
+        if(!nomeFileFXML.equals("")) { 
+        	 try {
+                 Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource(nomeFileFXML));
 
-        try {
-            Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource(nomeFileFXML));
-
-            Stage scenaCorrente = (Stage) bottoneCliccato.getScene().getWindow();
-            Scene nuovaScena = new Scene(scenaSuccessiva);
-            scenaCorrente.setScene(nuovaScena);
-            scenaCorrente.show();
-        } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+                 Stage scenaCorrente = (Stage) bottoneCliccato.getScene().getWindow();
+                 Scene nuovaScena = new Scene(scenaSuccessiva);
+                 scenaCorrente.setScene(nuovaScena);
+                 scenaCorrente.show();
+             } catch (NullPointerException | IOException e) {
+                 System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+                 e.printStackTrace();
+             }
         }
     }
     

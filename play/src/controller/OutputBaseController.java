@@ -3,10 +3,11 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
-
 import dati.Utente;
 import domanda.DomandaVeroFalso;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +17,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -30,19 +33,78 @@ public class OutputBaseController {
     private Button close, indietro, terminaCorreggi;
 
     @FXML
-    private Label codice1, codice2, codice3, codice4, codice5, domanda1, domanda2, domanda3, domanda4, domanda5, utente;
+    private Label codice1, codice2, codice3, codice4, codice5, domanda1, domanda2, domanda3, domanda4, domanda5, utente, timer;
 
-    private ArrayList<DomandaVeroFalso> domandeVeroFalso;
+    @FXML
+    private ImageView immagine; 
+    
+    private int tempoRestante = 120;  //2 minuti per eseguire l'esercizio
+    
+    //carica immagine dell'orologio per il timer
+	private final Image orologio = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/orologio.png")));
+    
+	private ArrayList<Label> domande  = new ArrayList<>();
+	private ArrayList<Label> codici  = new ArrayList<>();
+	private ArrayList<ToggleGroup> gruppi = new ArrayList<>(); 
+	private ArrayList<DomandaVeroFalso> domandeVeroFalso;
     
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
 
     @FXML
     public void initialize() {
-        letturaDaFile(); 
+        domande.add(domanda1); 
+        domande.add(domanda2); 
+        domande.add(domanda3); 
+        domande.add(domanda4); 
+        domande.add(domanda5); 
+    	
+        codici.add(codice1); 
+        codici.add(codice2); 
+        codici.add(codice3); 
+        codici.add(codice4); 
+        codici.add(codice5); 
+        
+        gruppi.add(Gruppo1); 
+        gruppi.add(Gruppo2); 
+        gruppi.add(Gruppo3); 
+        gruppi.add(Gruppo4); 
+        gruppi.add(Gruppo5); 
+        
+    	letturaDaFile(); 
         utente.setText(utenteCorrente.getUsername()); 
+       
+        avvioTimer();
+        immagine.setImage(orologio); 
+        immagine.setFitWidth(20); //larghezza
+        immagine.setFitHeight(20); //altezza
     }
     
+    private void avvioTimer() {
+	    Thread t = new Thread(() -> { //viene creato un thread secondario, parallelo a quello principale (interfaccia grafica), che permette di gestire il timer 
+	    	while (tempoRestante > 0 ) {
+	            try {
+	                Thread.sleep(1000); //fa scorrere il timer di secondo in secondo (1000 millisecondi) 
+	                tempoRestante--; //timer decrescente
+	                Platform.runLater(() -> { //platform -> permette al thread secondario di interagire con quello principale (modifica l'interfaccia e mostra  lo scorrere del timer) 
+	                    int minuti = tempoRestante / 60;
+	                    int secondi = tempoRestante % 60;
+	                    timer.setText(String.format("%02d:%02d", minuti, secondi)); //viene aggiornata la label
+	                });
+	            } catch (InterruptedException e) {
+	            	System.out.println("Attenzione! L'operazione si è interrotta nel thread! " +e.getMessage()); 
+	            }
+	        }
+	        if (tempoRestante == 0) {
+	            Platform.runLater(() -> {
+	            	salvaPunteggio(null);//il timer è scaduto ma il bottone non è stato cliccato -> effettua comunque la correzione degli esercizi fatti fino a quel momento e salva il punteggio 
+	            });
+	        }
+	    });
+	    t.setDaemon(true);//consente all'utente di finire l'esercizio anche prima dello scadere del timer
+	    t.start();//consente di avviare il thread secondario
+	}
+	
     @FXML
     void closeButton(MouseEvent event) {
     	Stage stage = (Stage) close.getScene().getWindow(); 
@@ -134,32 +196,14 @@ public class OutputBaseController {
     
     //tramite lo switch trova il label in cui scrivere la domanda inserita precedentemente nell'arrayList
     void aggiornaLabel() {
-        for (int i = 0; i < domandeVeroFalso.size(); i++) {
-            DomandaVeroFalso domanda = domandeVeroFalso.get(i);
+    	 for (int i = 0; i < domandeVeroFalso.size(); i++) {
+    	        DomandaVeroFalso domanda = domandeVeroFalso.get(i);
 
-            switch (i) {
-                case 0:
-                    codice1.setText(domanda.getCodice());
-                    domanda1.setText(domanda.getTestoDomanda());
-                    break;
-                case 1:
-                    codice2.setText(domanda.getCodice());
-                    domanda2.setText(domanda.getTestoDomanda());
-                    break;
-                case 2:
-                    codice3.setText(domanda.getCodice());
-                    domanda3.setText(domanda.getTestoDomanda());
-                    break;
-                case 3:
-                    codice4.setText(domanda.getCodice());
-                    domanda4.setText(domanda.getTestoDomanda());
-                    break;
-                case 4:
-                    codice5.setText(domanda.getCodice());
-                    domanda5.setText(domanda.getTestoDomanda());
-                    break;
-            }
-        }
+    	        if (i < codici.size()) {
+    	            codici.get(i).setText(domanda.getCodice());
+    	            domande.get(i).setText(domanda.getTestoDomanda());
+    	        }
+    	} 
     }
 
     @FXML
@@ -167,7 +211,7 @@ public class OutputBaseController {
     	int punteggioLocale = 0;
         for (int i = 0; i < domandeVeroFalso.size(); i++) {
             DomandaVeroFalso domanda = domandeVeroFalso.get(i);
-            ToggleGroup gruppo = getGruppoDaIndice(i); 
+            ToggleGroup gruppo = gruppi.get(i); 
             String rispostaUtente = getRispostaSelezionata(gruppo); 
 
             if (rispostaUtente != null && domanda.verificaRisposta(rispostaUtente)) {
@@ -224,22 +268,6 @@ public class OutputBaseController {
     	    }   
 	}
     
-    private ToggleGroup getGruppoDaIndice(int indice) {
-        switch (indice) {
-            case 0:
-                return Gruppo1;
-            case 1:
-                return Gruppo2;
-            case 2:
-                return Gruppo3;
-            case 3:
-                return Gruppo4;
-            case 4:
-                return Gruppo5;
-            default:
-                return null;
-        }
-    }
     
     private String getRispostaSelezionata(ToggleGroup gruppo) {
         Toggle selezionato = gruppo.getSelectedToggle(); //restituisce il toggle selezionato

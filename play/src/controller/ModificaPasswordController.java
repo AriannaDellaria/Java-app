@@ -67,7 +67,7 @@ public class ModificaPasswordController {
     }
 
      //carica e inizializza le immagini     
-    private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioAperto.png")));
+    private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/foto2.png")));
     private final Image occhioChiuso = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioChiuso.png")));
 
     //initialize -> metodo che viene chiamato automaticamente da javaFX per inizializzare gli elementi dell'interfaccia
@@ -89,6 +89,12 @@ public class ModificaPasswordController {
                     textField.setText(newValue);
                 }
         });
+        
+        nuovaPassword.setOnKeyPressed(event -> {
+            if (event.getCode().toString().equals("ENTER")) {
+                confermaPassword.requestFocus(); // Sposta il focus sulla password
+            }
+        });  
     }
     
     @FXML
