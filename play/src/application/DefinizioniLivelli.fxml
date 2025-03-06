@@ -15,7 +15,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="file:/C:/Users/Utente/Desktop/Progetto/src/immagini/close1.png" />
+                  <Image url="@../immagini/close1.png" />
                </source>
             </ImageInput>
          </effect>
@@ -24,7 +24,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="file:/C:/Users/Utente/Desktop/Progetto/src/immagini/frecciaIndietro.png" />
+                  <Image url="@../immagini/frecciaIndietro.png" />
                </source>
             </ImageInput>
          </effect>

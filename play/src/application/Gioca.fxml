@@ -18,7 +18,7 @@
          <effect>
             <ImageInput x="-1.0" y="-7.0">
                <source>
-                  <Image url="file:/C:/Users/Utente/Desktop/Progetto/src/immagini/close1.png" />
+                  <Image url="@../immagini/close1.png" />
                </source>
             </ImageInput>
          </effect>
