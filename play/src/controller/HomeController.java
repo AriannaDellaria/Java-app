@@ -42,6 +42,7 @@ public class HomeController {
     	close.setStyle("");
     }
 
+    
 
     @FXML
     void paginaPrecedente(MouseEvent event) {
