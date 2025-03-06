@@ -37,15 +37,30 @@ public class LoginController {
     
     @FXML
     private ToggleButton toggle;
+    
+    @FXML
+    private ImageView immagine; 
  
     
     //carica e inizializza le immagini 
     private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/foto2.png")));
     private final Image occhioChiuso = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioChiuso.png")));
-
+    
+    @FXML
+    void colorChangeGreen(MouseEvent event) {
+    	login.setStyle("-fx-background-color: #A2D8A3;-fx-border-color: #2AAA4A"); 
+    }
+    
+    @FXML
+    void colorChangeBasic(MouseEvent event) {
+    	login.setStyle("-fx-background-color: white; -fx-border-color: #2AAA4A; -fx-border-width: 2px;");
+    	
+    }
+    
     //initialize -> metodo che viene chiamato automaticamente da javaFX per inizializzare gli elementi dell'interfaccia
     @FXML
     private void initialize() {
+    	
         ImageView icon = new ImageView(occhioAperto); //ImageView -> consente di visualizzare l'immagine nell'interfaccia 
         icon.setFitWidth(20); //larghezza
         icon.setFitHeight(20); //altezza 
@@ -85,55 +100,10 @@ public class LoginController {
      }
     
     @FXML
-    void colorChangeYellow(MouseEvent event) {
-    	indietro.setStyle("-fx-background-color: yellow;");	
-    }
-    
-    @FXML
-    void colorChangeRed(MouseEvent event) {
-    	close.setStyle("-fx-background-color: red;");
-    }
-
-    @FXML
-    void colorChangeBasic(MouseEvent event) {
-    	indietro.setStyle("");
-    	close.setStyle("");
-    }
-    
-    @FXML
     void closeButton(MouseEvent event) {
         Stage stage = (Stage) close.getScene().getWindow(); 
         stage.close(); 
     }
-    /*
-    public void onEnterPressed(KeyEvent event) {
-        // Verifica se il tasto premuto è "Invio"
-        if (event.getCode().toString().equals("ENTER")) {
-            // Imposta il focus sul TextField successivo
-            if (event.getSource() == textField1) {
-                textField2.requestFocus();
-            } else if (event.getSource() == textField2) {
-                textField3.requestFocus();
-            }
-        }
-    }
- // Metodo per gestire l'evento di pressione del tasto
-    public void invio(KeyEvent event) {
-        // Verifica se il tasto premuto è "Invio"
-        if (event.getCode().toString().equals("ENTER")) {
-            // Simula il clic del bottone quando l'utente preme "Invio" nel PasswordField
-            login.fire();  // Questo eseguirà l'azione associata al bottone
-        }
-    }*/
- 
-/*
-    // Metodo che simula l'azione del bottone
-    public void handleSubmitButtonAction() {
-        // Codice per gestire l'azione del bottone
-        System.out.println("Password inviata: " + passwordField.getText());
-        // Qui puoi aggiungere la logica di autenticazione o altre azioni
-    }
- */   
     
     //torna alla pagina precedente (Gioca)
     @FXML
@@ -155,8 +125,8 @@ public class LoginController {
     void accesso(MouseEvent event) {
     
     	//recuperano username e password scritti nei textField
-        String username = usernameUtente.getText(); 
-        String password = passwordUtente.getText();
+        String username = usernameUtente.getText().trim(); 
+        String password = passwordUtente.getText().trim();
         
         //se uno dei due campi è vuoto, viene segnalato l'errore all'utente
     	if(username.isEmpty() || password.isEmpty()) {
@@ -193,7 +163,7 @@ public class LoginController {
                 scenaCorrente.setScene(nuovaScena);
                 scenaCorrente.show();
             } catch (NullPointerException | IOException e) {
-                System.out.println("Errore nel caricamento della schermata successiva!");
+                System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
                 e.printStackTrace(); 
             }
     	}
@@ -233,7 +203,8 @@ public class LoginController {
             scenaCorrente.setScene(nuovaScena);
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata successiva!");
+            System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+            e.printStackTrace(); 
         }
     }
    

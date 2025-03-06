@@ -14,11 +14,11 @@ import javafx.stage.Stage;
 public class GiocaController {
 
     @FXML
-    private Button close;
+    private Button close, start;
 
     @FXML
-    private Label start;
-
+    private Label opinioni;
+    
     //chiude la scena 
     @FXML
     void closeButton(MouseEvent event) {
@@ -27,14 +27,16 @@ public class GiocaController {
     }
     
     @FXML
-    void colorChangeRed(MouseEvent event) {
-    	close.setStyle("-fx-background-color: red;"); 
+    void colorChangeGreen(MouseEvent event) {
+    	start.setStyle("-fx-background-color: #A2D8A3;-fx-border-color: #2AAA4A"); 
     }
-
+    
     @FXML
     void colorChangeBasic(MouseEvent event) {
-    	close.setStyle("");
+    	start.setStyle("-fx-background-color: white; -fx-border-color: #2AAA4A; -fx-border-width: 2px;");
+    	
     }
+    
 
     @FXML
     void startGame(MouseEvent event) {
@@ -50,7 +52,26 @@ public class GiocaController {
             scenaCorrente.setScene(nuovaScena);
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) { 
-            System.out.println("Errore nel caricamento della schermata successiva!");
+            System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+        }
+    }
+    
+    @FXML
+    void vostreOpinioni(MouseEvent event) {
+    	try {
+        	// Parent è il primo nodo (BorderPane)
+            Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/Recensioni.fxml")); //il loader carica il file dell'interfaccia successiva
+
+            Stage scenaCorrente = (Stage) opinioni.getScene().getWindow(); //prende la scena corrente
+            
+            //Crea la nuova scena
+            //Modifica la scena corrente
+            Scene nuovaScena = new Scene(scenaSuccessiva);
+            scenaCorrente.setScene(nuovaScena);
+            scenaCorrente.show();
+        } catch (NullPointerException | IOException e) { 
+            System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+            e.printStackTrace(); 
         }
     }
 }

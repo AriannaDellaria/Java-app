@@ -2,38 +2,71 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="750.0" prefWidth="1300.0" style="-fx-background-color: #d6f1ff;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GiocaController">
-   <center>
-      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="900.0">
-         <children>
-            <Text fill="#1c5c99" stroke="#1a0c84" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="3.5" text="PLAY" translateY="-50.0">
-               <font>
-                  <Font name="Georgia Bold" size="200.0" />
-               </font>
-            </Text>
-            <Text fill="#1a0c84" strokeType="OUTSIDE" strokeWidth="0.0" text="Play, Learn, Assess Yourself" translateY="-35.0">
-               <font>
-                  <Font name="Georgia" size="33.0" />
-               </font>
-            </Text>
-            <Label fx:id="start" onMouseClicked="#startGame" text="clicca qui per iniziare" underline="true">
-               <font>
-                  <Font name="Verdana Italic" size="19.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-   </center>
-   <top>
-      <Button fx:id="close" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#closeButton" onMouseEntered="#colorChangeRed" onMouseExited="#colorChangeBasic" text="✘" translateX="-3.0" translateY="3.0" BorderPane.alignment="TOP_RIGHT">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GiocaController">
+   <children>
+      <Button fx:id="close" layoutX="1243.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#closeButton" pickOnBounds="false" prefHeight="26.0" prefWidth="31.0" text="X" AnchorPane.leftAnchor="1255.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
-            <Font size="13.0" />
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <effect>
+            <ImageInput x="-1.0" y="-7.0">
+               <source>
+                  <Image url="file:/C:/Users/Utente/Desktop/Progetto/src/immagini/close1.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <ImageView fitHeight="393.0" fitWidth="524.0" layoutX="-19.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/sfondo_sinistro.JPG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="346.0" fitWidth="463.0" layoutX="855.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="-7.216064453125">
+         <image>
+            <Image url="@../immagini/sfondo_destro.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="312.0" fitWidth="452.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/sfondo_sinistro2.JPG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="224.0" fitWidth="585.0" layoutX="358.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/sfondo.PNG" />
+         </image>
+      </ImageView>
+      <Text layoutX="467.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="69.0" fitWidth="409.0" layoutX="443.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/sottotitolo.PNG" />
+         </image>
+      </ImageView>
+      <Button fx:id="start" layoutX="585.0" layoutY="452.0" mnemonicParsing="false" onMouseClicked="#startGame" onMouseEntered="#colorChangeGreen" onMouseExited="#colorChangeBasic" prefHeight="48.0" prefWidth="132.0" style="-fx-border-color: #2AAA4A; -fx-border-width: 2; -fx-background-color: white;" text="Gioca!" textFill="#2aaa4a">
+         <font>
+            <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-   </top>
-</BorderPane>
+      <Label fx:id="opinioni" layoutX="550.0" layoutY="634.0" onMouseClicked="#vostreOpinioni" text="Le vostre opinioni" underline="true">
+         <font>
+            <Font name="System Italic" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="727.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/commento.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

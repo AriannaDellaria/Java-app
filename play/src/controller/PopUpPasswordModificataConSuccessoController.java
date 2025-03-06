@@ -14,14 +14,4 @@ public class PopUpPasswordModificataConSuccessoController {
     	Stage stage = (Stage) close.getScene().getWindow(); 
         stage.close(); 
     }
-
-    @FXML
-    void colorChangeBasic(MouseEvent event) {
-    	close.setStyle("");
-    }
-
-    @FXML
-    void colorChangeRed(MouseEvent event) {
-    	close.setStyle("-fx-background-color: red;");
-    }
 }

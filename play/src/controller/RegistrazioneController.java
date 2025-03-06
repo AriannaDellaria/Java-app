@@ -1,19 +1,20 @@
 package controller;
 
 import java.io.*;
+
 import java.util.Objects;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -23,7 +24,7 @@ public class RegistrazioneController {
     private TextField nomeUtente,cognomeUtente,usernameUtente,textField;
 
     @FXML
-    private Text erroreCompilazioneRegistrazione, errorePassword, usernameEsistente;
+    private Label erroreCompilazioneRegistrazione, errorePassword, usernameEsistente;
 
     @FXML
     private PasswordField passwordField, passwordUtente;
@@ -90,21 +91,15 @@ public class RegistrazioneController {
     }
 
     @FXML
-    void colorChangeYellow(MouseEvent event) {
-    	indietro.setStyle("-fx-background-color: yellow;");	
+    void colorChangeBasic(MouseEvent event) {
+    	salvaButton.setStyle("-fx-background-color: white; -fx-border-color: #2AAA4A; -fx-border-width: 2px;");
     }
     
     @FXML
-    void colorChangeRed(MouseEvent event) {
-    	close.setStyle("-fx-background-color: red;");
+    void colorChangeGreen(MouseEvent event) {
+    	salvaButton.setStyle("-fx-background-color: #A2D8A3;-fx-border-color: #2AAA4A"); 
     }
-
-    @FXML
-    void colorChangeBasic(MouseEvent event) {
-    	indietro.setStyle("");
-    	close.setStyle("");
-    	salvaButton.setStyle("");
-    }
+    
   
     @FXML
     void paginaPrecedente(MouseEvent event) {
@@ -125,11 +120,11 @@ public class RegistrazioneController {
     void salvaEContinua(MouseEvent event) { 
     
         
-    	String nome = nomeUtente.getText();
-        String cognome = cognomeUtente.getText();
-        String username = usernameUtente.getText();
-        String password = passwordUtente.getText();
-        String confermaPassword = passwordField.getText(); 
+    	String nome = nomeUtente.getText().trim();
+        String cognome = cognomeUtente.getText().trim();
+        String username = usernameUtente.getText().trim();
+        String password = passwordUtente.getText().trim();
+        String confermaPassword = passwordField.getText().trim(); 
         
         
         boolean vuoto = false; 

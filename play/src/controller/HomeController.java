@@ -24,7 +24,7 @@ public class HomeController {
     private ProgressBar pb1, pb2, pb3;
 
     @FXML
-    private Label primoEsercizio, secondoEsercizio, terzoEsercizio, utente;
+    private Label primoEsercizio, secondoEsercizio, terzoEsercizio, utente, recensione, tutteLeRecensioni;
   
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();  //getIstance() -> restituisce una e una sola istanza della classe
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato(); //recupera i dati dell'utente che ha effettuato il login
@@ -42,15 +42,6 @@ public class HomeController {
     	close.setStyle("");
     }
 
-    @FXML
-    void colorChangeRed(MouseEvent event) {
-    	close.setStyle("-fx-background-color: red;");
-    }
-
-    @FXML
-    void colorChangeYellow(MouseEvent event) {
-    	indietro.setStyle("-fx-background-color: yellow;");	
-    }
 
     @FXML
     void paginaPrecedente(MouseEvent event) {
@@ -63,7 +54,7 @@ public class HomeController {
             scenaCorrente.setScene(vecchiaScena);
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata precedente!");
+            System.out.println("Errore nel caricamento della schermata precedente! " +e.getMessage());
         }
     }
  
@@ -79,7 +70,7 @@ public class HomeController {
             scenaCorrente.setScene(nuovaScena);
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata successiva!");
+            System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
         }
     }
      
@@ -111,10 +102,40 @@ public class HomeController {
             scenaCorrente.setScene(nuovaScena);
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata successiva!");
+            System.out.println("Errore nel caricamento della schermata successiva! " +e.getMessage());
         }
     }
 
+    @FXML
+    void scriviRecensione(MouseEvent event) {
+    	try {
+            Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/ScriviRecensione.fxml"));
+
+            Stage scenaCorrente = (Stage)recensione.getScene().getWindow();
+            
+            Scene nuovaScena = new Scene(scenaSuccessiva);
+            scenaCorrente.setScene(nuovaScena);
+            scenaCorrente.show();
+        } catch (NullPointerException | IOException e) {
+            System.out.println("Errore nel caricamento della schermata successiva! " +e.getMessage());
+        }
+    }
+    
+    @FXML
+    void apriRecensioni(MouseEvent event)  { 
+    	try {
+            Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/Recensioni.fxml"));
+
+            Stage scenaCorrente = (Stage)tutteLeRecensioni.getScene().getWindow();
+            
+            Scene nuovaScena = new Scene(scenaSuccessiva);
+            scenaCorrente.setScene(nuovaScena);
+            scenaCorrente.show();
+        } catch (NullPointerException | IOException e) {
+            System.out.println("Errore nel caricamento della schermata successiva! " +e.getMessage());
+        }
+    }
+    
     @FXML
     public void initialize() {
         aggiornaProgressBar();
@@ -146,6 +167,7 @@ public class HomeController {
     	        popUpStage.show(); 
     	    } catch (NullPointerException | IOException e) {
     	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+    	        e.printStackTrace(); 
     	    }   
 	}
 }

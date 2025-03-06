@@ -15,6 +15,22 @@ public class PopUpLogoutController {
     private Button annulla, conferma;
 
     @FXML
+    void colorChangeGreen(MouseEvent event) {
+    	conferma.setStyle("-fx-background-color: #A2D8A3;-fx-border-color: #2AAA4A"); 
+    }
+    
+    @FXML
+    void colorChangeRed(MouseEvent event) {
+    	annulla.setStyle("-fx-background-color: #FFC8AE;-fx-border-color: #f64c4c"); 
+    }
+    
+    @FXML
+    void colorChangeBasic(MouseEvent event) {
+    	conferma.setStyle("-fx-background-color: white; -fx-border-color: #2AAA4A; -fx-border-width: 2px;");
+    	annulla.setStyle("-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2px;");
+    }
+    
+    @FXML
     void procediAlLogout(MouseEvent event) {
     	try {
             Stage popUpCorrente = (Stage) conferma.getScene().getWindow();

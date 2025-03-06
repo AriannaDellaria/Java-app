@@ -32,11 +32,26 @@ public class PopUpRecuperaPasswordController {
     @FXML
     private Text usernameNonEsistente;
 
+    @FXML
+    void colorChangeGreen(MouseEvent event) {
+    	continua.setStyle("-fx-background-color: #A2D8A3;-fx-border-color: #2AAA4A"); 
+    }
+    
+    @FXML
+    void colorChangeRed(MouseEvent event) {
+    	annulla.setStyle("-fx-background-color: #FFC8AE;-fx-border-color: #f64c4c"); 
+    }
+    @FXML
+    void colorChangeBasic(MouseEvent event) {
+    	continua.setStyle("-fx-background-color: white; -fx-border-color: #2AAA4A; -fx-border-width: 2px;");
+    	annulla.setStyle("-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2px;");
+    }
+    
     //tramite l'username il metodo recupera gli altri dati utente per consentire la successiva modifica della password 
     //il tutto attraverso la lettura del file 'utenti.csv'
     @FXML
     void procediAllaModifica(MouseEvent event) {
-    	String x = username.getText(); 
+    	String x = username.getText().trim(); 
         File file = new File("utenti.csv");	
         boolean trovato = false; 
         

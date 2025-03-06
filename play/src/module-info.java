@@ -4,4 +4,5 @@ module play {
 	requires javafx.graphics;
 	
 	opens application to javafx.graphics, javafx.fxml;
-    opens controller to javafx.fxml;}
+    opens controller to javafx.fxml;
+}

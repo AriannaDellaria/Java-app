@@ -31,17 +31,20 @@ import sessione.SessioneGioco;
 	    	Stage stage = (Stage) close.getScene().getWindow(); 
 	        stage.close(); 
 	    }
-
 	    @FXML
-	    void colorChangeBasic(MouseEvent event) {
-	    	close.setStyle("");
+	    void colorChangeGreen(MouseEvent event) {
+	    	home.setStyle("-fx-background-color: #A2D8A3;-fx-border-color: #2AAA4A"); 
 	    }
-
+	    
 	    @FXML
 	    void colorChangeRed(MouseEvent event) {
-	    	close.setStyle("-fx-background-color: red;");
+	    	logout.setStyle("-fx-background-color: #FFC8AE;-fx-border-color: #f64c4c"); 
 	    }
-
+	    @FXML
+	    void colorChangeBasic(MouseEvent event) {
+	    	home.setStyle("-fx-background-color: white; -fx-border-color: #2AAA4A; -fx-border-width: 2px;");
+	    	logout.setStyle("-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2px;");
+	    }
 
 	    @FXML
 	    void esci(MouseEvent event) {
@@ -58,7 +61,8 @@ import sessione.SessioneGioco;
 	            popUpLogout.initOwner(popUpUtente);
 	            popUpLogout.show();
 	            } catch (NullPointerException | IOException e) {
-	                System.out.println("Errore nel caricamento della schermata successiva!");
+	                System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+	                e.printStackTrace(); 
 	            }
 		}
 

@@ -33,24 +33,39 @@ public class DefinizioniLivelliController {
     }
 
     @FXML
-    void colorChangeBasic(MouseEvent event) {
-    	indietro.setStyle("");
-    	close.setStyle("");
-    }
-
-    @FXML
-    void colorChangeRed(MouseEvent event) {
-    	close.setStyle("-fx-background-color: red;");
-    }
-
-    @FXML
-    void colorChangeYellow(MouseEvent event) {
-    	indietro.setStyle("-fx-background-color: yellow;");	
+    public void initialize() {
+        utente.setText(utenteCorrente.getUsername());    
     }
     
     @FXML
-    public void initialize() {
-        utente.setText(utenteCorrente.getUsername());    
+    void entrata(MouseEvent event) {
+        Button bottone = (Button) event.getSource();
+
+        if (bottone.getId().equals("base")) { // Il base si colora sempre
+            bottone.setStyle("-fx-background-color: #FFC8AE; -fx-border-color: #F64C4C");
+        }
+        else if (bottone.getId().equals("medio") && utenteCorrente.getPg1() >= 0.33) {
+            bottone.setStyle("-fx-background-color: #FFC8AE; -fx-border-color: #F64C4C"); // colore per "medio"
+        }
+        else if (bottone.getId().equals("avanzato") && utenteCorrente.getPg1() >= 0.66) {
+            bottone.setStyle("-fx-background-color: #FFC8AE; -fx-border-color: #F64C4C"); // colore per "avanzato"
+        }
+    }
+
+    @FXML
+    void uscita(MouseEvent event) {
+        Button bottone = (Button) event.getSource();
+
+        if (bottone.getId().equals("base")) { // Il base si colora sempre
+            bottone.setStyle("-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2");
+        }
+        // Ritorna al colore di default solo se aveva il colore cambiato
+        else if (bottone.getId().equals("medio") && utenteCorrente.getPg1() >= 0.33) {
+            bottone.setStyle("-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2"); // Ritorna al colore di default
+        }
+        else if (bottone.getId().equals("avanzato") && utenteCorrente.getPg1() >= 0.66) {
+            bottone.setStyle("-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2");
+        }
     }
 
     @FXML
@@ -79,21 +94,22 @@ public class DefinizioniLivelliController {
             	nomeFileFXML = "/application/DefinizioniBase.fxml";
                 break;
             case "medio":
-            	if(utenteCorrente.getPg1() == 0.33) { 
+            	if(utenteCorrente.getPg1() >= 0.33) { 
             		nomeFileFXML = "/application/DefinizioniMedio.fxml";
+            		medio.setStyle("-fx-background-color:  #FFC8AE");
             	}
             	else { 
-            		nomeFileFXML = ""; 
             		erroreEsercizi.setVisible(true); 
+            		return;
             	}
                 break;
             case "avanzato":
-            	if(utenteCorrente.getPg1() == 0.66) { 
+            	if(utenteCorrente.getPg1() >= 0.66) { 
             		nomeFileFXML = "/application/DefinizioniAvanzato.fxml";
             	}
-            	else { 
-            		nomeFileFXML = ""; 
+            	else {  
             		erroreEsercizi.setVisible(true); 
+            		return;
             	}
                 break;
             default:

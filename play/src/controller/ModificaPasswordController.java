@@ -30,7 +30,7 @@ import sessione.SessioneGioco;
 public class ModificaPasswordController {
 
     @FXML
-    private Button close, conferma, home;
+    private Button close, conferma, login;
 
     @FXML
     private PasswordField nuovaPassword, confermaPassword;
@@ -57,13 +57,19 @@ public class ModificaPasswordController {
     }
 
     @FXML
-    void colorChangeBasic(MouseEvent event) {
-    	close.setStyle("");
+    void colorChangeGreen(MouseEvent event) {
+    	conferma.setStyle("-fx-background-color: #A2D8A3;-fx-border-color: #2AAA4A"); 
     }
-
+    
     @FXML
-    void colorChangeRed(MouseEvent event) {
-    	close.setStyle("-fx-background-color: red;");
+    void colorChangeBasic(MouseEvent event) {
+    	conferma.setStyle("-fx-background-color: white; -fx-border-color: #2AAA4A; -fx-border-width: 2px;");
+    	login.setStyle("-fx-background-color: white; -fx-border-color: #77358f; -fx-border-width: 2px;");
+    	
+    }
+    @FXML
+    void colorChangePurple(MouseEvent event) {
+    	login.setStyle("-fx-background-color: #c990f3;-fx-border-color: #77358f"); 
     }
 
      //carica e inizializza le immagini     
@@ -179,18 +185,22 @@ public class ModificaPasswordController {
     }
     
     @FXML
-    void tornaAllaHome(MouseEvent event) {
-    	 try {
-             Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/Home.fxml")); 
-             Stage scenaCorrente = (Stage) home.getScene().getWindow();
-             
-             Scene nuovaScena = new Scene(scenaSuccessiva);
-             scenaCorrente.setScene(nuovaScena);
-             scenaCorrente.show();
-         } catch (NullPointerException | IOException e) { 
-             System.out.println("Errore nel caricamento della schermata successiva!");
-         }
+    void tornaAlLogin(MouseEvent event) {
+        
+            try {
+                // Carica la scena di login
+                Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
+                Scene nuovaScena = new Scene(scenaSuccessiva);
+                Stage scenaCorrente = (Stage) login.getScene().getWindow();
+                scenaCorrente.setScene(nuovaScena);
+                scenaCorrente.show();
+            } catch (NullPointerException | IOException e) {
+                System.out.println("Errore nel caricamento della schermata successiva!");
+            }
     }
+
+   
+    
 }
     
     

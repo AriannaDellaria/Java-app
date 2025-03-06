@@ -1,70 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeController">
-   <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <Label fx:id="primoEsercizio" onMouseClicked="#paginaPrimoEsercizio" text="Label" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="secondoEsercizio" onMouseClicked="#paginaSecondoEsercizio" text="Label" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="terzoEserczio" onMouseClicked="#paginaTerzoEsercizio" text="Label" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="69.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <ProgressBar fx:id="pb1" prefWidth="300.0" progress="0.0" HBox.hgrow="ALWAYS" />
-                  <ProgressBar fx:id="pb2" prefWidth="300.0" progress="0.0" HBox.hgrow="ALWAYS" />
-                  <ProgressBar fx:id="pb3" prefWidth="300.0" progress="0.0" HBox.hgrow="ALWAYS" />
-               </children>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-         </children>
-      </VBox>
-   </center>
-   <top>
-      <HBox prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <HBox prefHeight="100.0" prefWidth="835.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <Label fx:id="utente" alignment="CENTER_RIGHT" onMouseClicked="#popUpUtente" text="Label" translateX="12.0" translateY="10.0" underline="true" HBox.hgrow="ALWAYS">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox alignment="TOP_RIGHT" prefHeight="100.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <Button fx:id="indietro" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#paginaPrecedente" onMouseEntered="#colorChangeYellow" onMouseExited="#colorChangeBasic" text="🡸" translateX="-5.0" translateY="3.0" HBox.hgrow="ALWAYS">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="close" alignment="CENTER_RIGHT" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#closeButton" onMouseEntered="#colorChangeRed" onMouseExited="#colorChangeBasic" text="✘" translateX="-3.0" translateY="3.0" HBox.hgrow="ALWAYS">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-         </children>
-      </HBox>
-   </top>
-</BorderPane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeController">
+   <children>
+      <Button fx:id="close" layoutX="1269.0" mnemonicParsing="false" onMouseClicked="#closeButton" prefHeight="26.0" prefWidth="30.0" text="Button">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Utente/Desktop/Progetto/src/immagini/close1.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <Button fx:id="indietro" layoutX="1224.0" mnemonicParsing="false" onMouseClicked="#paginaPrecedente" prefHeight="20.0" prefWidth="38.0" text="Button">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/C:/Users/Utente/Desktop/Progetto/src/immagini/frecciaIndietro.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <Label fx:id="utente" layoutX="67.0" layoutY="13.0" onMouseClicked="#popUpUtente" text="Label" underline="true">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="44.0" fitWidth="49.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/user.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="recensione" layoutX="67.0" layoutY="73.0" onMouseClicked="#scriviRecensione" text="Scrivi la tua recensione" underline="true">
+         <font>
+            <Font name="System Italic" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="primoEsercizio" layoutX="146.0" layoutY="276.0" onMouseClicked="#paginaPrimoEsercizio" text="Assegna la definizione" underline="true">
+         <font>
+            <Font name="Georgia Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="secondoEsercizio" layoutX="526.0" layoutY="460.0" onMouseClicked="#paginaSecondoEsercizio" text="Prevedi l'output" underline="true">
+         <font>
+            <Font name="Georgia Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="terzoEsercizio" layoutX="917.0" layoutY="276.0" onMouseClicked="#paginaTerzoEsercizio" text="Riordina il codice" underline="true">
+         <font>
+            <Font name="Georgia Bold" size="30.0" />
+         </font>
+      </Label>
+      <ProgressBar fx:id="pb1" layoutX="185.0" layoutY="335.0" prefHeight="26.0" prefWidth="250.0" progress="0.0" style="-fx-accent: #f64c4c;" />
+      <ProgressBar fx:id="pb2" layoutX="524.0" layoutY="507.0" prefHeight="26.0" prefWidth="250.0" progress="0.0" style="-fx-accent: #add9f4;" />
+      <ProgressBar fx:id="pb3" layoutX="928.0" layoutY="335.0" prefHeight="26.0" prefWidth="250.0" progress="0.0" style="-fx-accent: #ffd13b;" />
+      <Label fx:id="tutteLeRecensioni" layoutX="582.0" layoutY="690.0" onMouseClicked="#apriRecensioni" text="Le vostre opinioni" underline="true">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font></Label>
+      <ImageView fitHeight="391.0" fitWidth="493.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/home.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="350.0" fitWidth="493.0" layoutX="807.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/home2.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="52.0" fitWidth="38.0" layoutX="94.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/libro.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="52.0" fitWidth="56.0" layoutX="857.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/es3.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="390.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Scopri gli esercizi!">
+         <font>
+            <Font name="Georgia Bold" size="55.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="35.0" fitWidth="38.0" layoutX="725.0" layoutY="686.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/commento.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="35.0" fitWidth="33.0" layoutX="476.0" layoutY="461.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/es2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="44.0" layoutX="14.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/utenteCommento.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

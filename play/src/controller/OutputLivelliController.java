@@ -30,22 +30,42 @@ public class OutputLivelliController {
         stage.close(); 
     }
 
+
     @FXML
-    void colorChangeBasic(MouseEvent event) {
-    	indietro.setStyle("");
-    	close.setStyle("");
+    public void initialize() {
+        utente.setText(utenteCorrente.getUsername());    
+    }
+    
+    @FXML
+    void entrata(MouseEvent event) {
+        Button bottone = (Button) event.getSource();
+
+        if (bottone.getId().equals("base")) { // Il base si colora sempre
+            bottone.setStyle("-fx-background-color: #ADD9F4; -fx-border-color: #2379be");
+        }
+        else if (bottone.getId().equals("medio") && utenteCorrente.getPg2() >= 0.33) {
+            bottone.setStyle("-fx-background-color: #ADD9F4; -fx-border-color: #2379be"); // colore per "medio"
+        }
+        else if (bottone.getId().equals("avanzato") && utenteCorrente.getPg2() >= 0.66) {
+            bottone.setStyle("-fx-background-color: #ADD9F4; -fx-border-color: #2379be"); // colore per "avanzato"
+        }
     }
 
     @FXML
-    void colorChangeRed(MouseEvent event) {
-    	close.setStyle("-fx-background-color: red;");
-    }
+    void uscita(MouseEvent event) {
+        Button bottone = (Button) event.getSource();
 
-    @FXML
-    void colorChangeYellow(MouseEvent event) {
-    	indietro.setStyle("-fx-background-color: yellow;");	
+        if (bottone.getId().equals("base")) { // Il base si colora sempre
+            bottone.setStyle("-fx-background-color: white; -fx-border-color: #2379be; -fx-border-width: 2");
+        }
+        // Ritorna al colore di default solo se aveva il colore cambiato
+        else if (bottone.getId().equals("medio") && utenteCorrente.getPg2() >= 0.33) {
+            bottone.setStyle("-fx-background-color: white; -fx-border-color: #2379be; -fx-border-width: 2"); // Ritorna al colore di default
+        }
+        else if (bottone.getId().equals("avanzato") && utenteCorrente.getPg2() >= 0.66) {
+            bottone.setStyle("-fx-background-color: white; -fx-border-color:  #2379be; -fx-border-width: 2");
+        }
     }
-
     @FXML
     void paginaPrecedente(MouseEvent event) {
     	try {
@@ -72,21 +92,21 @@ public class OutputLivelliController {
             	nomeFileFXML = "/application/OutputBase.fxml";
                 break;
             case "medio":
-            	if(utenteCorrente.getPg2() == 0.33) { 
+            	if(utenteCorrente.getPg2() >= 0.33) { 
             		nomeFileFXML = "/application/OutputMedio.fxml";
             	}
             	else { 
-            		nomeFileFXML = ""; 
             		erroreEsercizi.setVisible(true); 
+            		return;
             	}
                 break;
             case "avanzato":
-            	if(utenteCorrente.getPg2() == 0.66) { 
+            	if(utenteCorrente.getPg2() >= 0.66) { 
             		nomeFileFXML = "/application/OutputAvanzato.fxml";
             	}
             	else { 
-            		nomeFileFXML = ""; 
-            		erroreEsercizi.setVisible(true); 
+            		erroreEsercizi.setVisible(true);
+            		return;
             	}
                 break;
             default:
