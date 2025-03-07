@@ -4,9 +4,8 @@
 .project
 .settings/
 build.fxbuild
-bin/
 
 # File temporanei
 *.log
 *.tmp
-*.bak
+/lib/
