@@ -1,7 +1,7 @@
 domanda: 
 Una classe che non può essere istanziata e può contenere metodi astratti e metodi concreti
 risposta: 
-Classe astratta
+Astratta
 ****
 domanda:
 La capacità di un oggetto di assumere molte forme.

@@ -33,9 +33,6 @@ import sessione.SessioneGioco;
 	    @FXML
 	    private Button close, indietro, terminaCorreggi;
 	    
-	    @FXML
-	    private ImageView immagine;
-	    
 	    SessioneGioco sessioneGioco = SessioneGioco.getInstance();
 	    Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
 	   
@@ -44,9 +41,6 @@ import sessione.SessioneGioco;
 	    private ArrayList<ComboBox<String>> opzioni = new ArrayList<>();
 	   
 	    private int tempoRestante = 120; //2 minuti
-
-	    //carica immagine dell'orologio per il timer
-		private final Image orologio = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/orologio.png")));
 		
 	    @FXML
 	    public void initialize() {
@@ -66,9 +60,6 @@ import sessione.SessioneGioco;
 	        utente.setText(utenteCorrente.getUsername());
 	        avvioTimer();
 	        
-	        immagine.setImage(orologio); 
-	        immagine.setFitWidth(20); //larghezza
-	        immagine.setFitHeight(20); //altezza
 	    }
 	    
 	    
@@ -104,19 +95,14 @@ import sessione.SessioneGioco;
 	    }
 
 	    @FXML
-	    void colorChangeBasic(MouseEvent event) {
-	    	indietro.setStyle("");
-	    	close.setStyle("");
-	    }
-
-	    @FXML
 	    void colorChangeRed(MouseEvent event) {
-	    	close.setStyle("-fx-background-color: red;");
+	    	terminaCorreggi.setStyle("-fx-background-color: #FFC8AE;-fx-border-color: #f64c4c"); 
 	    }
-
+	    
 	    @FXML
-	    void colorChangeYellow(MouseEvent event) {
-	    	indietro.setStyle("-fx-background-color: yellow;");	
+	    void colorChangeBasic(MouseEvent event) {
+	    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2px;");
+	    	
 	    }
 
 	    @FXML

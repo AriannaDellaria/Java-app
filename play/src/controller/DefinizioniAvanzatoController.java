@@ -33,8 +33,6 @@ public class DefinizioniAvanzatoController {
     @FXML
     private TextField risposta1, risposta2, risposta3, risposta4, risposta5;
     
-    @FXML
-    private ImageView immagine; 
     
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
@@ -44,10 +42,6 @@ public class DefinizioniAvanzatoController {
     private ArrayList<DomandaClassica> domandeClassiche = new ArrayList<>();
     
     private int tempoRestante = 120; //2 minuti
-
-    //carica immagine dell'orologio per il timer
-	private final Image orologio = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/orologio.png")));
-	
   
     @FXML
     public void initialize() {
@@ -67,9 +61,6 @@ public class DefinizioniAvanzatoController {
         utente.setText(utenteCorrente.getUsername());
         avvioTimer();
         
-        immagine.setImage(orologio); 
-        immagine.setFitWidth(20); //larghezza
-        immagine.setFitHeight(20); //altezza
     }
     
     private void avvioTimer() {
@@ -104,19 +95,14 @@ public class DefinizioniAvanzatoController {
     }
 
     @FXML
-    void colorChangeBasic(MouseEvent event) {
-    	indietro.setStyle("");
-    	close.setStyle("");
-    }
-
-    @FXML
     void colorChangeRed(MouseEvent event) {
-    	close.setStyle("-fx-background-color: red;");
+    	terminaCorreggi.setStyle("-fx-background-color: #FFC8AE;-fx-border-color: #f64c4c"); 
     }
-
+    
     @FXML
-    void colorChangeYellow(MouseEvent event) {
-    	indietro.setStyle("-fx-background-color: yellow;");	
+    void colorChangeBasic(MouseEvent event) {
+    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2px;");
+    	
     }
 
     @FXML
@@ -187,7 +173,7 @@ public class DefinizioniAvanzatoController {
         for (int i = 0; i < domandeClassiche.size(); i++) {
             DomandaClassica domanda = domandeClassiche.get(i);
             TextField text = getTextField(i);
-            String rispostaUtente = text.getText(); 
+            String rispostaUtente = text.getText().trim(); 
             
             if (rispostaUtente != null && domanda.verificaRisposta(rispostaUtente)) {
                 punteggioLocale++; //se la risposta è corretta incrementa il punteggio locale 

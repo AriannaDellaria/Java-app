@@ -14,7 +14,7 @@ public class DomandaDefinizioni extends Domanda {
 
 	@Override
 	public boolean verificaRisposta(String rispostaUtente) {
-		return rispostaUtente.equals(this.rispostaCorretta);
+		return rispostaUtente.equalsIgnoreCase(this.rispostaCorretta);
 	}
 
 	public  ArrayList<String> getOpzioni() {
