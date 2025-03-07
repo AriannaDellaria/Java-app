@@ -1,1 +1,11 @@
 /bin/
+# File di configurazione Eclipse
+.classpath
+.project
+.settings/
+build.fxbuild
+
+# File temporanei
+*.log
+*.tmp
+/lib/
