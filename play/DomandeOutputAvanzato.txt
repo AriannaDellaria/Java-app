@@ -141,9 +141,11 @@ risposta:
 Array principale: 3 2 4 5 Array modificato: 3 5
 ****
 codice:
-dati_meteo.txt
-Roma, 22.5, 65
-Milano, 18.2, 70
+------------------
+dati_meteo.txt    |
+Roma, 22.5, 65    |
+Milano, 18.2, 70  |
+------------------
 
 import java.io.*;
 import java.util.*;
@@ -184,7 +186,7 @@ codice:
 import java.io.*;
 import java.util.*;
 
-public class ScritturaFileVoti {
+public class Esercizio5{
     public static void main(String[] args) {
         String nomeFile = "registro_voti.txt";
         Scanner scanner = new Scanner(System.in);
