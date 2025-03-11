@@ -35,14 +35,9 @@ public class OutputBaseController {
     @FXML
     private Label codice1, codice2, codice3, codice4, codice5, domanda1, domanda2, domanda3, domanda4, domanda5, utente, timer;
 
-    @FXML
-    private ImageView immagine; 
-    
     private int tempoRestante = 120;  //2 minuti per eseguire l'esercizio
     
-    //carica immagine dell'orologio per il timer
-	private final Image orologio = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/orologio.png")));
-    
+   
 	private ArrayList<Label> domande  = new ArrayList<>();
 	private ArrayList<Label> codici  = new ArrayList<>();
 	private ArrayList<ToggleGroup> gruppi = new ArrayList<>(); 
@@ -75,9 +70,6 @@ public class OutputBaseController {
         utente.setText(utenteCorrente.getUsername()); 
        
         avvioTimer();
-        immagine.setImage(orologio); 
-        immagine.setFitWidth(20); //larghezza
-        immagine.setFitHeight(20); //altezza
     }
     
     private void avvioTimer() {
@@ -113,18 +105,12 @@ public class OutputBaseController {
 
     @FXML
     void colorChangeBasic(MouseEvent event) {
-    	indietro.setStyle("");
-    	close.setStyle("");
+    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #2379be; -fx-border-width: 2px;");
     }
 
     @FXML
-    void colorChangeRed(MouseEvent event) {
-    	close.setStyle("-fx-background-color: red;");
-    }
-
-    @FXML
-    void colorChangeYellow(MouseEvent event) {
-    	indietro.setStyle("-fx-background-color: yellow;");	
+    void colorChangeBlue(MouseEvent event) {
+    	terminaCorreggi.setStyle("-fx-background-color: #ADD9F4;-fx-border-color: #2379be"); 
     }
 
     @FXML

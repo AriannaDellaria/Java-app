@@ -5,206 +5,235 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OutputMedioController">
-   <center>
-      <ScrollPane prefHeight="600.0" prefWidth="900.0">
-         <content>
-            <VBox alignment="CENTER" prefWidth="1298.0" spacing="100.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" style="-fx-background-color: e2f3ff;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OutputMedioController">
+   <children>
+      <Button fx:id="close" layoutX="1266.0" mnemonicParsing="false" onMouseClicked="#closeButton" prefHeight="26.0" prefWidth="33.0" text="Button">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@../immagini/close1.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <Button fx:id="indietro" layoutX="1224.0" mnemonicParsing="false" onMouseClicked="#paginaPrecedente" prefHeight="26.0" prefWidth="41.0" text="Button">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@../immagini/frecciaIndietro.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <ImageView fitHeight="44.0" fitWidth="49.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/user.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="utente" layoutX="67.0" layoutY="13.0" onMouseClicked="#popUpUtente" text="Label" underline="true">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="66.0" layoutY="136.0" prefHeight="543.0" prefWidth="1176.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="3000.0" prefWidth="1182.0" style="-fx-background-color: white;">
                <children>
-
-                  <!-- Domanda 1 -->
-                  <HBox alignment="CENTER" fillHeight="false" maxHeight="450.0" prefHeight="450.0" spacing="20.0">
-                     <children>
-                        <Label fx:id="codice1" text="Label" wrapText="true">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </Label>
-                        <VBox alignment="CENTER_LEFT" spacing="7.0">
-                           <children>
-                              <Label fx:id="domanda1" text="Label">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <RadioButton fx:id="opzione1_1" mnemonicParsing="false" text="Opzione 1">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="Gruppo1" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="opzione1_2" mnemonicParsing="false" text="Opzione 2" toggleGroup="$Gruppo1" />
-                              <RadioButton fx:id="opzione1_3" mnemonicParsing="false" text="Opzione 3" toggleGroup="$Gruppo1" />
-                              <RadioButton fx:id="opzione1_4" mnemonicParsing="false" text="Opzione 4" toggleGroup="$Gruppo1" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-
-                  <!-- Domanda 2 -->
-                  <HBox alignment="CENTER" maxHeight="450.0" prefHeight="450.0" spacing="20.0">
-                     <children>
-                        <Label fx:id="codice2" text="Label" wrapText="true">
-                           <font>
-                              <Font size="13.0" />
-                           </font></Label>
-                        <VBox spacing="7.0">
-                           <children>
-                              <Label fx:id="domanda2" text="Label">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font></Label>
-                              <RadioButton fx:id="opzione2_1" text="Opzione 1">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="Gruppo2" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="opzione2_2" text="Opzione 2" toggleGroup="$Gruppo2" />
-                              <RadioButton fx:id="opzione2_3" text="Opzione 3" toggleGroup="$Gruppo2" />
-                              <RadioButton fx:id="opzione2_4" text="Opzione 4" toggleGroup="$Gruppo2" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-
-                  <!-- Domanda 3 -->
-                  <HBox alignment="CENTER" maxHeight="450.0" prefHeight="450.0" spacing="20.0">
-                     <children>
-                        <Label fx:id="codice3" text="Label" wrapText="true">
-                           <font>
-                              <Font size="13.0" />
-                           </font></Label>
-                        <VBox spacing="7.0">
-                           <children>
-                              <Label fx:id="domanda3" text="Label">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font></Label>
-                              <RadioButton fx:id="opzione3_1" text="Opzione 1">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="Gruppo3" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="opzione3_2" text="Opzione 2" toggleGroup="$Gruppo3" />
-                              <RadioButton fx:id="opzione3_3" text="Opzione 3" toggleGroup="$Gruppo3" />
-                              <RadioButton fx:id="opzione3_4" text="Opzione 4" toggleGroup="$Gruppo3" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-
-                  <!-- Domanda 4 -->
-                  <HBox alignment="CENTER" maxHeight="450.0" prefHeight="450.0" spacing="20.0">
-                     <children>
-                        <Label fx:id="codice4" text="Label" wrapText="true">
-                           <font>
-                              <Font size="13.0" />
-                           </font></Label>
-                        <VBox spacing="7.0">
-                           <children>
-                              <Label fx:id="domanda4" text="Label">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font></Label>
-                              <RadioButton fx:id="opzione4_1" text="Opzione 1">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="Gruppo4" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="opzione4_2" text="Opzione 2" toggleGroup="$Gruppo4" />
-                              <RadioButton fx:id="opzione4_3" text="Opzione 3" toggleGroup="$Gruppo4" />
-                              <RadioButton fx:id="opzione4_4" text="Opzione 4" toggleGroup="$Gruppo4" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-
-                  <!-- Domanda 5 -->
-                  <HBox alignment="CENTER" maxHeight="450.0" prefHeight="450.0" spacing="20.0">
-                     <children>
-                        <Label fx:id="codice5" text="Label" wrapText="true">
-                           <font>
-                              <Font size="13.0" />
-                           </font></Label>
-                        <VBox spacing="7.0">
-                           <children>
-                              <Label fx:id="domanda5" text="Label">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font></Label>
-                              <RadioButton fx:id="opzione5_1" text="Opzione 1">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="Gruppo5" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="opzione5_2" text="Opzione 2" toggleGroup="$Gruppo5" />
-                              <RadioButton fx:id="opzione5_3" text="Opzione 3" toggleGroup="$Gruppo5" />
-                              <RadioButton fx:id="opzione5_4" text="Opzione 4" toggleGroup="$Gruppo5" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-
-               </children>
-            </VBox>
-         </content>
-      </ScrollPane>
-   </center>
-   <bottom>
-      <Button fx:id="terminaCorreggi" mnemonicParsing="false" onMouseClicked="#salvaPunteggio" text="Termina e correggi" BorderPane.alignment="CENTER" />
-   </bottom>
-   <top>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox prefHeight="100.0" prefWidth="54.0">
-               <children>
-                  <Label fx:id="utente" onMouseClicked="#popUpUtente" text="Label" translateX="12.0" translateY="10.0" underline="true">
+                  <Label fx:id="codice1" layoutX="71.0" layoutY="74.0" text="Label" wrapText="true">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-               </children>
-            </HBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizza un blocco di codice e cercando di prevedere quello che potrebbe essere l'output, &#10;scegli la risposta corretta in un periodo di tempo limitato. &#10;" textAlignment="CENTER" wrappingWidth="906.1368035078049">
+                  <Label fx:id="domanda1" layoutX="709.0" layoutY="87.0" text="Label" textFill="#2379be">
                      <font>
-                        <Font name="Georgia" size="17.0" />
+                        <Font name="System Bold" size="18.0" />
                      </font>
-                  </Text>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fx:id="immagine" fitHeight="40.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="timer" prefHeight="30.0" prefWidth="90.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="348.0">
-               <children>
-                  <Button fx:id="indietro" alignment="TOP_RIGHT" mnemonicParsing="false" onMouseClicked="#paginaPrecedente" onMouseEntered="#colorChangeYellow" onMouseExited="#colorChangeBasic" text="🡸" translateX="-5.0" translateY="3.0">
+                  </Label>
+                  <RadioButton fx:id="opzione1_1" layoutX="709.0" layoutY="122.0" mnemonicParsing="false" text="1_1">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Gruppo1" />
+                     </toggleGroup>
                      <font>
-                        <Font size="13.0" />
+                        <Font size="14.0" />
                      </font>
-                  </Button>
-                  <Button fx:id="close" alignment="CENTER_RIGHT" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#closeButton" onMouseEntered="#colorChangeRed" onMouseExited="#colorChangeBasic" text="✘" translateX="-3.0" translateY="3.0">
+                  </RadioButton>
+                  <RadioButton fx:id="opzione1_2" layoutX="709.0" layoutY="151.0" mnemonicParsing="false" text="1_2" toggleGroup="$Gruppo1">
                      <font>
-                        <Font size="13.0" />
+                        <Font size="14.0" />
                      </font>
-                  </Button>
+                  </RadioButton>
+                  <Label fx:id="codice2" layoutX="71.0" layoutY="475.0" text="Label" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="domanda2" layoutX="709.0" layoutY="501.0" text="Label" textFill="#2379be">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="opzione2_1" layoutX="709.0" layoutY="536.0" mnemonicParsing="false" text="2_1">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Gruppo2" />
+                     </toggleGroup>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="opzione2_2" layoutX="709.0" layoutY="565.0" mnemonicParsing="false" text="2_2" toggleGroup="$Gruppo2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <Label fx:id="codice3" layoutX="71.0" layoutY="1210.0" text="Label" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="domanda3" layoutX="709.0" layoutY="1235.0" text="Label" textFill="#2379be">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="opzione3_1" layoutX="709.0" layoutY="1270.0" mnemonicParsing="false" text="3">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Gruppo3" />
+                     </toggleGroup>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="opzione3_2" layoutX="709.0" layoutY="1300.0" mnemonicParsing="false" text="3" toggleGroup="$Gruppo3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <Label fx:id="codice4" layoutX="71.0" layoutY="1800.0" text="Label" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="domanda4" layoutX="709.0" layoutY="1825.0" text="Label" textFill="#2379be">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="opzione4_1" layoutX="709.0" layoutY="1860.0" mnemonicParsing="false" text="4">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Gruppo4" />
+                     </toggleGroup>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="opzione4_2" layoutX="709.0" layoutY="1890.0" mnemonicParsing="false" text="4" toggleGroup="$Gruppo4">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <Label fx:id="codice5" layoutX="71.0" layoutY="2450.0" text="Label" wrapText="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="domanda5" layoutX="709.0" layoutY="2475.0" text="Label" textFill="#2379be">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <RadioButton fx:id="opzione5_1" layoutX="709.0" layoutY="2510.0" mnemonicParsing="false" text="5">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="Gruppo5" />
+                     </toggleGroup>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="opzione5_2" layoutX="709.0" layoutY="2540.0" mnemonicParsing="false" text="5" toggleGroup="$Gruppo5">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="opzione1_3" layoutX="709.0" layoutY="182.0" mnemonicParsing="false" text="1_3" toggleGroup="$Gruppo1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="opzione1_4" layoutX="709.0" layoutY="212.0" mnemonicParsing="false" text="1_4" toggleGroup="$Gruppo1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="opzione2_3" layoutX="709.0" layoutY="596.0" mnemonicParsing="false" text="2_3" toggleGroup="$Gruppo2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="opzione2_4" layoutX="709.0" layoutY="628.0" mnemonicParsing="false" text="2_4" toggleGroup="$Gruppo2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="opzione3_3" layoutX="709.0" layoutY="1330.0" mnemonicParsing="false" text="3" toggleGroup="$Gruppo3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="opzione3_4" layoutX="709.0" layoutY="1360.0" mnemonicParsing="false" text="3" toggleGroup="$Gruppo3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="opzione4_3" layoutX="709.0" layoutY="1920.0" mnemonicParsing="false" text="4" toggleGroup="$Gruppo4">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="opzione4_4" layoutX="709.0" layoutY="1950.0" mnemonicParsing="false" text="4" toggleGroup="$Gruppo4">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="opzione5_3" layoutX="709.0" layoutY="2570.0" mnemonicParsing="false" text="5" toggleGroup="$Gruppo5">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="opzione5_4" layoutX="709.0" layoutY="2600.0" mnemonicParsing="false" text="5" toggleGroup="$Gruppo5">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </RadioButton>
                </children>
-            </HBox>
-         </children>
-      </HBox>
-   </top>
-</BorderPane>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Button fx:id="terminaCorreggi" layoutX="559.0" layoutY="699.0" mnemonicParsing="false" onMouseClicked="#salvaPunteggio" onMouseEntered="#colorChangeBlue" onMouseExited="#colorChangeBasic" style="-fx-background-color: white; -fx-border-color: #2379be; -fx-border-width: 2;" text="Termina e correggi" textFill="#2379be">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="37.0" fitWidth="36.0" layoutX="592.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/orologio.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timer" layoutX="643.0" layoutY="82.0" text="Label">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Text layoutX="267.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizza cinque programmi e, cercando di prevedere quello che potrebbe essere l'output, &#10;scegli le risposte corrette entro lo scadere del timer" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

@@ -3,7 +3,6 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 import dati.Utente;
 import domanda.DomandaMultipla;
@@ -17,8 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -46,8 +43,6 @@ public class OutputAvanzatoController {
     @FXML
     private RadioButton opzione5_1, opzione5_2, opzione5_3, opzione5_4;
     
-    @FXML
-    private ImageView immagine;
     
      SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
@@ -59,9 +54,6 @@ public class OutputAvanzatoController {
     private ArrayList<ArrayList<RadioButton>> opzioni = new ArrayList<>();
     
     private int tempoRestante = 120;  //2 minuti per eseguire l'esercizio
-    
-    //carica immagine dell'orologio per il timer
-	private final Image orologio = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/orologio.png")));
     
 	@FXML
     public void initialize() {
@@ -128,9 +120,6 @@ public class OutputAvanzatoController {
         utente.setText(utenteCorrente.getUsername());
         
         avvioTimer();
-        immagine.setImage(orologio); 
-        immagine.setFitWidth(20); //larghezza
-        immagine.setFitHeight(20); //altezza
     }
 	
 	private void avvioTimer() {
@@ -166,18 +155,12 @@ public class OutputAvanzatoController {
 
     @FXML
     void colorChangeBasic(MouseEvent event) {
-    	indietro.setStyle("");
-    	close.setStyle("");
+    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #2379be; -fx-border-width: 2px;");
     }
 
     @FXML
-    void colorChangeRed(MouseEvent event) {
-    	close.setStyle("-fx-background-color: red;");
-    }
-
-    @FXML
-    void colorChangeYellow(MouseEvent event) {
-    	indietro.setStyle("-fx-background-color: yellow;");	
+    void colorChangeBlue(MouseEvent event) {
+    	terminaCorreggi.setStyle("-fx-background-color: #ADD9F4;-fx-border-color: #2379be"); 
     }
 
     @FXML
@@ -313,8 +296,8 @@ public class OutputAvanzatoController {
             }
         }
         
-        if(utenteCorrente != null && utenteCorrente.getPg2() == 0.33 && punteggioLocale >= 3) {
-    		utenteCorrente.setPg2(0.66); //punteggio globale incrementato solo se viene superato l'esercizio
+        if(utenteCorrente != null && utenteCorrente.getPg2() == 0.66 && punteggioLocale >= 3) {
+    		utenteCorrente.setPg2(1.00); //punteggio globale incrementato solo se viene superato l'esercizio
     		utenteCorrente.salvaSuFile();
         } 
 

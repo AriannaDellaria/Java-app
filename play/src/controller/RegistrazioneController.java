@@ -170,8 +170,8 @@ public class RegistrazioneController {
        if(vuoto == false && uguali == false && trovato == false) {
 				
     	   try (PrintWriter writer = new PrintWriter(new FileWriter(file, true))) { //scrive sul file
-               writer.println(); // Aggiungi una nuova riga
-               writer.write(nome + "," + cognome + "," + username + "," + password + "," + 0.0 + "," + 0.0 + "," + 0.0);
+               //writer.println(); // Aggiungi una nuova riga
+               writer.println(nome + "," + cognome + "," + username + "," + password + "," + 0.0 + "," + 0.0 + "," + 0.0);
            
     	   } catch(IOException e) {
            		System.out.println("Errore nel salvataggio");
