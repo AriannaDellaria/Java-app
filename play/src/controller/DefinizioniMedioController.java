@@ -195,8 +195,8 @@ import sessione.SessioneGioco;
 	            }
 	        }
 	        
-	        if(utenteCorrente != null && utenteCorrente.getPg1() == 0 && punteggioLocale >= 3) {
-	    		utenteCorrente.setPg1(0.33); //punteggio globale incrementato se l'esercizio viene superato
+	        if(utenteCorrente != null && utenteCorrente.getPg1() == 0.33 && punteggioLocale >= 3) {
+	    		utenteCorrente.setPg1(0.66); //punteggio globale incrementato se l'esercizio viene superato
 	    		utenteCorrente.salvaSuFile();
 	        } 
 
