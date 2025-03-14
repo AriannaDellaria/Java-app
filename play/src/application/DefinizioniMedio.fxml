@@ -41,17 +41,17 @@
             <Font name="System Bold Italic" size="16.0" />
          </font>
       </Label>
-      <Text layoutX="244.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leggi le cinque definzioni fornite e dai menù sulla destra seleziona i termini corretti corrispondenti">
+      <Text layoutX="241.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leggi le cinque definzioni fornite e dai menù sulla destra seleziona i termini corretti corrispondenti,&#10;entro lo scadere del timer" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <ImageView fitHeight="37.0" fitWidth="36.0" layoutX="593.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="37.0" fitWidth="36.0" layoutX="592.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../immagini/orologio.png" />
          </image>
       </ImageView>
-      <Label fx:id="timer" layoutX="641.0" layoutY="69.0" text="Label">
+      <Label fx:id="timer" layoutX="640.0" layoutY="82.0" text="Label">
          <font>
             <Font size="18.0" />
          </font>
