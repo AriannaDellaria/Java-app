@@ -69,7 +69,8 @@ import java.util.Scanner;
 public class GiornoDellaSettimana {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Inserisci un numero (1-7) per rappresentare un giorno della settimana: ");
+        System.out.print("Inserisci un numero (1-7) 
+        				  per rappresentare un giorno della settimana: ");
         int giorno = scanner.nextInt();
         String nomeGiorno;
 ////
@@ -111,16 +112,17 @@ class OrdineTesto{
 	public static void main (String[] args){
 	Scanner scan = new Scanner(System.in);
 ////
-String primaParola = frase.substring(0, indicePrimoSpazio);
+	String primaParola = frase.substring(0, indicePrimoSpazio);
  	String restoFrase = frase.substring(indicePrimoSpazio);      
  	String nuovaFrase = restoFrase + " " + primaParola;
  	System.out.println("La nuova frase e': " + nuovaFrase);
 	}
 }
 ////
-int indicePrimoSpazio = frase.indexOf(' ');
+	int indicePrimoSpazio = frase.indexOf(' ');
 ////
-System.out.println("Inserisci una frase di cui la prima parola si spostera alla fine, senza punteggiatura");
+	System.out.println("Inserisci una frase di cui la prima parola
+						si sposterà alla fine, senza punteggiatura");
 	String bozza = scan.nextLine();
 	String frase = bozza.trim();
 ////
