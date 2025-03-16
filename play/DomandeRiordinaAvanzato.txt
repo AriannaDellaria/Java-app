@@ -1,0 +1,149 @@
+codice:
+public abstract class ClasseA { 
+	private String nome; 
+
+	public ClasseA(String nome) { 
+		this.nome = nome; 
+	} 
+	
+	public String getNome() { 
+		return this.nome; 
+	} 
+	abstract public int getNumeroZampe();
+}
+////
+public class ClasseB extends ----- { 
+	
+	public ClasseB(String nome) { 
+		super(nome); 
+	} 
+	public String toString() { 
+	    return "l'animale ha: " + super.getNumeroZampe(); 
+    }
+}
+////
+public abstract class ClasseC extends ----- { 
+	public ClasseC(String nome) { 
+		super(nome); 
+	} 
+	//super può essere chiamato solo una volta, quindi metto tutto su una riga 
+	public int getNumeroZampe() { 
+		return 4; 
+	}
+}
+////
+
+////
+++++
+risposta:
+DCBA
+****
+codice:
+Scanner scan = new Scanner(System.in);
+////
+import java.util.Scanner;
+public class Esercizio2{
+	public static void main(String[] args) {
+////
+System.out.println("Inserisci un numero:");
+double x1 = scan.nextDouble();
+System.out.println("Inserisci un altro numero:");
+double x2 = scan.nextDouble();
+////
+	double massimo = Math.max(x1, x2);
+ 	System.out.println(massimo);
+	}
+}
+////
+++++
+risposta:
+BACD
+****
+codice:
+if (eta >= 18) {
+	System.out.println("Sei un adulto!");
+}
+////
+else if (eta >= 12) {
+	System.out.println("Sei un adolescente!");
+}
+////
+import java.util.Scanner;
+public class Esercizio3 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in); 
+        System.out.println("Quanti anni hai?");
+        int eta = scanner.nextInt();
+////
+        else {
+        	System.out.println("Sei un bambino!");
+        }
+    }
+}
+////
+++++
+risposta:
+CABD
+****
+codice:
+default:
+	nomeGiorno = "Numero non valido";
+    break;
+////
+import java.util.Scanner;
+public class Esercizio4 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Inserisci un numero tra 1 e 5:");
+        int giorno = scanner.nextInt();
+        String nomeGiorno;
+////
+		}
+        System.out.println("Giorno: " + nomeGiorno);
+    }
+}
+////
+switch (giorno) {
+	case 1:
+		nomeGiorno = "lunedì";
+		break;
+	case 2:
+		nomeGiorno = "martedì";
+		break;
+	case 3:
+		nomeGiorno = "mercoledì";
+		break;
+	case 4:
+		nomeGiorno = "giovedì";
+		break;
+	case 5:
+		nomeGiorno = "venerdì";
+		break;
+////
+++++
+risposta:
+BDAC
+****
+codice:
+import java.util.Scanner;
+public class Esercizio5{
+	public static void main (String[] args){
+	Scanner scan = new Scanner(System.in);
+////
+	String primaParola = frase.substring(0, indicePrimoSpazio);
+ 	String restoFrase = frase.substring(indicePrimoSpazio);      
+ 	String nuovaFrase = restoFrase + " " + primaParola;
+ 	System.out.println("La nuova frase e': " + nuovaFrase);
+	}
+}
+////
+	int indicePrimoSpazio = frase.indexOf(' ');
+////
+	System.out.println("Inserisci una frase di almeno due parole);
+	String bozza = scan.nextLine();
+	String frase = bozza.trim();
+////
+++++
+risposta:
+ADCB
+****

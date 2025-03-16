@@ -1,108 +1,139 @@
 codice:
-import java.util.Scanner;
-public class While {
-	public static void main(String[] args) {
-	Scanner scan = new Scanner(System.in);
-	int conteggio, n;
+System.out.println("inserisci un numero"); 
+int n = scan.nextInt();
 ////
-System.out.println("inserisci un numero");
-n = scan.nextInt();
-conteggio = 1;
+while(true) { 
 ////
-while(conteggio<=n) {
-	System.out.println(conteggio + ',');
-	conteggio++;
-}
+import java.util.ArrayList; 
+import java.util.Scanner; 
+public class Esercizio1 { 
+	public static void main(String[] args) { 
+	//viene chiesto l'inserimento di numeri nell'array 
+	//Il ciclo termina quando il numero inserito è < 0 o >100
+	Scanner scan = new Scanner(System.in); 
+	ArrayList<Integer> A = new ArrayList<Integer>(); 
 ////
-System.out.println("Sorpresa!");
-}
+		A.add(n); 
+			if(n < 0 || n > 100) {
+				break; 
+			} 
+		}
+    }
 }
 ////
 ++++
 risposta:
-1234
+CBAD
 ****
 codice:
-int i = 11;
+public class Esercizio2 { 
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in); 
+        Integer numPrecedente = null; 
+        int x;
 ////
-	while(i<10);
+		System.out.println("Hai inserito due numeri uguali di seguito");
+    }
+} 
+////
+do { 
+	System.out.println("Inserisci un numero"); 
+    x = scan.nextInt(); 
+            
+	if (numPrecedente != null && x == numPrecedente) {
+		break;
+	} else {
+		numPrecedente = x;
 	}
- }
 }
 ////
-do {
-System.out.println(i);
-i++;
-}
-////
-public class doWhile {
-	public static void main(String[] args) {
+while (true);
 ////
 ++++
 risposta:
-4132
+ACDB
 ****
 codice:
-public class for {
-	public static void main(String[] args) {
+int somma = 0;
 ////
-System.out.println("il numero pari è " + i);
-	}
-   }
-  }
+			somma = somma + m[i][j];
+   	    		if (somma >= 100) {
+   	    		contatore++; 
+   	    		break; 
+   	    		}
+   	    	}
+   	    }
+   	    System.out.println(contatore); 
+   	  }
  }
 ////
-if(i % 2 == 0)  {
+for (int j = 0; j < m[i].length; j++) {
 ////
-for(int i = -7; i <= 7; i++) {
+import java.util.Scanner; 
+public class Esercizio3 {
+    public static void main(String[] args) {
+    //numero di righe con una somma di elementi => 100
+    	int[][] m = {
+    		{5,1,2,3},
+    		{5,10,20,70},
+    		{7,7,9,5},
+    		{90,1,5,7}
+   	    };
+   	    
+   	    int contatore = 0; 
+   	    
+   	    for (int i = 0; i < m.length; i++) {
 ////
 ++++
 risposta:
-1432
+DACB
 ****
 codice:
-if (i == 5);
-break;
-System.out.println(i);
+if (i == 5) {
+	break;
+}
+System.out.print(i);
 ////
 for(int i = 1; i <= 10; i++) {
 ////
-public class EsercizioFor {
+public class Esercizio4 {
 	public static void main(String[] args) {
-	for(int j = 1; j <= 10; j++) {
+		for(int j = 1; j <= 10; j++) {
 ////
+			}
+      	System.out.println();
+        System.out.println("Fuori dal ciclo interno");
+    	}
+	System.out.println("Fuori dal ciclo");
 	}
-	System.out.println("Fuori dal ciclo interno");
-   }
-System.out.println("Fuori dal ciclo");
-}
 }
 ////
 ++++
 risposta:
-3214
+CBAD
 ****
 codice:
-for(int i = 0; i < a.length; i++) { 
-	System.out.println("inseirsci un numero nella posizione i " + i + " dell'array");
-	a[i] = scan.nextInt();
+for (int i = 0; i < A.length; i++) { 
+	A[i] = scan.nextInt();
 }
 ////
-int a[] = new int [N];
+int[] A = new int[n];
 ////
-System.out.println(Arrays.toString(a));
-}
+		for (int i = 0; i < A.length; i++) { 
+			System.out.print(A[i] + " ");
+		} 
+    }
 }
 ////
-import java.util.Scanner;
-import java.util.Arrays;
-public class EserciziArray {
+import java.util.Scanner; 
+public class Esercizio5{
 	public static void main(String[] args) {
-	Scanner scan = new Scanner(System.in);
-	System.out.println("inserisci la lunghezza del vettore: ");
-	int a[] = new int[N];
+		//stampa di un array di valori inseriti da tastiera
+		Scanner scan = new Scanner(System.in);
+		System.out.println("dammi un intero");
+		int n = scan.nextInt();
 ////
 ++++
 risposta:
-4213
+DBAC
 ****
