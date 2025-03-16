@@ -1,114 +1,108 @@
 codice:
-System.out.println(a); 
+	System.out.println(a); 
+	}
 }
 ////
 a = 10;
 ////
 int a; 
 ////
-public class Variabili {
-	public static void main(String args[]) {
+public class Esercizio1 {
+	public static void main(String[] args) {
 ////
 ++++
 risposta:
-4321
+DCBA
 ****
 codice:
 Scanner scan = new Scanner(System.in);
 ////
 import java.util.Scanner;
-public class Esercizio5{
+public class Esercizio2{
 	public static void main(String[] args) {
 ////
-System.out.println("Inserisci un numero: ");
-int x1 = scan.nextInt();
-System.out.println("Inserisci un altro numero: ");
-int x2 = scan.nextInt();
+System.out.println("Inserisci un numero:");
+double x1 = scan.nextDouble();
+System.out.println("Inserisci un altro numero:");
+double x2 = scan.nextDouble();
 ////
- 	int num_cas = (int) (x1 + Math.random() * (x2 - x1 + 1));
- 	System.out.println(num_cas);
+	double massimo = Math.max(x1, x2);
+ 	System.out.println(massimo);
 	}
 }
 ////
 ++++
 risposta:
-2134
+BACD
 ****
 codice:
- if (voto >= 60) {
-   System.out.println("Congratulazioni, hai passato l'esame!");
- }
+if (eta >= 18) {
+	System.out.println("Sei un adulto!");
+}
 ////
-else if (voto >= 50) {
-  System.out.println("Sei vicino a passare, continua a studiare");
+else if (eta >= 12) {
+	System.out.println("Sei un adolescente!");
 }
 ////
 import java.util.Scanner;
-public class VerificaVoto {
+public class Esercizio3 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Inserisci il tuo voto: ");
-        int voto = scanner.nextInt();
+        Scanner scanner = new Scanner(System.in); 
+        System.out.println("Quanti anni hai?");
+        int eta = scanner.nextInt();
 ////
-		else {
-  			System.out.println("Mi dispiace, non hai passato l'esame.");
- 		}
-	}
+        else {
+        	System.out.println("Sei un bambino!");
+        }
+    }
 }
 ////
 ++++
 risposta:
-3124
+CABD
 ****
 codice:
 default:
-   nomeGiorno = "Numero non valido, per favore inserisci un numero tra 1 e 7.";
-   break;
+	nomeGiorno = "Numero non valido";
+    break;
 ////
 import java.util.Scanner;
-public class GiornoDellaSettimana {
+public class Esercizio4 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Inserisci un numero (1-7) 
-        				  per rappresentare un giorno della settimana: ");
+        System.out.println("Inserisci un numero tra 1 e 5:");
         int giorno = scanner.nextInt();
         String nomeGiorno;
 ////
-}
- System.out.println("Il giorno della settimana è: " + nomeGiorno);
+		}
+        System.out.println("Giorno: " + nomeGiorno);
     }
 }
 ////
 switch (giorno) {
-            case 1:
-                nomeGiorno = "Lunedì";
-                break;
-            case 2:
-                nomeGiorno = "Martedì";
-                break;
-            case 3:
-                nomeGiorno = "Mercoledì";
-                break;
-            case 4:
-                nomeGiorno = "Giovedì";
-                break;
-            case 5:
-                nomeGiorno = "Venerdì";
-                break;
-            case 6:
-                nomeGiorno = "Sabato";
-                break;
-            case 7:
-                nomeGiorno = "Domenica";
-                break;
+	case 1:
+		nomeGiorno = "lunedì";
+		break;
+	case 2:
+		nomeGiorno = "martedì";
+		break;
+	case 3:
+		nomeGiorno = "mercoledì";
+		break;
+	case 4:
+		nomeGiorno = "giovedì";
+		break;
+	case 5:
+		nomeGiorno = "venerdì";
+		break;
 ////
 ++++
 risposta:
-2413
+BDAC
 ****
 codice:
 import java.util.Scanner;
-class OrdineTesto{
+public class Esercizio5{
 	public static void main (String[] args){
 	Scanner scan = new Scanner(System.in);
 ////
@@ -121,12 +115,11 @@ class OrdineTesto{
 ////
 	int indicePrimoSpazio = frase.indexOf(' ');
 ////
-	System.out.println("Inserisci una frase di cui la prima parola
-						si sposterà alla fine, senza punteggiatura");
+	System.out.println("Inserisci una frase di almeno due parole);
 	String bozza = scan.nextLine();
 	String frase = bozza.trim();
 ////
 ++++
 risposta:
-1432
+ADCB
 ****

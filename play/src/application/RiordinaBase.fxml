@@ -49,7 +49,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <TextField fx:id="text1" layoutX="60.0" layoutY="237.0" prefHeight="34.0" prefWidth="139.0" promptText="Sequenza corretta" style="-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2;">
+                  <TextField fx:id="text1" layoutX="39.0" layoutY="328.0" prefHeight="34.0" prefWidth="80.0" promptText="ex: ADCB" style="-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2;">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
@@ -58,161 +58,238 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Label fx:id="codice2" layoutX="411.0" layoutY="63.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice2" layoutX="500.0" layoutY="63.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice3" layoutX="777.0" layoutY="63.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice3" layoutX="1050.0" layoutY="63.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice4" layoutX="1144.0" layoutY="63.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice4" layoutX="1500.0" layoutY="63.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice5" layoutX="60.0" layoutY="423.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice5" layoutX="60.0" layoutY="546.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice6" layoutX="411.0" layoutY="423.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice6" layoutX="500.0" layoutY="546.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice7" layoutX="777.0" layoutY="423.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice7" layoutX="1050.0" layoutY="546.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice8" layoutX="1144.0" layoutY="423.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice8" layoutX="1500.0" layoutY="546.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <TextField fx:id="text2" layoutX="60.0" layoutY="597.0" prefHeight="34.0" prefWidth="139.0" promptText="Sequenza corretta" style="-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2;" />
-                  <Label fx:id="codice9" layoutX="60.0" layoutY="800.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <TextField fx:id="text2" layoutX="38.0" layoutY="735.0" prefHeight="34.0" prefWidth="80.0" style="-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2;" />
+                  <Label fx:id="codice9" layoutX="60.0" layoutY="990.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice10" layoutX="411.0" layoutY="800.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice10" layoutX="500.0" layoutY="1001.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice11" layoutX="777.0" layoutY="800.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice11" layoutX="1050.0" layoutY="1001.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice12" layoutX="1144.0" layoutY="800.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice12" layoutX="1500.0" layoutY="1001.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <TextField fx:id="text3" layoutX="60.0" layoutY="974.0" prefHeight="34.0" prefWidth="139.0" promptText="Sequenza corretta" style="-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2;">
+                  <TextField fx:id="text3" layoutX="39.0" layoutY="1217.0" prefHeight="34.0" prefWidth="80.0" style="-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2;">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
-                  <TextField fx:id="text4" layoutX="60.0" layoutY="1535.0" prefHeight="34.0" prefWidth="139.0" promptText="Sequenza corretta" style="-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2;">
+                  <TextField fx:id="text4" layoutX="39.0" layoutY="1700.0" prefHeight="34.0" prefWidth="80.0" style="-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2;">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
-                  <TextField fx:id="text5" layoutX="60.0" layoutY="2000.0" prefHeight="34.0" prefWidth="139.0" promptText="Sequenza corretta" style="-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2;">
+                  <TextField fx:id="text5" layoutX="39.0" layoutY="2220.0" prefHeight="34.0" prefWidth="80.0" style="-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2;">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
-                  <Label fx:id="codice13" layoutX="60.0" layoutY="1170.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice13" layoutX="60.0" layoutY="1480.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice14" layoutX="670.0" layoutY="1170.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice14" layoutX="500.0" layoutY="1480.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice15" layoutX="1250.0" layoutY="1170.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice15" layoutX="1050.0" layoutY="1480.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice16" layoutX="1780.0" layoutY="1170.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice16" layoutX="1500.0" layoutY="1480.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice17" layoutX="60.0" layoutY="1777.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" />
-                  <Label fx:id="codice18" layoutX="411.0" layoutY="1777.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" />
-                  <Label fx:id="codice19" layoutX="777.0" layoutY="1777.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" />
-                  <Label fx:id="codice20" layoutX="1053.0" layoutY="1777.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" />
-                  <Text layoutX="390.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B">
+                  <Label fx:id="codice17" layoutX="60.0" layoutY="1965.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label fx:id="codice18" layoutX="500.0" layoutY="1965.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label fx:id="codice19" layoutX="1050.0" layoutY="1965.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label fx:id="codice20" layoutX="1500.0" layoutY="1965.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Text layoutX="480.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="757.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
+                  <Text layoutX="1030.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="1121.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
+                  <Text layoutX="1480.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="39.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A">
+                  <Text layoutX="39.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="390.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B">
+                  <Text layoutX="480.0" layoutY="557.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="757.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
+                  <Text layoutX="1030.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="1121.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
+                  <Text layoutX="1480.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="39.0" layoutY="812.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A">
+                  <Text layoutX="39.0" layoutY="1002.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="390.0" layoutY="812.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B">
+                  <Text layoutX="480.0" layoutY="1002.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="757.0" layoutY="812.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
+                  <Text layoutX="1030.0" layoutY="1002.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="1121.0" layoutY="812.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
+                  <Text layoutX="1480.0" layoutY="1002.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
                   <Text layoutX="39.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esercizio 1">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="39.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esercizio 2">
+                  <Text layoutX="39.0" layoutY="516.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esercizio 2">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="39.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esercizio 3">
+                  <Text layoutX="39.0" layoutY="960.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esercizio 3">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="39.0" layoutY="1140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esercizio 4">
+                  <Text layoutX="39.0" layoutY="1450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esercizio 4">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="39.0" layoutY="1750.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esercizio 5">
+                  <Text layoutX="39.0" layoutY="1935.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esercizio 5">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="39.0" layoutY="1976.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="480.0" layoutY="1976.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="1030.0" layoutY="1976.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="1480.0" layoutY="1976.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="39.0" layoutY="1492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="480.0" layoutY="1492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="1030.0" layoutY="1492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="1480.0" layoutY="1492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="39.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sequenza corretta: ">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="39.0" layoutY="720.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sequenza corretta: ">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="39.0" layoutY="1200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sequenza corretta: ">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="39.0" layoutY="1680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sequenza corretta: ">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="39.0" layoutY="2200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sequenza corretta: ">
+                     <font>
+                        <Font size="16.0" />
                      </font>
                   </Text>
                </children>
@@ -234,7 +311,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Text layoutX="175.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizza 4 blocchi di codice, comprendi l'ordine corretto del programma e inserisci la sequanza corretta nell'apposito spazio, &#10;entro lo scadere del timer&#10;&#10;&#10;" textAlignment="CENTER">
+      <Text layoutX="188.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizza i 4 blocchi di codice (ABCD), comprendi l'ordine corretto del programma e inserisci la sequanza giusta (senza spazi) &#10;nell'apposito riquadro, entro lo scadere del timer&#10;&#10;&#10;" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

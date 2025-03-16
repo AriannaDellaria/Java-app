@@ -40,13 +40,13 @@ public class RiordinaLivelliController {
         Button bottone = (Button) event.getSource();
 
         if (bottone.getId().equals("base")) { // Il base si colora sempre
-            bottone.setStyle("-fx-background-color: #FFD13B; -fx-border-color: #F9943B");
+            bottone.setStyle("-fx-background-color:  #fede77; -fx-border-color: #F9943B");
         }
         else if (bottone.getId().equals("medio") && utenteCorrente.getPg3() >= 0.33) {
-            bottone.setStyle("-fx-background-color: #FFD13B; -fx-border-color:  #F9943B"); // colore per "medio"
+            bottone.setStyle("-fx-background-color:  #fede77; -fx-border-color:  #F9943B"); // colore per "medio"
         }
         else if (bottone.getId().equals("avanzato") && utenteCorrente.getPg3() >= 0.66) {
-            bottone.setStyle("-fx-background-color: #FFD13B; -fx-border-color:  #F9943B"); // colore per "avanzato"
+            bottone.setStyle("-fx-background-color:  #fede77; -fx-border-color:  #F9943B"); // colore per "avanzato"
         }
     }
 
