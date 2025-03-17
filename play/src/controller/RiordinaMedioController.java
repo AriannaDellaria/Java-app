@@ -36,8 +36,6 @@ import sessione.SessioneGioco;
     @FXML
     private TextField text1, text2, text3, text4, text5; 
 
-    @FXML
-    private ImageView immagine; 
     
     private ArrayList<DomandaRiordina> domandeRiordina;  
     
@@ -47,9 +45,6 @@ import sessione.SessioneGioco;
     ArrayList<TextField> risposte = new ArrayList<>();
     
     private int tempoRestante = 120;  //2 minuti per eseguire l'esercizio
-    
-    //carica immagine dell'orologio per il timer
-	private final Image orologio = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/orologio.png")));
     
     
     @FXML
@@ -101,9 +96,6 @@ import sessione.SessioneGioco;
         utente.setText(utenteCorrente.getUsername());
         
         avvioTimer();
-        immagine.setImage(orologio); 
-        immagine.setFitWidth(20); //larghezza
-        immagine.setFitHeight(20); //altezza
     }
 	  
     private void avvioTimer() {
@@ -130,7 +122,6 @@ import sessione.SessioneGioco;
 	    t.setDaemon(true);//consente all'utente di finire l'esercizio anche prima dello scadere del timer
 	    t.start();//consente di avviare il thread secondario
 	}
-	
     @FXML
     void closeButton(MouseEvent event) {
     	Stage stage = (Stage) close.getScene().getWindow(); 
@@ -138,19 +129,14 @@ import sessione.SessioneGioco;
     }
 
     @FXML
-    void colorChangeBasic(MouseEvent event) {
-	    indietro.setStyle("");
-		close.setStyle("");
-    }
-
-    @FXML
-    void colorChangeRed(MouseEvent event) {
-    	close.setStyle("-fx-background-color: red;");
-    }
-
-    @FXML
     void colorChangeYellow(MouseEvent event) {
-    	indietro.setStyle("-fx-background-color: yellow;");	
+    	terminaCorreggi.setStyle("-fx-background-color: #fede77;-fx-border-color: #f9943b"); 
+    }
+    
+    @FXML
+    void colorChangeBasic(MouseEvent event) {
+    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #f9943b; -fx-border-width: 2px;");
+    	
     }
 
     @FXML

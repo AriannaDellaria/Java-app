@@ -1,19 +1,42 @@
 codice:
-	System.out.println(somma); 
+public abstract class ClasseA { 
+	private String nome; 
+
+	public ClasseA(String nome) { 
+		this.nome = nome; 
+	} 
+	
+	public String getNome() { 
+		return this.nome; 
+	} 
+	abstract public int getNumeroZampe();
+}
+////
+public class ClasseB extends ----- { 
+	
+	public ClasseB(String nome) { 
+		super(nome); 
+	} 
+	public String toString() { 
+	    return "l'animale ha: " + super.getNumeroZampe(); 
+    }
+}
+////
+public abstract class ClasseC extends ----- { 
+	public ClasseC(String nome) { 
+		super(nome); 
+	} 
+	//super può essere chiamato solo una volta, quindi metto tutto su una riga 
+	public int getNumeroZampe() { 
+		return 4; 
 	}
 }
 ////
-int a = 3;
-int b = 4;
-////
-int somma = a + b;
-////
-public class Esempio {
-	public static void main(String[] args) {
+
 ////
 ++++
 risposta:
-DBCA
+DCBA
 ****
 codice:
 Scanner scan = new Scanner(System.in);

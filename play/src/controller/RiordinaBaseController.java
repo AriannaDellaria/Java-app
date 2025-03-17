@@ -131,12 +131,12 @@ import sessione.SessioneGioco;
 
     @FXML
     void colorChangeYellow(MouseEvent event) {
-    	terminaCorreggi.setStyle("-fx-background-color: #FFC8AE;-fx-border-color: #f64c4c"); 
+    	terminaCorreggi.setStyle("-fx-background-color: #fede77;-fx-border-color: #f9943b"); 
     }
     
     @FXML
     void colorChangeBasic(MouseEvent event) {
-    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2px;");
+    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #f9943b; -fx-border-width: 2px;");
     	
     }
     @FXML
