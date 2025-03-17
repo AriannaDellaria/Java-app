@@ -42,6 +42,31 @@ public class HomeController {
     	close.setStyle("");
     }
 
+    @FXML
+    void grande(MouseEvent event) {
+    	primoEsercizio.setStyle("-fx-font-size: 32px; -fx-font-family: 'Georgia'; -fx-font-weight: bold;");
+    }
+    @FXML
+    void grande1(MouseEvent event) {
+    	secondoEsercizio.setStyle("-fx-font-size: 32px; -fx-font-family: 'Georgia'; -fx-font-weight: bold;");
+    }
+    @FXML
+    void grande2(MouseEvent event) {
+    	terzoEsercizio.setStyle("-fx-font-size: 32px; -fx-font-family: 'Georgia'; -fx-font-weight: bold;");
+    }
+    @FXML
+    void piccolo(MouseEvent event) {
+    	primoEsercizio.setStyle("-fx-font-size: 30px; -fx-font-family: 'Georgia'; -fx-font-weight: bold;"); 
+    }
+    @FXML
+    void piccolo1(MouseEvent event) {
+    	secondoEsercizio.setStyle("-fx-font-size: 30px; -fx-font-family: 'Georgia'; -fx-font-weight: bold;");
+    }
+    @FXML
+    void piccolo2(MouseEvent event) {
+    	terzoEsercizio.setStyle("-fx-font-size: 30px; -fx-font-family: 'Georgia'; -fx-font-weight: bold;");
+    }
+    
     
 
     @FXML
@@ -54,6 +79,7 @@ public class HomeController {
             Scene vecchiaScena = new Scene(scenaPrecedente);
             scenaCorrente.setScene(vecchiaScena);
             scenaCorrente.show();
+            sessioneGioco.setUtenteLoggato(null);
         } catch (NullPointerException | IOException e) {
             System.out.println("Errore nel caricamento della schermata precedente! " +e.getMessage());
         }

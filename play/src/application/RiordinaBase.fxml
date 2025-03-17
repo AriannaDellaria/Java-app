@@ -49,7 +49,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <TextField fx:id="text1" layoutX="39.0" layoutY="328.0" prefHeight="34.0" prefWidth="80.0" promptText="ex: ADCB" style="-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2;">
+                  <TextField fx:id="text1" layoutX="39.0" layoutY="291.0" prefHeight="34.0" prefWidth="80.0" promptText="ex: ADCB" style="-fx-background-color: white; -fx-border-color: #f64c4c; -fx-border-width: 2;">
                      <font>
                         <Font size="14.0" />
                      </font></TextField>
@@ -58,15 +58,15 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Label fx:id="codice2" layoutX="500.0" layoutY="63.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice2" layoutX="384.0" layoutY="63.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice3" layoutX="1050.0" layoutY="63.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice3" layoutX="581.0" layoutY="63.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice4" layoutX="1500.0" layoutY="63.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice4" layoutX="830.0" layoutY="63.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
@@ -74,15 +74,15 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice6" layoutX="500.0" layoutY="546.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice6" layoutX="480.0" layoutY="546.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice7" layoutX="1050.0" layoutY="546.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice7" layoutX="920.0" layoutY="546.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice8" layoutX="1500.0" layoutY="546.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice8" layoutX="1390.0" layoutY="546.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
@@ -95,11 +95,11 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice11" layoutX="1050.0" layoutY="990.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice11" layoutX="970.0" layoutY="990.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice12" layoutX="1500.0" layoutY="990.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice12" layoutX="1440.0" layoutY="990.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
@@ -123,7 +123,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="codice15" layoutX="1050.0" layoutY="1480.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
+                  <Label fx:id="codice15" layoutX="1020.0" layoutY="1480.0" style="-fx-border-color: #F9943B; -fx-padding: 10;" text="Label" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
@@ -147,17 +147,17 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Text layoutX="480.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B">
+                  <Text layoutX="362.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="1030.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
+                  <Text layoutX="563.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="1480.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
+                  <Text layoutX="809.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -167,17 +167,17 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="480.0" layoutY="557.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B">
+                  <Text layoutX="460.0" layoutY="557.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="1030.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
+                  <Text layoutX="900.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="1480.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
+                  <Text layoutX="1370.0" layoutY="556.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -192,12 +192,12 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="1030.0" layoutY="1002.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
+                  <Text layoutX="950.0" layoutY="1002.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="1480.0" layoutY="1002.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
+                  <Text layoutX="1420.0" layoutY="1002.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -257,7 +257,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="1030.0" layoutY="1492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
+                  <Text layoutX="1000.0" layoutY="1492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -267,7 +267,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="39.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sequenza corretta: ">
+                  <Text layoutX="39.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sequenza corretta: ">
                      <font>
                         <Font size="16.0" />
                      </font>

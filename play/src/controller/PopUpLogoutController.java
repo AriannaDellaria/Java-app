@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+
+import dati.Utente;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,11 +10,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import sessione.SessioneGioco;
 
 public class PopUpLogoutController {
 
     @FXML
     private Button annulla, conferma;
+    
+    SessioneGioco sessioneGioco = SessioneGioco.getInstance();  //getIstance() -> restituisce una e una sola istanza della classe
+    Utente utenteCorrente = sessioneGioco.getUtenteLoggato(); //recupera i dati dell'utente che ha effettuato il login
+    
+    
 
     @FXML
     void colorChangeGreen(MouseEvent event) {
@@ -44,6 +52,7 @@ public class PopUpLogoutController {
             Scene nuovaScena = new Scene(scenaSuccessiva);
             popUpCorrente.setScene(nuovaScena);
             popUpCorrente.show();  
+            sessioneGioco.setUtenteLoggato(null);
  	    } catch (NullPointerException | IOException e) {
  	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
  	    }   

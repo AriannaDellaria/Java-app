@@ -2,7 +2,13 @@ codice:
 System.out.println("inserisci un numero"); 
 int n = scan.nextInt();
 ////
-while(true) { 
+		A.add(n); 
+			if(n < 0 || n > 100) {
+				break; 
+			} 
+		}
+    }
+}
 ////
 import java.util.ArrayList; 
 import java.util.Scanner; 
@@ -13,17 +19,11 @@ public class Esercizio1 {
 	Scanner scan = new Scanner(System.in); 
 	ArrayList<Integer> A = new ArrayList<Integer>(); 
 ////
-		A.add(n); 
-			if(n < 0 || n > 100) {
-				break; 
-			} 
-		}
-    }
-}
+while(true) { 
 ////
 ++++
 risposta:
-CBAD
+CDAB
 ****
 codice:
 public class Esercizio2 { 
@@ -56,6 +56,8 @@ ACDB
 codice:
 int somma = 0;
 ////
+for (int j = 0; j < m[i].length; j++) {
+////
 			somma = somma + m[i][j];
    	    		if (somma >= 100) {
    	    		contatore++; 
@@ -66,8 +68,6 @@ int somma = 0;
    	    System.out.println(contatore); 
    	  }
  }
-////
-for (int j = 0; j < m[i].length; j++) {
 ////
 import java.util.Scanner; 
 public class Esercizio3 {
@@ -86,7 +86,7 @@ public class Esercizio3 {
 ////
 ++++
 risposta:
-DACB
+DABC
 ****
 codice:
 if (i == 5) {

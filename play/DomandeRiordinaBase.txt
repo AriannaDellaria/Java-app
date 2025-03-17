@@ -1,18 +1,19 @@
 codice:
-	System.out.println(a); 
+	System.out.println(somma); 
 	}
 }
 ////
-a = 10;
+int a = 3;
+int b = 4;
 ////
-int a; 
+int somma = a + b;
 ////
-public class Esercizio1 {
+public class Esempio {
 	public static void main(String[] args) {
 ////
 ++++
 risposta:
-DCBA
+DBCA
 ****
 codice:
 Scanner scan = new Scanner(System.in);

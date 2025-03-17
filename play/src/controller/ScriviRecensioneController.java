@@ -65,7 +65,7 @@ public class ScriviRecensioneController {
     @FXML
     void paginaPrecedente(MouseEvent event) {
     	try {
-            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
+            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/Home.fxml"));
 
             Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
 
