@@ -1,20 +1,210 @@
 codice:
-public abstract class ClasseA { 
-	private String nome; 
-
-	public ClasseA(String nome) { 
-		this.nome = nome; 
+while(true) { 
+	System.out.println("inserisci un numero"); 
+	int n = scan.nextInt(); 
+	if(n > 0) { 
+		array.add(n); 
+	} 
+	else { 
+		break; 
+	} 
+} 
+////
+import java.util.Iterator; 
+import java.util.ArrayList; 
+import java.util.Scanner;
+public class EsercizioIteratori{ 
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in); 
+////
+ArrayList<Integer> array = new ArrayList<>(); 
+////
+	   Iterator<Integer> iteratore = array.iterator(); 
+	   int somma = 0;
+	   while(iteratore.hasNext()) { 
+	   	   somma = somma + iteratore.next(); 
+	   } 
+	   System.out.println(somma); 
+	} 
+}
+////
+++++
+risposta:
+BCAD
+****
+codice: 
+import java.io.*;
+import java.util.Scanner; 
+public class EsercizioFile14 {
+	public static void main(String[] args) { 
+////
+try {
+	Scanner scanIn = new Scanner(new File("input14.dat")); 
+	PrintWriter scanOut = new PrintWriter("output14.dat"); 
+////
+	catch(IOException e) { 
+		System.out.println("il file non e' stato trovato"); 
+	} 
+}
+}
+////
+		while(scanIn.hasNextLine()) {
+			scanOut.println(scanIn.nextLine()); 
+		}
+		scanIn.close(); 
+		scanOut.close();
+   }
+////
+++++
+risposta:
+ABDC
+****
+codice:
+public class Diesel extends **** {
+	
+	public Diesel(int cilindrata, int numeroCilindri) { 
+		super(cilindrata, numeroCilindri);
+	} 
+	public double potenza() {
+		return ((super.getCilindrata() / super.getNumeroCilindri()) * 0.2); 
+	} 
+	public int getVelocitaMax() { 
+		return 200; 
+	}
+} 
+////
+public abstract class Motore implements **** { 
+	private int cilindrata; 
+	private int numeroCilindri; 
+	
+	public Motore(int cilindrata, int numeroCilindri) {
+		this.cilindrata = cilindrata; 
+	    this.numeroCilindri = numeroCilindri; 
 	} 
 	
+	public int getCilindrata() { 
+		return this.cilindrata; 
+	} 
+	public int getNumeroCilindri() { 
+		return this.numeroCilindri; 
+	} 
+	public abstract double potenza(); 
+}
+////
+public class Main {
+    public static void main(String[] args) {
+        Diesel motore = new Diesel(2500, 6); 
+        System.out.println("Motore diesel:");
+        System.out.println("Cilindrata: " + motore.getCilindrata() + " cc");
+        System.out.println("Numero di cilindri: " + motore.getNumeroCilindri());
+        System.out.println("Potenza: " + motore.potenza() + " CV");
+        System.out.println("Velocità massima: " + motore.getVelocitaMax() + " km/h");
+    }
+}
+////
+public interface velocitaMax {
+	public int getVelocitaMax(); 
+} 
+////
+++++
+risposta:
+DBAC
+****
+codice:
+public abstract class Studente extends **** { 
+	private String matricola;  
+	
+	public Studente(String nome, String matricola) { 
+		super(nome); 
+		this.matricola = matricola;
+	} 
+	public String getNumeroMatricola() { 
+		return this.matricola;
+	} 
+	
+	public abstract int calcolaOreSettimana();
+	
+	public String toString() { 
+		return ("lo studente: [ " + super.getNome() + " ] [ matricola numero : " + this.matricola + " ]"); 
+	} 
+} 
+////
+public class StudenteLavoratore extends **** {
+    private String lavoro;
+    private int oreLavoroSettimana;
+    private int oreStudioSettimana;
+
+    public StudenteLavoratore(String nome, String matricola, String lavoro, int oreLavoroSettimana, int oreStudioSettimana) {
+        super(nome, matricola);
+        this.lavoro = lavoro;
+        this.oreLavoroSettimana = oreLavoroSettimana;
+        this.oreStudioSettimana = oreStudioSettimana;
+    }
+    
+	public String getLavoro() { 
+		return this.lavoro;
+	} 
+	
+    public int calcolaOreSettimana() {
+        return oreLavoroSettimana + oreStudioSettimana;
+    }
+}
+////
+public class Persona { 
+	private String nome;
+	private String cognome; 
+	
+	public Persona(String nome) { 
+		this.nome = nome; 
+	} 
+	public String getNome() { 
+		return this.nome;
+	}
+}
+////
+import java.util.ArrayList; 
+import java.io.PrintWriter;
+import java.io.FileWriter; 
+import java.io.*; 
+
+public class Gruppo {
+	private ArrayList<Studente> studenti; 
+	
+	public Gruppo() { 
+		this.studenti = new ArrayList<Studente>(); 
+	} 
+	public void aggiungiStudente(Studente studente) { 
+		studenti.add(studente); 
+	} 
+    public void calcolaOreTotaliGruppo() {
+        int totaleOre = 0;
+        for (Studente studente : studenti) {
+            totaleOre += studente.calcolaOreSettimana();
+        }
+        System.out.println("Ore settimanali totali per il gruppo: " + totaleOre);
+    }
+} 
+////
+++++
+risposta:
+CABD
+****
+codice:
+public abstract class Animali { 
+	private String nome; 
+
+	public Animali(String nome) { 
+		this.nome = nome; 
+	} 
 	public String getNome() { 
 		return this.nome; 
 	} 
 	abstract public int getNumeroZampe();
 }
 ////
-public class ClasseB extends ----- { 
+public class Cane extends **** { 
 	
-	public ClasseB(String nome) { 
+	public Cane(String nome) { 
 		super(nome); 
 	} 
 	public String toString() { 
@@ -22,128 +212,24 @@ public class ClasseB extends ----- {
     }
 }
 ////
-public abstract class ClasseC extends ----- { 
-	public ClasseC(String nome) { 
+public class Main { 
+	public static void main(String[] args) { 
+		Cane cane1 = new Cane("pluto"); 
+		System.out.println(cane1.getNome()); 
+		System.out.println(cane1.getNumeroZampe()); 
+	} 
+} 
+////
+public class Quadrupede extends **** { 
+	public Quadrupede(String nome) { 
 		super(nome); 
 	} 
-	//super può essere chiamato solo una volta, quindi metto tutto su una riga 
 	public int getNumeroZampe() { 
 		return 4; 
 	}
 }
 ////
-
-////
 ++++
 risposta:
-DCBA
-****
-codice:
-Scanner scan = new Scanner(System.in);
-////
-import java.util.Scanner;
-public class Esercizio2{
-	public static void main(String[] args) {
-////
-System.out.println("Inserisci un numero:");
-double x1 = scan.nextDouble();
-System.out.println("Inserisci un altro numero:");
-double x2 = scan.nextDouble();
-////
-	double massimo = Math.max(x1, x2);
- 	System.out.println(massimo);
-	}
-}
-////
-++++
-risposta:
-BACD
-****
-codice:
-if (eta >= 18) {
-	System.out.println("Sei un adulto!");
-}
-////
-else if (eta >= 12) {
-	System.out.println("Sei un adolescente!");
-}
-////
-import java.util.Scanner;
-public class Esercizio3 {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in); 
-        System.out.println("Quanti anni hai?");
-        int eta = scanner.nextInt();
-////
-        else {
-        	System.out.println("Sei un bambino!");
-        }
-    }
-}
-////
-++++
-risposta:
-CABD
-****
-codice:
-default:
-	nomeGiorno = "Numero non valido";
-    break;
-////
-import java.util.Scanner;
-public class Esercizio4 {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Inserisci un numero tra 1 e 5:");
-        int giorno = scanner.nextInt();
-        String nomeGiorno;
-////
-		}
-        System.out.println("Giorno: " + nomeGiorno);
-    }
-}
-////
-switch (giorno) {
-	case 1:
-		nomeGiorno = "lunedì";
-		break;
-	case 2:
-		nomeGiorno = "martedì";
-		break;
-	case 3:
-		nomeGiorno = "mercoledì";
-		break;
-	case 4:
-		nomeGiorno = "giovedì";
-		break;
-	case 5:
-		nomeGiorno = "venerdì";
-		break;
-////
-++++
-risposta:
-BDAC
-****
-codice:
-import java.util.Scanner;
-public class Esercizio5{
-	public static void main (String[] args){
-	Scanner scan = new Scanner(System.in);
-////
-	String primaParola = frase.substring(0, indicePrimoSpazio);
- 	String restoFrase = frase.substring(indicePrimoSpazio);      
- 	String nuovaFrase = restoFrase + " " + primaParola;
- 	System.out.println("La nuova frase e': " + nuovaFrase);
-	}
-}
-////
-	int indicePrimoSpazio = frase.indexOf(' ');
-////
-	System.out.println("Inserisci una frase di almeno due parole);
-	String bozza = scan.nextLine();
-	String frase = bozza.trim();
-////
-++++
-risposta:
-ADCB
+ADBC
 ****
