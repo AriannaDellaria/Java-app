@@ -39,7 +39,7 @@
             <Font name="System Bold Italic" size="16.0" />
          </font>
       </Label>
-      <ImageView fitHeight="391.0" fitWidth="493.0" layoutX="-8.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="391.0" fitWidth="493.0" layoutX="-3.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../immagini/livelli1.PNG" />
          </image>
@@ -58,31 +58,31 @@
          <font>
             <Font size="16.0" />
          </font></Text>
-      <Button fx:id="base" layoutX="241.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-border-color: #F64C4C; -fx-border-width: 2; -fx-background-color: white;" text="Livello base">
+      <Button fx:id="base" layoutX="243.0" layoutY="298.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-border-color: #F64C4C; -fx-border-width: 2; -fx-background-color: white;" text="Livello base">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="medio" layoutX="556.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2;" text="Livello medio">
+      <Button fx:id="medio" layoutX="557.0" layoutY="381.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2;" text="Livello medio">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="avanzato" layoutX="870.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" style="-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2;" text="Livello avanzato ">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Button>
-      <Label fx:id="erroreEsercizi" layoutX="348.0" layoutY="604.0" text="Per svolgere gli esercizi di livello superiore, è necessario superare con successo gli esercizi precedenti!" textFill="#f64c4c" visible="false">
+      <Label fx:id="erroreEsercizi" layoutX="335.0" layoutY="461.0" text="Per svolgere gli esercizi di livello superiore, è necessario superare con successo gli esercizi precedenti!" textFill="#f64c4c" visible="false">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <ImageView fitHeight="130.0" fitWidth="638.0" layoutX="330.0" layoutY="528.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="avanzato" layoutX="871.0" layoutY="298.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" style="-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2;" text="Livello avanzato ">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="130.0" fitWidth="638.0" layoutX="330.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../immagini/esempio_definizioni.PNG" />
          </image>
       </ImageView>
-      <Text layoutX="330.0" layoutY="516.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esempio: ">
+      <Text layoutX="330.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esempio: ">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
