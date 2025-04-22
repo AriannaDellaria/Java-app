@@ -59,22 +59,22 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <Button fx:id="base" layoutX="241.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-border-color: #2379be; -fx-background-color: white; -fx-border-width: 2;" text="Livello base">
+      <Button fx:id="base" layoutX="243.0" layoutY="277.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-border-color: #2379be; -fx-background-color: white; -fx-border-width: 2;" text="Livello base">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="avanzato" layoutX="870.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-background-color: white; -fx-border-color: #2379be; -fx-border-width: 2;" text="Livello avanzato">
+      <Button fx:id="avanzato" layoutX="869.0" layoutY="277.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-background-color: white; -fx-border-color: #2379be; -fx-border-width: 2;" text="Livello avanzato">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="medio" layoutX="557.0" layoutY="412.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-background-color: WHITE; -fx-border-color: #2379be; -fx-border-width: 2;" text="Livello medio">
+      <Button fx:id="medio" layoutX="557.0" layoutY="364.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-background-color: WHITE; -fx-border-color: #2379be; -fx-border-width: 2;" text="Livello medio">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Button>
-      <Label fx:id="erroreEsercizi" layoutX="337.0" layoutY="600.0" text="Per svolgere gli esercizi di livello superiore, è necessario superare con successo gli esercizi precedenti!" textFill="#f64c4c" visible="false">
+      <Label fx:id="erroreEsercizi" layoutX="336.0" layoutY="452.0" text="Per svolgere gli esercizi di livello superiore, è necessario superare con successo gli esercizi precedenti!" textFill="#f64c4c" visible="false">
          <font>
             <Font size="14.0" />
          </font>
