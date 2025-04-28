@@ -33,6 +33,8 @@ import sessione.SessioneGioco;
 	    @FXML
 	    private Button close, indietro, terminaCorreggi;
 	    
+	    
+	    
 	    SessioneGioco sessioneGioco = SessioneGioco.getInstance();
 	    Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
 	   
@@ -40,7 +42,8 @@ import sessione.SessioneGioco;
 	    private ArrayList<Label> domande = new ArrayList<>();
 	    private ArrayList<ComboBox<String>> opzioni = new ArrayList<>();
 	   
-	    private int tempoRestante = 120; //2 minuti
+	    private int tempoRestante = 90; //1 min e mezzo
+		private volatile boolean timerAttivo = true;
 		
 	    @FXML
 	    public void initialize() {
@@ -65,7 +68,7 @@ import sessione.SessioneGioco;
 	    
 	    private void avvioTimer() {
 		    Thread t = new Thread(() -> { //viene creato un thread secondario, parallelo a quello principale (interfaccia grafica), che permette di gestire il timer 
-		    	while (tempoRestante > 0 ) {
+		    	while (tempoRestante > 0 && timerAttivo) {
 		            try {
 		                Thread.sleep(1000); //fa scorrere il timer di secondo in secondo (1000 millisecondi) 
 		                tempoRestante--; //timer decrescente
@@ -75,10 +78,10 @@ import sessione.SessioneGioco;
 		                    timer.setText(String.format("%02d:%02d", minuti, secondi)); //viene aggiornata la label
 		                });
 		            } catch (InterruptedException e) {
-		            	System.out.println("Attenzione! L'operazione si è interrotta nel thread! " +e.getMessage()); 
+		            	System.out.println("Attenzione! L'operazione si è interrotta nel thread! " + e.getMessage()); 
 		            }
 		        }
-		        if (tempoRestante == 0) {
+		        if (tempoRestante == 0 && timerAttivo) {
 		            Platform.runLater(() -> {
 		            	salvaPunteggio(null);//il timer è scaduto ma il bottone non è stato cliccato -> effettua comunque la correzione degli esercizi fatti fino a quel momento e salva il punteggio 
 		            });
@@ -90,6 +93,7 @@ import sessione.SessioneGioco;
 	    
 	    @FXML
 	    void closeButton(MouseEvent event) {
+	    	timerAttivo = false; // FERMO il timer
 	    	Stage stage = (Stage) close.getScene().getWindow(); 
 	        stage.close(); 
 	    }
@@ -107,6 +111,7 @@ import sessione.SessioneGioco;
 
 	    @FXML
 	    void paginaPrecedente(MouseEvent event) {
+	    	timerAttivo = false; // FERMO il timer PRIMA di cambiare scena
 	    	try {
 	            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/DefinizioniLivelli.fxml"));
 
@@ -117,6 +122,7 @@ import sessione.SessioneGioco;
 	            scenaCorrente.show();
 	        } catch (NullPointerException | IOException e) {
 	            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
+	            e.printStackTrace();
 	        }
 	    }
 	  
@@ -183,6 +189,7 @@ import sessione.SessioneGioco;
 	   //corregge l'esercizio ottenendo un punteggio per verificare il superamento dell'esercizio
 	    @FXML
 	    void salvaPunteggio(MouseEvent event) {
+	    	timerAttivo = false;
 	    	int punteggioLocale = 0;
 
 	        for (int i = 0; i < domandeDefinizioni.size(); i++) {
@@ -222,11 +229,13 @@ import sessione.SessioneGioco;
 	            popUpStage.show();
 	        } catch (NullPointerException | IOException e) {
 	            System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+	            e.printStackTrace();
 	        }
 	    }
 	    
 	    @FXML
 	    void popUpUtente() {
+	    	timerAttivo = false; // Fermiamo anche qui
 	    	    try {
 	    	        Stage paginaPrincipale = (Stage) utente.getScene().getWindow();
 
@@ -239,6 +248,7 @@ import sessione.SessioneGioco;
 	    	        popUpStage.show(); 
 	    	    } catch (NullPointerException | IOException e) {
 	    	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+	    	        e.printStackTrace();
 	    	    }   
 		}
 	    

@@ -53,7 +53,8 @@ public class OutputAvanzatoController {
     private ArrayList<ToggleGroup> gruppiToggle = new ArrayList<>();
     private ArrayList<ArrayList<RadioButton>> opzioni = new ArrayList<>();
     
-    private int tempoRestante = 120;  //2 minuti per eseguire l'esercizio
+    private int tempoRestante = 540;  //2 minuti per eseguire l'esercizio
+    private volatile boolean timerAttivo = true;
     
 	@FXML
     public void initialize() {
@@ -124,7 +125,7 @@ public class OutputAvanzatoController {
 	
 	private void avvioTimer() {
 	    Thread t = new Thread(() -> { //viene creato un thread secondario, parallelo a quello principale (interfaccia grafica), che permette di gestire il timer 
-	    	while (tempoRestante > 0 ) {
+	    	while (tempoRestante > 0 && timerAttivo) {
 	            try {
 	                Thread.sleep(1000); //fa scorrere il timer di secondo in secondo (1000 millisecondi) 
 	                tempoRestante--; //timer decrescente
@@ -137,7 +138,7 @@ public class OutputAvanzatoController {
 	            	System.out.println("Attenzione! L'operazione si è interrotta nel thread! " +e.getMessage()); 
 	            }
 	        }
-	        if (tempoRestante == 0) {
+	        if (tempoRestante == 0 && timerAttivo) {
 	            Platform.runLater(() -> {
 	            	salvaPunteggio(null);//il timer è scaduto ma il bottone non è stato cliccato -> effettua comunque la correzione degli esercizi fatti fino a quel momento e salva il punteggio 
 	            });
@@ -149,6 +150,7 @@ public class OutputAvanzatoController {
 	
     @FXML
     void closeButton(MouseEvent event) {
+    	timerAttivo = false; // FERMO il timer
     	Stage stage = (Stage) close.getScene().getWindow(); 
         stage.close(); 
     }
@@ -165,6 +167,7 @@ public class OutputAvanzatoController {
 
     @FXML
     void paginaPrecedente(MouseEvent event) {
+    	timerAttivo = false;
     	try {
             Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/OutputLivelli.fxml"));
 
@@ -180,6 +183,7 @@ public class OutputAvanzatoController {
     
     @FXML
     void popUpUtente() {
+    	timerAttivo = false;
     	    try {
     	        Stage stagePrincipale = (Stage) utente.getScene().getWindow();
 
@@ -285,7 +289,9 @@ public class OutputAvanzatoController {
     //corregge l'esercizio ottenendo un punteggio per verificare il superamento dell'esercizio
     @FXML
     void salvaPunteggio(MouseEvent event) {
+    	timerAttivo = false;
     	int punteggioLocale = 0;
+    	
         for (int i = 0; i < domandeMultiple.size(); i++) {
             DomandaMultipla domanda = domandeMultiple.get(i);
             ToggleGroup gruppo = getGruppoDaIndice(i); 

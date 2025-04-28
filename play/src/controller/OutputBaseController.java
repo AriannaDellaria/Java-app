@@ -35,8 +35,8 @@ public class OutputBaseController {
     @FXML
     private Label codice1, codice2, codice3, codice4, codice5, domanda1, domanda2, domanda3, domanda4, domanda5, utente, timer;
 
-    private int tempoRestante = 120;  //2 minuti per eseguire l'esercizio
-    
+    private int tempoRestante = 240;  //2 minuti per eseguire l'esercizio
+    private volatile boolean timerAttivo = true;
    
 	private ArrayList<Label> domande  = new ArrayList<>();
 	private ArrayList<Label> codici  = new ArrayList<>();
@@ -74,7 +74,7 @@ public class OutputBaseController {
     
     private void avvioTimer() {
 	    Thread t = new Thread(() -> { //viene creato un thread secondario, parallelo a quello principale (interfaccia grafica), che permette di gestire il timer 
-	    	while (tempoRestante > 0 ) {
+	    	while (tempoRestante > 0 && timerAttivo) {
 	            try {
 	                Thread.sleep(1000); //fa scorrere il timer di secondo in secondo (1000 millisecondi) 
 	                tempoRestante--; //timer decrescente
@@ -87,7 +87,7 @@ public class OutputBaseController {
 	            	System.out.println("Attenzione! L'operazione si è interrotta nel thread! " +e.getMessage()); 
 	            }
 	        }
-	        if (tempoRestante == 0) {
+	        if (tempoRestante == 0 && timerAttivo) {
 	            Platform.runLater(() -> {
 	            	salvaPunteggio(null);//il timer è scaduto ma il bottone non è stato cliccato -> effettua comunque la correzione degli esercizi fatti fino a quel momento e salva il punteggio 
 	            });
@@ -99,6 +99,7 @@ public class OutputBaseController {
 	
     @FXML
     void closeButton(MouseEvent event) {
+    	timerAttivo = false; // FERMO il timer
     	Stage stage = (Stage) close.getScene().getWindow(); 
         stage.close(); 
     }
@@ -115,6 +116,7 @@ public class OutputBaseController {
 
     @FXML
     void paginaPrecedente(MouseEvent event) {
+    	timerAttivo = false; // FERMO il timer
     	try {
             Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/OutputLivelli.fxml"));
 
@@ -194,6 +196,7 @@ public class OutputBaseController {
 
     @FXML
     void salvaPunteggio(MouseEvent event) {
+    	timerAttivo = false;
     	int punteggioLocale = 0;
         for (int i = 0; i < domandeVeroFalso.size(); i++) {
             DomandaVeroFalso domanda = domandeVeroFalso.get(i);
@@ -239,6 +242,7 @@ public class OutputBaseController {
     
     @FXML
     void popUpUtente() {
+    	timerAttivo = false;
     	    try {
     	        Stage paginaPrincipale = (Stage) utente.getScene().getWindow();
 

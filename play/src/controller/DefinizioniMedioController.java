@@ -41,7 +41,8 @@ import sessione.SessioneGioco;
 	    private ArrayList<Label> domande = new ArrayList<>();
 	    private ArrayList<ComboBox<String>> opzioni = new ArrayList<>();
 	   
-	    private int tempoRestante = 120; //2 minuti
+	    private int tempoRestante = 100; 
+	    private volatile boolean timerAttivo = true;
 
 	    @FXML
 	    public void initialize() {
@@ -66,7 +67,7 @@ import sessione.SessioneGioco;
 	    
 	    private void avvioTimer() {
 		    Thread t = new Thread(() -> { //viene creato un thread secondario, parallelo a quello principale (interfaccia grafica), che permette di gestire il timer 
-		    	while (tempoRestante > 0 ) {
+		    	while (tempoRestante > 0 && timerAttivo) {
 		            try {
 		                Thread.sleep(1000); //fa scorrere il timer di secondo in secondo (1000 millisecondi) 
 		                tempoRestante--; //timer decrescente
@@ -79,7 +80,7 @@ import sessione.SessioneGioco;
 		            	System.out.println("Attenzione! L'operazione si è interrotta nel thread! " +e.getMessage()); 
 		            }
 		        }
-		        if (tempoRestante == 0) {
+		        if (tempoRestante == 0 && timerAttivo) {
 		            Platform.runLater(() -> {
 		            	salvaPunteggio(null);//il timer è scaduto ma il bottone non è stato cliccato -> effettua comunque la correzione degli esercizi fatti fino a quel momento e salva il punteggio 
 		            });
@@ -91,6 +92,7 @@ import sessione.SessioneGioco;
 	    
 	    @FXML
 	    void closeButton(MouseEvent event) {
+	    	timerAttivo = false; // FERMO il timer
 	    	Stage stage = (Stage) close.getScene().getWindow(); 
 	        stage.close(); 
 	    }
@@ -108,6 +110,7 @@ import sessione.SessioneGioco;
 	    
 	    @FXML
 	    void paginaPrecedente(MouseEvent event) {
+	    	timerAttivo = false;
 	    	try {
 	            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/DefinizioniLivelli.fxml"));
 
@@ -184,6 +187,7 @@ import sessione.SessioneGioco;
 	   //corregge l'esercizio ottenendo un punteggio per verificare il superamento dell'esercizio
 	    @FXML
 	    void salvaPunteggio(MouseEvent event) {
+	    	timerAttivo = false;
 	    	int punteggioLocale = 0;
 
 	        for (int i = 0; i < domandeDefinizioni.size(); i++) {
@@ -228,6 +232,7 @@ import sessione.SessioneGioco;
 	    
 	    @FXML
 	    void popUpUtente() {
+	    	timerAttivo = false; // Fermiamo anche qui
 	    	    try {
 	    	        Stage paginaPrincipale = (Stage) utente.getScene().getWindow();
 

@@ -1,4 +1,21 @@
 codice:
+public class Esercizio1 {
+    public static void main(String[] args) {
+        Greeter g1 = new Greeter("paolo");
+        System.out.print(g1.sayHello());
+
+        Greeter g2 = new Greeter();
+        System.out.print(g2.sayHello());
+
+        Greeter g3 = new Greeter("GiOvAnNa");
+        g3.setName("maRia");
+        System.out.print(g3.sayHello());
+
+        Greeter g4 = new Greeter("");
+        System.out.print(g4.sayHello());
+    }
+}
+
 class Greeter {
     private String name;
 
@@ -29,26 +46,9 @@ class Greeter {
         return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
     }
 }
-
-public class Esercizio1 {
-    public static void main(String[] args) {
-        Greeter g1 = new Greeter("paolo");
-        System.out.print(g1.sayHello());
-
-        Greeter g2 = new Greeter();
-        System.out.print(g2.sayHello());
-
-        Greeter g3 = new Greeter("GiOvAnNa");
-        g3.setName("maRia");
-        System.out.print(g3.sayHello());
-
-        Greeter g4 = new Greeter("");
-        System.out.print(g4.sayHello());
-    }
-}
 ////
 domanda:
-Chi verrà salutato dal programma?
+Chi verrà salutato dal programma (formato dalle classi Esercizio1 e Greeter)?
 opzioni:
 Hello, Paolo!Hello, World!Hello, Maria!Hello, !
 Hello, paolo!Hello, World!Hello, maria!Hello, World!
