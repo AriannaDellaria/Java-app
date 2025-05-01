@@ -185,14 +185,8 @@ import sessione.SessioneGioco;
                 }
                 if(line.startsWith("risposta:")) {
                 	risposta = scf.nextLine().trim(); 
-<<<<<<< HEAD
-                }
-                
-                if(line.startsWith("")) { 
-=======
                 }  
-                if(line.startsWith("****")) { 
->>>>>>> branch 'master' of https://github.com/IleniaCata/Progetto23.git
+                if(line.startsWith("")) { 
                 	if (!codici.isEmpty()) {
                         DomandaRiordina D = new DomandaRiordina(codici, risposta);
                         domandeRiordina.add(D);
