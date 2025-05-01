@@ -17,7 +17,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="@../immagini/close1.png" />
+                  <Image url="@../immagini/close.png" />
                </source>
             </ImageInput>
          </effect>
@@ -26,7 +26,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="@../immagini/frecciaIndietro.png" />
+                  <Image url="@../immagini/indietro.png" />
                </source>
             </ImageInput>
          </effect>
@@ -202,7 +202,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Text>
-                  <Text layoutX="39.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esercizio 1">
+                  <Text layoutX="39.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esercizio 1    ">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -292,6 +292,16 @@
                         <Font size="16.0" />
                      </font>
                   </Text>
+                  <Text fill="#e4812b" layoutX="124.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- l'obiettivo è quello di inserire dei numeri da tastiera fino a quando il numero inserito non è maggiore di 100 o minore di 0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#e4812b" layoutX="124.0" layoutY="1060.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- l'obiettivo è quello di contare il numero di righe della matrice che la somma degli elementi maggiore o uguale a 100">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
         </content>
@@ -306,14 +316,19 @@
             <Image url="@../immagini/orologio.png" />
          </image>
       </ImageView>
-      <Label fx:id="timer" layoutX="641.0" layoutY="87.0" text="Label">
+      <Label fx:id="timer" layoutX="641.0" layoutY="87.0" text="timer">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Text layoutX="188.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizza i 4 blocchi di codice (ABCD), comprendi l'ordine corretto del programma e inserisci la sequanza giusta (senza spazi) &#10;nell'apposito riquadro, entro lo scadere del timer&#10;&#10;&#10;" textAlignment="CENTER">
+      <Text layoutX="177.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizza i 4 blocchi di codice (ABCD), comprendi l'ordine corretto del programma e inserisci la sequanza corretta &#10;&#10;&#10;" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#f9943b" layoutX="490.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="senza spazi e nell'apposito riquadro">
+         <font>
+            <Font name="System Bold" size="18.0" />
          </font>
       </Text>
    </children>

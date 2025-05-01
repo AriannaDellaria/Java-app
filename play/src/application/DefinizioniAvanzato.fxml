@@ -17,7 +17,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="@../immagini/close1.png" />
+                  <Image url="@../immagini/close.png" />
                </source>
             </ImageInput>
          </effect>
@@ -26,7 +26,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="@../immagini/frecciaIndietro.png" />
+                  <Image url="@../immagini/indietro.png" />
                </source>
             </ImageInput>
          </effect>
@@ -41,17 +41,17 @@
             <Font name="System Bold Italic" size="16.0" />
          </font>
       </Label>
-      <Text layoutX="228.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leggi le cinque definzioni fornite e scrivi nell'apposito riquadro i termini corrispondenti, max. 1 parola">
+      <Text layoutX="272.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leggi le cinque definzioni fornite e scrivi nell'apposito riquadro i termini corrispondenti">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <ImageView fitHeight="37.0" fitWidth="36.0" layoutX="593.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="37.0" fitWidth="36.0" layoutX="593.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../immagini/orologio.png" />
          </image>
       </ImageView>
-      <Label fx:id="timer" layoutX="641.0" layoutY="69.0" text="Label">
+      <Label fx:id="timer" layoutX="643.0" layoutY="87.0" text="timer">
          <font>
             <Font size="18.0" />
          </font>
@@ -99,5 +99,10 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
+      <Text fill="#f64c4c" layoutX="590.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="max. 1 parola">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

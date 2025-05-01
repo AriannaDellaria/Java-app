@@ -18,7 +18,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="@../immagini/close1.png" />
+                  <Image url="@../immagini/close.png" />
                </source>
             </ImageInput>
          </effect>
@@ -27,7 +27,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="@../immagini/frecciaIndietro.png" />
+                  <Image url="@../immagini/indietro.png" />
                </source>
             </ImageInput>
          </effect>

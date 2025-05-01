@@ -11,6 +11,5 @@ public abstract class Domanda {
 		return this.testoDomanda; 
 	}
 	
-	// Metodo astratto per verificare la risposta
     public abstract boolean verificaRisposta(String rispostaUtente);
 }

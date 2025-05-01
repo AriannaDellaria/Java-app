@@ -18,29 +18,29 @@
          <effect>
             <ImageInput x="-1.0" y="-7.0">
                <source>
-                  <Image url="@../immagini/close1.png" />
+                  <Image url="@../immagini/close.png"  />
                </source>
             </ImageInput>
          </effect>
       </Button>
       <ImageView fitHeight="393.0" fitWidth="524.0" layoutX="-19.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../immagini/sfondo_sinistro.JPG" />
+            <Image url="@../immagini/gioca1.JPG" />
          </image>
       </ImageView>
       <ImageView fitHeight="346.0" fitWidth="463.0" layoutX="855.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="-7.216064453125">
          <image>
-            <Image url="@../immagini/sfondo_destro.png" />
+            <Image url="@../immagini/gioca3.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="312.0" fitWidth="452.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../immagini/sfondo_sinistro2.JPG" />
+            <Image url="@../immagini/gioca2.JPG" />
          </image>
       </ImageView>
       <ImageView fitHeight="224.0" fitWidth="585.0" layoutX="358.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../immagini/sfondo.PNG" />
+            <Image url="@../immagini/titolo.PNG" />
          </image>
       </ImageView>
       <Text layoutX="467.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0">

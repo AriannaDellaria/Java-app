@@ -19,164 +19,158 @@ import sessione.SessioneGioco;
 
 public class RecensioniController {
 
-	    @FXML
-	    private Button close;
+    @FXML
+    private Button close;
 
-	    @FXML
-	    private Button indietro;
+    @FXML
+    private Button indietro;
 
-	    @FXML
-	    private Label successivo;
+    @FXML
+    private Label successivo;
 
-	    @FXML
-	    private VBox vboxScroll;
-	    
-	    private ArrayList<Recensione> recensioni  = new ArrayList<>();
+    @FXML
+    private VBox vBoxEsterno;
+    
+    private ArrayList<Recensione> recensioni  = new ArrayList<>();
 
-	    SessioneGioco sessioneGioco = SessioneGioco.getInstance();
-	    Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
-	    
-	    @FXML
-	    private void initialize() {
-	    	if(utenteCorrente != null) {
-	    		 successivo.setText("Scrivi la tua opinione");
-	    	}
-	    	else { 
-	    		successivo.setText("Mettiti in gioco");
-	    	}
-	    	letturaDaFile(); 
-	    }
-	    
-	    @FXML
-	    void closeButton(MouseEvent event) {
-	    	Stage stage = (Stage) close.getScene().getWindow();  
-	        stage.close(); 
-	    }
-	    
-	    @FXML
-	    void finestraSuccessiva(MouseEvent event) {
-	    	String nomeFile = "";
-	    	if(utenteCorrente != null) {
-	    		nomeFile = "/application/ScriviRecensione.fxml";
-	    	}
-	    	else { 
-	    		nomeFile = "/application/Login.fxml";
-	    	}
-	    	try {
-	            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource(nomeFile));
+    SessioneGioco sessioneGioco = SessioneGioco.getInstance();
+    Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
+    
+    @FXML
+    void closeButton(MouseEvent event) {
+    	Stage stage = (Stage) close.getScene().getWindow();  
+        stage.close(); 
+    }
 
-	            Stage scenaCorrente = (Stage) successivo.getScene().getWindow();
+    //la pagina recensioni può essere aperta sia da Home che da Gioca
+    //se l'utente si trova in Home, vuol dire che ha già eseguito il login e esiste un utenteCorrente 
+    //se l'utente si trova in Gioca, vuol dire che non esiste un utenteCorrente
+    //in base a questo, cambia la paginaPrecedente
+    @FXML
+    void paginaPrecedente(MouseEvent event) {
+    	String nomeFile = "";
+    	if(utenteCorrente != null) {
+    		nomeFile = "/application/Home.fxml";
+    	} else { 
+    		nomeFile = "/application/Gioca.fxml";
+    	}
+    	try {
+            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource(nomeFile));
 
-	            Scene vecchiaScena = new Scene(scenaPrecedente);
-	            scenaCorrente.setScene(vecchiaScena);
-	            scenaCorrente.show();
-		        } catch (IOException e) {
-		            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
-		        }
-	    }
+            Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
 
-	    @FXML
-	    void paginaPrecedente(MouseEvent event) {
-	    	String nomeFile = "";
-	    	if(utenteCorrente != null) {
-	    		nomeFile = "/application/Home.fxml";
-	    	}
-	    	else { 
-	    		nomeFile = "/application/Gioca.fxml";
-	    	}
-	    	try {
-	            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource(nomeFile));
+            Scene vecchiaScena = new Scene(scenaPrecedente);
+            scenaCorrente.setScene(vecchiaScena);
+            scenaCorrente.show();
+        } catch (NullPointerException | IOException e) {
+            System.out.println("Errore nel caricamento della schermata precedente! " +e.getMessage());
+        }
+    }
 
-	            Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
+    //se esiste l'utenteCorrente viene data la possibilità di scrivere una recensione, altrimenti rimanda al login 
+    //viene settata una label con un testo diverso a seconda della situazione 
+    @FXML
+    private void initialize() {
+    	if(utenteCorrente != null) {
+    		 successivo.setText("Scrivi la tua opinione");
+    	} else { 
+    		successivo.setText("Mettiti in gioco");
+    	}
+    	letturaDaFile(); 
+    }
+    
+    //viene utilizzato lo stesso meccanismo di paginaPrecedente, ma cambia la paginaSuccessiva
+    @FXML
+    void finestraSuccessiva(MouseEvent event) {
+    	String nomeFile = "";
+    	if(utenteCorrente != null) {
+    		nomeFile = "/application/ScriviRecensione.fxml";
+    	} else { 
+    		nomeFile = "/application/Login.fxml";
+    	}
+    	try {
+            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource(nomeFile));
 
-	            Scene vecchiaScena = new Scene(scenaPrecedente);
-	            scenaCorrente.setScene(vecchiaScena);
-	            scenaCorrente.show();
-	        } catch (NullPointerException | IOException e) {
-	            System.out.println("Errore nel caricamento della schermata precedente! " +e.getMessage());
-	        }
-	    }
+            Stage scenaCorrente = (Stage) successivo.getScene().getWindow();
 
-
-	    void letturaDaFile() {
-	    	   recensioni = new ArrayList<>(); 
-	        
-	        try {
-	            Scanner scf = new Scanner(new File("tutteLeRecensioni.txt"));
-	            String commento = "";
-	            String utente = "";
-	            String stelline = "";
-	            
-	            while (scf.hasNextLine()) {
-	                String line = scf.nextLine().trim();
-
-	                if (line.startsWith("commento:")) {
-	                	commento = "";
-	                	while (scf.hasNextLine()) {
-	                        String commentoLine = scf.nextLine();
-	                        if (commentoLine.startsWith("////")) {
-	                            break;
-	                        }
-	                        commento += commentoLine + "\n"; 
-	                    }
-	                }
-	               
-	                
-	                if (line.startsWith("utente:")) {
-	                    utente = scf.nextLine(); 
-	                }
-	                
-	                if (line.startsWith("stelline:")) {
-	                    stelline = scf.nextLine();
-	                }
-	                
-	                if (line.equals("****")) { 
-	                    if (!commento.isEmpty() && !utente.isEmpty() && !stelline.isEmpty()) {
-	                        Recensione R = new Recensione(utente, stelline, commento);
-	                        recensioni.add(R);
-	                        
-	                        
-	                        
-	                        commento = "";
-	                        utente = "";
-	                        stelline = "";
-	                    }
-	                }
-	            }
-	          scf.close();
-	          aggiungiRecensioneAllaGUI();
+            Scene vecchiaScena = new Scene(scenaPrecedente);
+            scenaCorrente.setScene(vecchiaScena);
+            scenaCorrente.show();
 	        } catch (IOException e) {
-	            System.out.println("Errore nella lettura del file: " + e.getMessage());
+	            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
 	        }
-}
-	 // Metodo per aggiungere una recensione alla GUI
-	    private void aggiungiRecensioneAllaGUI() {
-	    	   for (Recensione r : recensioni) {
-	    	        // Crea una VBox per ogni recensione
-	    	        VBox recensioneBox = new VBox();
-	    	       // recensioneBox.setSpacing(5);
-	    	        recensioneBox.setStyle("-fx-border-color: #77358f; -fx-padding: 10; -fx-background-color: white;");
+    }
 
-	    	        // Label per l'utente
-	    	        Label utenteLabel = new Label(r.getUtente());
-	    	        utenteLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+    //metodo che legge il file delle recensioni, creando un oggetto per ogni recensione lasciata dall'utente 
+    void letturaDaFile() {
+        recensioni = new ArrayList<>(); 
+        try {
+            Scanner scf = new Scanner(new File("tutteLeRecensioni.txt"));
+            String commento = "";
+            String utente = "";
+            String stelline = "";
+            
+            while (scf.hasNextLine()) {
+                String line = scf.nextLine().trim();
 
-	    	        // Label per le stelline
-	    	        Label stelleLabel = new Label(r.getStelline());
-	    	        stelleLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #FFD13B;");
-
-	    	        // Label per il commento
-	    	        Label commentoLabel = new Label(r.getCommento());
-	    	        commentoLabel.setWrapText(true);
-	    	        commentoLabel.setStyle("-fx-font-size: 14px;");
-
-	    	        // Aggiungi gli elementi alla VBox
-	    	        recensioneBox.getChildren().addAll(utenteLabel, stelleLabel, commentoLabel);
-
-	    	        // Aggiungi la VBox al contenitore
-	    	        vboxScroll.getChildren().add(recensioneBox);
-	    	    }
+                if (line.startsWith("commento:")) {
+                	commento = "";
+                	while (scf.hasNextLine()) {
+                        String commentoLine = scf.nextLine();
+                        if (commentoLine.startsWith("////")) {
+                            break;
+                        }
+                        commento += commentoLine + "\n"; 
+                    }
+                }
+               
+                if (line.startsWith("utente:")) {
+                    utente = scf.nextLine(); 
+                }
+                
+                if (line.startsWith("stelline:")) {
+                    stelline = scf.nextLine();
+                }
+                
+                if (line.equals("****")) { 
+                    if (!commento.isEmpty() && !utente.isEmpty() && !stelline.isEmpty()) {
+                        Recensione R = new Recensione(utente, stelline, commento); //creazione oggetto
+                        recensioni.add(R); //viene aggiunto l'oggetto all'arrayList delle recensioni 
+                        commento = "";
+                        utente = "";
+                        stelline = "";
+                    }
+                }
+            }
+          scf.close();
+          aggiungiRecensione();
+        } catch (IOException e) {
+            System.out.println("Errore nella lettura del file: " + e.getMessage());
 	    }
+    }
+    
+	//recupera una recensione dell'array e la aggiunge in maniera dinamica all'interfaccia grafica 
+    //il metodo crea un vBox che contiene le varie parti di una recensione (nomeUtente, stelline e commento) 
+    //i vBox delle singole recensioni vengono inserite all'interno di un altro vBox
+    private void aggiungiRecensione() {
+    	   for (Recensione r : recensioni) {
+    	        VBox vBoxInterno = new VBox();
+    	        vBoxInterno.setStyle("-fx-border-color: #77358f; -fx-padding: 10; -fx-background-color: white;");
+
+    	        Label utenteLabel = new Label(r.getUtente());
+    	        utenteLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+
+    	        Label stelleLabel = new Label(r.getStelline());
+    	        stelleLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #FFD13B;");
+
+    	        Label commentoLabel = new Label(r.getCommento());
+    	        commentoLabel.setWrapText(true);
+    	        commentoLabel.setStyle("-fx-font-size: 14px;");
+
+    	        vBoxInterno.getChildren().addAll(utenteLabel, stelleLabel, commentoLabel);
+	    	    vBoxEsterno.getChildren().add(vBoxInterno);
+	    	}
+	 }
 }
 
 

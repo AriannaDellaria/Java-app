@@ -1,6 +1,5 @@
 package controller;
 
-
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,20 +33,18 @@ public class GiocaController {
     @FXML
     void colorChangeBasic(MouseEvent event) {
     	start.setStyle("-fx-background-color: white; -fx-border-color: #2AAA4A; -fx-border-width: 2px;");
-    	
     }
     
-
     @FXML
     void startGame(MouseEvent event) {
         try {
-        	// Parent è il primo nodo (BorderPane)
+        	//parent è il primo nodo (BorderPane)
             Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/Login.fxml")); //il loader carica il file dell'interfaccia successiva
 
             Stage scenaCorrente = (Stage) start.getScene().getWindow(); //prende la scena corrente
             
-            //Crea la nuova scena
-            //Modifica la scena corrente
+            //crea la nuova scena
+            //modifica la scena corrente
             Scene nuovaScena = new Scene(scenaSuccessiva);
             scenaCorrente.setScene(nuovaScena);
             scenaCorrente.show();
@@ -59,19 +56,18 @@ public class GiocaController {
     @FXML
     void vostreOpinioni(MouseEvent event) {
     	try {
-        	// Parent è il primo nodo (BorderPane)
+        	//parent è il primo nodo (BorderPane)
             Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/Recensioni.fxml")); //il loader carica il file dell'interfaccia successiva
 
             Stage scenaCorrente = (Stage) opinioni.getScene().getWindow(); //prende la scena corrente
             
-            //Crea la nuova scena
-            //Modifica la scena corrente
+            //crea la nuova scena
+            //modifica la scena corrente
             Scene nuovaScena = new Scene(scenaSuccessiva);
             scenaCorrente.setScene(nuovaScena);
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) { 
             System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
-            e.printStackTrace(); 
         }
     }
 }

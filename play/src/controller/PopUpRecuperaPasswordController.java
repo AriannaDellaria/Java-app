@@ -85,7 +85,7 @@ public class PopUpRecuperaPasswordController {
                      break; 
                  }
              }
-    	 }catch (NullPointerException | IOException e) {
+    	 } catch (NullPointerException | IOException e) {
        	    System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
          }
     	
@@ -95,6 +95,8 @@ public class PopUpRecuperaPasswordController {
     	 }	
      }
     
+    //quando viene inserito un nome utente non trovato nel file l'utente viene rimandato alla pagina di registrazione
+    //viene visualizzata la label della registrazione
     @FXML
     void registrazione(MouseEvent event) {
     	try {
@@ -111,8 +113,8 @@ public class PopUpRecuperaPasswordController {
  	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
  	    }        
     }
-
     
+    //chiude il popUp
     @FXML
     void tornaIndietro(MouseEvent event) {
     	try {

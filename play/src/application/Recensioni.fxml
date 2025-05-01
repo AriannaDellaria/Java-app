@@ -22,7 +22,7 @@
                <effect>
                   <ImageInput>
                      <source>
-                        <Image url="@../immagini/frecciaIndietro.png" />
+                        <Image url="@../immagini/indietro.png" />
                      </source>
                   </ImageInput>
                </effect>
@@ -34,7 +34,7 @@
                <effect>
                   <ImageInput>
                      <source>
-                        <Image url="@../immagini/close1.png" />
+                        <Image url="@../immagini/close.png" />
                      </source>
                   </ImageInput>
                </effect>
@@ -52,7 +52,7 @@
             </Text>
             <ScrollPane prefHeight="381.0" prefWidth="900.0">
                <content>
-                  <VBox fx:id="vboxScroll" />
+                  <VBox fx:id="vBoxEsterno" />
                </content>
             </ScrollPane>
             <Label fx:id="successivo" onMouseClicked="#finestraSuccessiva" text="label" underline="true">

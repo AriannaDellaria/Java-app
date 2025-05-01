@@ -18,7 +18,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="@../immagini/close1.png" />
+                  <Image url="@../immagini/close.png" />
                </source>
             </ImageInput>
          </effect>
@@ -27,7 +27,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="@../immagini/frecciaIndietro.png" />
+                  <Image url="@../immagini/indietro.png" />
                </source>
             </ImageInput>
          </effect>
@@ -225,12 +225,12 @@
             <Image url="@../immagini/orologio.png" />
          </image>
       </ImageView>
-      <Label fx:id="timer" layoutX="643.0" layoutY="82.0" text="Label">
+      <Label fx:id="timer" layoutX="643.0" layoutY="82.0" text="timer">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Text layoutX="267.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizza cinque programmi e, cercando di prevedere quello che potrebbe essere l'output, &#10;scegli le risposte corrette entro lo scadere del timer" textAlignment="CENTER">
+      <Text layoutX="267.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visualizza cinque programmi e, cercando di prevedere quello che potrebbe essere l'output, &#10;scegli le risposte corrette" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
