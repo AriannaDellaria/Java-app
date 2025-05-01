@@ -5,6 +5,11 @@ k,k,k,123456789,0.33,1.0,0.0
 j,j,j,987654321,1.0,1.0,0.0
 s,s,s,123456789,0.33,0.0,0.0
 t,t,t,123456789,0.33,0.0,0.0
+<<<<<<< HEAD
 prova,prova,prova,123456789,0.33,0.0,0.0
 Esempio,Relazione,prova,123456789,0.33,0.0,0.0
 Esempio,Relazione,prova2,123456789,0.0,0.0,0.0
+=======
+prova,prova,prova,123456789,0.0,0.0,0.0
+prova,prova,prova1,123456789,0.33,0.33,0.0
+>>>>>>> branch 'master' of https://github.com/IleniaCata/Progetto23.git

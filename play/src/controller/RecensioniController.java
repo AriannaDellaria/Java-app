@@ -156,6 +156,7 @@ public class RecensioniController {
     	   for (Recensione r : recensioni) {
     	        VBox vBoxInterno = new VBox();
     	        vBoxInterno.setStyle("-fx-border-color: #77358f; -fx-padding: 10; -fx-background-color: white;");
+    	        vBoxInterno.setMinWidth(900);   
 
     	        Label utenteLabel = new Label(r.getUtente());
     	        utenteLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");

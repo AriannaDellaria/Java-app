@@ -1,6 +1,6 @@
 
 utente:
-a
+Mario
 stelline:
 ★★★★
 commento:
@@ -8,67 +8,51 @@ carina!
 ////
 ****
 utente:
-c
-stelline:
-★
-commento:
-
-////
-****
-utente:
-b
+Pippo
 stelline:
 ★★★★
 commento:
-bellina
-
-
-
-
-
-
-
-
 
 ////
 ****
 utente:
-a
-stelline:
-★★
-commento:
-bella
-////
-****
-utente:
-a
+Alice
 stelline:
 ★★★★★
 commento:
-bellina
+Grazie a questa applicazione ho capito come programmare in java!
 ////
 ****
 utente:
-a
+Bob
 stelline:
 ★★★
 commento:
-mvoisdmvokdsvosdmvoismvosdmvivpmvsoimviosmvosmdviomoisvmiodmviosmvoismvismoivmsoivimsdivismvisdmviosmvoismvoismvoisdmivsmviosvmsovmsdoivmsdoivmsdivmsdoivmsdivmsdimsivmso
+L'applicazione è molto bella, ma avrei voluto più esercizi!
 ////
 ****
 utente:
-a
+Trudy
 stelline:
-★★★
+★★★★★
 commento:
-j vksnvsdkn vjksd nvjs nvjksdnvkosmdvksmdvksdkvmsdkvmsdlkvsdj vjksdnv ksdlmnksdmvklsdmvklsdvksdvklsdvkds
+Stupenda! Grazie a questa applicazione sono riuscita a superare l'esame di programmazione! 
+Peccato non esista per Python
 ////
 ****
 utente:
-k
+Giacomo
 stelline:
 ★★★★
 commento:
-nkdsnknsdjvnsdkvs
+Bella ed è anche senza pubblicità!! 
+////
+utente:
+prova1
+stelline:
+★★★★★
+commento:
+bella
+
 ////
 ****

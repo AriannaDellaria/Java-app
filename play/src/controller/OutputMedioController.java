@@ -3,7 +3,6 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 import dati.Utente;
 import domanda.DomandaMultipla;
@@ -17,8 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -46,8 +43,7 @@ public class OutputMedioController {
     @FXML
     private RadioButton opzione5_1, opzione5_2, opzione5_3, opzione5_4;
     
-    
-     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
+    SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
     
     private ArrayList<DomandaMultipla> domandeMultiple;
@@ -57,8 +53,42 @@ public class OutputMedioController {
     private ArrayList<ArrayList<RadioButton>> opzioni = new ArrayList<>();
     
     private int tempoRestante = 300;
-    private volatile boolean timerAttivo = true;
+    private boolean timerAttivo = true;
     
+    @FXML
+    void closeButton(MouseEvent event) {
+    	timerAttivo = false;
+    	Stage stage = (Stage) close.getScene().getWindow(); 
+        stage.close(); 
+    }
+
+    @FXML
+    void colorChangeBasic(MouseEvent event) {
+    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #2379be; -fx-border-width: 2px;");
+    }
+
+    @FXML
+    void colorChangeBlue(MouseEvent event) {
+    	terminaCorreggi.setStyle("-fx-background-color: #ADD9F4;-fx-border-color: #2379be"); 
+    }
+
+    @FXML
+    void paginaPrecedente(MouseEvent event) {
+    	timerAttivo = false;
+    	try {
+            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/OutputLivelli.fxml"));
+
+            Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
+
+            Scene vecchiaScena = new Scene(scenaPrecedente);
+            scenaCorrente.setScene(vecchiaScena);
+            scenaCorrente.show();  
+        } catch (NullPointerException | IOException e) {
+            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
+        }
+    }
+    
+    //aggiunge all'arrayList i codici, le domande e le opzioni (esiste un arrayList per ogni gruppo di radioButton) 
 	@FXML
     public void initialize() {
 
@@ -117,12 +147,8 @@ public class OutputMedioController {
         opzioni.add(gruppo4);
         opzioni.add(gruppo5);
         
-        // Esegui la lettura del file
         letturaDaFile();
-
-        // Imposta il nome dell'utente
         utente.setText(utenteCorrente.getUsername());
-        
         avvioTimer();
     }
 	
@@ -150,58 +176,6 @@ public class OutputMedioController {
 	    t.setDaemon(true);//consente all'utente di finire l'esercizio anche prima dello scadere del timer
 	    t.start();//consente di avviare il thread secondario
 	}
-	
-    @FXML
-    void closeButton(MouseEvent event) {
-    	timerAttivo = false;
-    	Stage stage = (Stage) close.getScene().getWindow(); 
-        stage.close(); 
-    }
-
-    @FXML
-    void colorChangeBasic(MouseEvent event) {
-    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #2379be; -fx-border-width: 2px;");
-    }
-
-    @FXML
-    void colorChangeBlue(MouseEvent event) {
-    	terminaCorreggi.setStyle("-fx-background-color: #ADD9F4;-fx-border-color: #2379be"); 
-    }
-
-    @FXML
-    void paginaPrecedente(MouseEvent event) {
-    	timerAttivo = false;
-    	try {
-            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/OutputLivelli.fxml"));
-
-            Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
-
-            Scene vecchiaScena = new Scene(scenaPrecedente);
-            scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.show();  
-        } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
-        }
-    }
-    
-    @FXML
-    void popUpUtente() {
-    	timerAttivo = false;
-    	    try {
-    	        Stage stagePrincipale = (Stage) utente.getScene().getWindow();
-
-    	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/PopUpUtente.fxml"));
-    	        Parent popUp = loader.load();
-    	        
-    	        Stage popUpStage = new Stage();
-    	        popUpStage.setScene(new Scene(popUp));
-    	        popUpStage.initModality(Modality.WINDOW_MODAL); 
-    	        popUpStage.initOwner(stagePrincipale); 
-    	        popUpStage.show();
-    	    } catch (NullPointerException | IOException e) {
-    	        System.out.println("Errore nel caricamento della schermata successiva!");
-    	    }   
-	}
   
     //legge il file e recupera le varie parti dell'esercizio
     //la struttura del file stesso consente la divisione delle parti 
@@ -228,11 +202,9 @@ public class OutputMedioController {
                         codice += codiceLine + "\n"; 
                     }
                 }
-                
                 if (line.startsWith("domanda:")) {
                     domanda = scf.nextLine(); 
-                }
-                
+                }       
                 if (line.startsWith("opzioni:")) {
                 	opzioni.clear();
                 	while (scf.hasNextLine()) {
@@ -243,11 +215,9 @@ public class OutputMedioController {
                         opzioni.add(opzioniLine);
                     }
                 }
-                
                 if (line.startsWith("risposta:")) {
                     risposta = scf.nextLine(); 
-                }
-                
+                } 
                 if (line.equals("****")) { //il separatore '****' permette di individuare la domanda successiva
                     if (!codice.isEmpty() && !domanda.isEmpty() && !opzioni.isEmpty()) {
                         DomandaMultipla D = new DomandaMultipla(codice, domanda, opzioni, risposta);
@@ -289,7 +259,7 @@ public class OutputMedioController {
         }
     }
 
-    //corregge l'esercizio ottenendo un punteggio per verificare il superamento dell'esercizio
+    //se è stata effettuata la correzione, l'utente torna alla pagina dei livelli e visualizza un popUp relativo al punteggio ottenuto 
     @FXML
     void salvaPunteggio(MouseEvent event) {
     	timerAttivo = false;
@@ -309,6 +279,7 @@ public class OutputMedioController {
     		utenteCorrente.salvaSuFile();
         } 
 
+        //se è stata effettuata la correzione, l'utente torna alla pagina dei livelli e visualizza un popUp relativo al punteggio ottenuto 
         try {      
 			Parent paginaPrecedente = FXMLLoader.load(getClass().getResource("/application/OutputLivelli.fxml"));
 
@@ -339,7 +310,6 @@ public class OutputMedioController {
         return (indice >= 0 && indice < gruppiToggle.size()) ? gruppiToggle.get(indice) : null;
     }
 
-    
     private String getRispostaSelezionata(ToggleGroup gruppo) {
         Toggle selezionato = gruppo.getSelectedToggle();//restituisce il toggle selezionato
         if (selezionato != null) {
