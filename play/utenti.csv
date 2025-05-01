@@ -1,10 +1,10 @@
 b,b,b,123456789,0.66,0.33,0.0
 c,c,c,123456789,0.33,0.0,0.0
-<<<<<<< HEAD
-albero,ac,a,987654321,1.0,1.0,0.66
-=======
 albero,ac,a,123456789,1.0,1.0,0.66
->>>>>>> branch 'master' of https://github.com/IleniaCata/Progetto23.git
 k,k,k,123456789,0.33,1.0,0.0
 j,j,j,987654321,1.0,1.0,0.0
 s,s,s,123456789,0.33,0.0,0.0
+t,t,t,123456789,0.33,0.0,0.0
+prova,prova,prova,123456789,0.33,0.0,0.0
+Esempio,Relazione,prova,123456789,0.33,0.0,0.0
+Esempio,Relazione,prova2,123456789,0.0,0.0,0.0
