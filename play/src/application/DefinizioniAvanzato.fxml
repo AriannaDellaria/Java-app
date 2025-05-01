@@ -36,7 +36,7 @@
             <Image url="@../immagini/user.png" />
          </image>
       </ImageView>
-      <Label fx:id="utente" layoutX="67.0" layoutY="13.0" onMouseClicked="#popUpUtente" text="Label" underline="true">
+      <Label fx:id="utente" layoutX="67.0" layoutY="13.0" text="Label">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font>

@@ -3,7 +3,6 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 import dati.Utente;
 import domanda.DomandaRiordina;
@@ -15,8 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -45,8 +42,43 @@ import sessione.SessioneGioco;
     ArrayList<TextField> risposte = new ArrayList<>();
     
     private int tempoRestante = 330;  
-    private volatile boolean timerAttivo = true;
+    private boolean timerAttivo = true;
     
+    @FXML
+    void closeButton(MouseEvent event) {
+    	timerAttivo = false; //viene fermato il timer quando si chiude la pagina
+    	Stage stage = (Stage) close.getScene().getWindow(); 
+        stage.close(); 
+    }
+
+    @FXML
+    void colorChangeYellow(MouseEvent event) {
+    	terminaCorreggi.setStyle("-fx-background-color: #fede77;-fx-border-color: #f9943b"); 
+    }
+
+    @FXML
+    void colorChangeBasic(MouseEvent event) {
+    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #f9943b; -fx-border-width: 2px;");
+    	
+    }
+
+    @FXML
+    void paginaPrecedente(MouseEvent event) {
+    	timerAttivo = false; //viene fermato il timer quando si torna alla pagina precedente
+    	try {
+            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/RiordinaLivelli.fxml"));
+
+            Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
+
+            Scene vecchiaScena = new Scene(scenaPrecedente);
+            scenaCorrente.setScene(vecchiaScena);
+            scenaCorrente.show();
+        } catch (NullPointerException | IOException e) {
+            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
+        }
+    }
+    
+    //aggiunge all'arrayList i textField e altri arrayList che contengono blocchi di codice 
     @FXML
     public void initialize() {
     	risposte.add(text1); 
@@ -100,121 +132,80 @@ import sessione.SessioneGioco;
 	  
     private void avvioTimer() {
 	    Thread t = new Thread(() -> { //viene creato un thread secondario, parallelo a quello principale (interfaccia grafica), che permette di gestire il timer 
-	    	while (tempoRestante > 0 && timerAttivo) {
-	            try {
-	                Thread.sleep(1000); //fa scorrere il timer di secondo in secondo (1000 millisecondi) 
-	                tempoRestante--; //timer decrescente
-	                Platform.runLater(() -> { //platform -> permette al thread secondario di interagire con quello principale (modifica l'interfaccia e mostra  lo scorrere del timer) 
-	                    int minuti = tempoRestante / 60;
-	                    int secondi = tempoRestante % 60;
-	                    timer.setText(String.format("%02d:%02d", minuti, secondi)); //viene aggiornata la label
-	                });
-	            } catch (InterruptedException e) {
-	            	System.out.println("Attenzione! L'operazione si è interrotta nel thread! " +e.getMessage()); 
-	            }
-	        }
-	        if (tempoRestante == 0 && timerAttivo) {
-	            Platform.runLater(() -> {
-	            	salvaPunteggio(null);//il timer è scaduto ma il bottone non è stato cliccato -> effettua comunque la correzione degli esercizi fatti fino a quel momento e salva il punteggio 
-	            });
-	        }
+    	while (tempoRestante > 0 && timerAttivo) {
+            try {
+                Thread.sleep(1000); //fa scorrere il timer di secondo in secondo (1000 millisecondi) 
+                tempoRestante--; //timer decrescente
+                Platform.runLater(() -> { //platform -> permette al thread secondario di interagire con quello principale (modifica l'interfaccia e mostra  lo scorrere del timer) 
+                    int minuti = tempoRestante / 60;
+                    int secondi = tempoRestante % 60;
+                    timer.setText(String.format("%02d:%02d", minuti, secondi)); //viene aggiornata la label
+                });
+            } catch (InterruptedException e) {
+            	System.out.println("Attenzione! L'operazione si è interrotta nel thread! " + e.getMessage()); 
+            }
+        }
+        if (tempoRestante == 0 && timerAttivo) {
+            Platform.runLater(() -> {
+            	salvaPunteggio(null);//il timer è scaduto ma il bottone non è stato cliccato -> effettua comunque la correzione degli esercizi fatti fino a quel momento e salva il punteggio 
+            });
+        }
 	    });
 	    t.setDaemon(true);//consente all'utente di finire l'esercizio anche prima dello scadere del timer
 	    t.start();//consente di avviare il thread secondario
-	}
-    @FXML
-    void closeButton(MouseEvent event) {
-    	timerAttivo = false; // FERMO il timer
-    	Stage stage = (Stage) close.getScene().getWindow(); 
-        stage.close(); 
     }
 
-    @FXML
-    void colorChangeYellow(MouseEvent event) {
-    	terminaCorreggi.setStyle("-fx-background-color: #fede77;-fx-border-color: #f9943b"); 
-    }
-    
-    @FXML
-    void colorChangeBasic(MouseEvent event) {
-    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #f9943b; -fx-border-width: 2px;");
-    	
-    }
-
-    @FXML
-    void paginaPrecedente(MouseEvent event) {
-    	timerAttivo = false;
-    	try {
-            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/RiordinaLivelli.fxml"));
-
-            Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
-
-            Scene vecchiaScena = new Scene(scenaPrecedente);
-            scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.show();
-        } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata precedente!");
-        }
-    }
- 
     //legge il file e recupera le varie parti dell'esercizio
     //la struttura del file stesso consente la divisione delle parti 
     void letturaDaFile() {
-        domandeRiordina= new ArrayList<>(); //crea una lista di domande (di tipo DomandaMultipla)
-        try {
-            Scanner scf = new Scanner(new File("DomandeRiordinaMedio.txt"));
-            
-            String codice = "";
-            ArrayList<String> codici = new ArrayList<>();
-            String risposta = "";
-
-            while (scf.hasNextLine()) {
-                String line = scf.nextLine().trim(); 
-                	
-                if(line.startsWith("codice:")) { 
-                	while(scf.hasNextLine()) { 
-                		String codiceLine = scf.nextLine();
+	    domandeRiordina= new ArrayList<>(); //crea una lista di domande (di tipo DomandaMultipla)
+	    try {
+	        Scanner scf = new Scanner(new File("DomandeRiordinaMedio.txt"));
+	        
+	        String codice = "";
+	        ArrayList<String> codici = new ArrayList<>();
+	        String risposta = "";
+	
+	        while (scf.hasNextLine()) {
+	            String line = scf.nextLine().trim(); 
+	            	
+	            if(line.startsWith("codice:")) { 
+	            	while(scf.hasNextLine()) { 
+	            		String codiceLine = scf.nextLine();
 	                		if(codiceLine.equals("++++")) { 
 	                			break;
 	                		}
 	                		else if(!codiceLine.equals("////")) {
-                				codice += codiceLine + "\n";
-                			}
-                			else { 
-                				codici.add(codice); 
-                				codice = ""; 
-                				continue;
-                			}
-                	}
-                }
-                
-                if(line.startsWith("risposta:")) {
-                	risposta = scf.nextLine().trim(); 
-                }
-                
-                if(line.startsWith("****")) { 
-                	if (!codici.isEmpty()) {
-                        DomandaRiordina D = new DomandaRiordina(codici, risposta);
-                        domandeRiordina.add(D);
-
-                         
-                        codici = new ArrayList<>();
-                        risposta = "";
-                    }
-                }
-                
-            }
-            scf.close(); 
-            aggiornaLabel();
-        }
-            
-        catch (IOException e) {
-            System.out.println("Errore nella lettura del file! " + e.getMessage());
+	            				codice += codiceLine + "\n";
+	            			}
+	            			else { 
+	            				codici.add(codice); 
+	            				codice = ""; 
+	            				continue;
+	            			}
+	            	}
+	            }
+	            if(line.startsWith("risposta:")) {
+	            	risposta = scf.nextLine().trim(); 
+	            }  
+	            if(line.startsWith("****")) { 
+	            	if (!codici.isEmpty()) {
+	                    DomandaRiordina D = new DomandaRiordina(codici, risposta);
+	                    domandeRiordina.add(D);
+	
+	                    codici = new ArrayList<>();
+	                    risposta = "";
+	                }
+	            }
+	        }
+	     scf.close(); 
+	     aggiornaLabel();
+	    } catch (IOException e) {
+        System.out.println("Errore nella lettura del file! " + e.getMessage());
         }
     }
-    
    
-
-        
+    //scrive nelle label i vari codici e le domande recuperate dell'arrayList 
     void aggiornaLabel() {
         for (int i = 0; i < domandeRiordina.size() && i < blocchiCodici.size(); i++) {
             ArrayList<Label> c = blocchiCodici.get(i);
@@ -226,7 +217,7 @@ import sessione.SessioneGioco;
         }
     }
     
-    
+    //se è stata effettuata la correzione, l'utente torna alla pagina dei livelli e visualizza un popUp relativo al punteggio ottenuto 
     @FXML
     void salvaPunteggio(MouseEvent event) {
     	timerAttivo = false;
@@ -240,57 +231,37 @@ import sessione.SessioneGioco;
                 punteggioLocale++; //se la risposta è corretta incrementa il punteggio locale
             }
         }
-        
-        if(utenteCorrente != null && utenteCorrente.getPg3() == 0.33 && punteggioLocale >= 3) {
-    		utenteCorrente.setPg3(0.66); //punteggio globale incrementato solo se viene superato l'esercizio
-    		utenteCorrente.salvaSuFile();
-        } 
+	    if(utenteCorrente != null && utenteCorrente.getPg3() == 0.33 && punteggioLocale >= 3) {
+			utenteCorrente.setPg3(0.66); //punteggio globale incrementato solo se viene superato l'esercizio
+			utenteCorrente.salvaSuFile();
+	    } 
 
-        try {
-	           
+	    //se è stata effettuata la correzione, l'utente torna alla pagina dei livelli e visualizza un popUp relativo al punteggio ottenuto 
+	    try {       
 			Parent paginaPrecedente = FXMLLoader.load(getClass().getResource("/application/RiordinaLivelli.fxml"));
-
-            Stage paginaCorrente = (Stage) terminaCorreggi.getScene().getWindow();
-
-            Scene vecchiaScena = new Scene(paginaPrecedente);
-            paginaCorrente.setScene(vecchiaScena);
-            paginaCorrente.show();
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/PopUpPunteggio.fxml"));
-            Parent popUpPunteggio = loader.load();
-
-            PopUpPunteggioController popUp = loader.getController();
-            popUp.modificaMessaggio(punteggioLocale);
-            
-            Stage popUpStage = new Stage();
-            popUpStage.setScene(new Scene(popUpPunteggio));
-            
-            popUpStage.initModality(Modality.WINDOW_MODAL); //non permette all'utente di interagire con ila finestra principale
-            popUpStage.initOwner(paginaCorrente); //mantiene il popup in primo piano e lo chiude se viene chiusa la scena genitore
-            popUpStage.show();
-        } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage()); 
-        }
+	
+	        Stage paginaCorrente = (Stage) terminaCorreggi.getScene().getWindow();
+	
+	        Scene vecchiaScena = new Scene(paginaPrecedente);
+	        paginaCorrente.setScene(vecchiaScena);
+	        paginaCorrente.show();
+	        
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/PopUpPunteggio.fxml"));
+	        Parent popUpPunteggio = loader.load();
+	
+	        PopUpPunteggioController popUp = loader.getController();
+	        popUp.modificaMessaggio(punteggioLocale);
+	        
+	        Stage popUpStage = new Stage();
+	        popUpStage.setScene(new Scene(popUpPunteggio));
+	        
+	        popUpStage.initModality(Modality.WINDOW_MODAL); //non permette all'utente di interagire con ila finestra principale
+	        popUpStage.initOwner(paginaCorrente); //mantiene il popup in primo piano e lo chiude se viene chiusa la scena genitore
+	        popUpStage.show();
+	    } catch (NullPointerException | IOException e) {
+	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage()); 
+	    }
     }
-    
-    @FXML
-    void popUpUtente() {
-    	timerAttivo = false;
-    	    try {
-    	        Stage stagePrincipale = (Stage) utente.getScene().getWindow();
-
-    	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/PopUpUtente.fxml"));
-    	        Parent popUp = loader.load();
-    	        
-    	        Stage popUpStage = new Stage();
-    	        popUpStage.setScene(new Scene(popUp));
-    	        popUpStage.initModality(Modality.WINDOW_MODAL); 
-    	        popUpStage.initOwner(stagePrincipale); 
-    	        popUpStage.show();
-    	    } catch (NullPointerException | IOException e) {
-    	        System.out.println("Errore nel caricamento della schermata successiva!");
-    	    }   
-	}
    
     private TextField getTextField(int indice) {
         if (indice < risposte.size()) {

@@ -56,6 +56,40 @@ public class OutputAvanzatoController {
     private int tempoRestante = 540;  //2 minuti per eseguire l'esercizio
     private volatile boolean timerAttivo = true;
     
+    @FXML
+    void closeButton(MouseEvent event) {
+    	timerAttivo = false; // FERMO il timer
+    	Stage stage = (Stage) close.getScene().getWindow(); 
+        stage.close(); 
+    }
+
+    @FXML
+    void colorChangeBasic(MouseEvent event) {
+    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #2379be; -fx-border-width: 2px;");
+    }
+
+    @FXML
+    void colorChangeBlue(MouseEvent event) {
+    	terminaCorreggi.setStyle("-fx-background-color: #ADD9F4;-fx-border-color: #2379be"); 
+    }
+
+    @FXML
+    void paginaPrecedente(MouseEvent event) {
+    	timerAttivo = false;
+    	try {
+            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/OutputLivelli.fxml"));
+
+            Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
+
+            Scene vecchiaScena = new Scene(scenaPrecedente);
+            scenaCorrente.setScene(vecchiaScena);
+            scenaCorrente.show();  
+        } catch (NullPointerException | IOException e) {
+            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
+        }
+    }
+    
+    //aggiunge all'arrayList i codici, le domande e le opzioni (esiste un arrayList per ogni gruppo di radioButton) 
 	@FXML
     public void initialize() {
 
@@ -114,12 +148,8 @@ public class OutputAvanzatoController {
         opzioni.add(gruppo4);
         opzioni.add(gruppo5);
         
-        // Esegui la lettura del file
         letturaDaFile();
-
-        // Imposta il nome dell'utente
         utente.setText(utenteCorrente.getUsername());
-        
         avvioTimer();
     }
 	
@@ -147,58 +177,6 @@ public class OutputAvanzatoController {
 	    t.setDaemon(true);//consente all'utente di finire l'esercizio anche prima dello scadere del timer
 	    t.start();//consente di avviare il thread secondario
 	}
-	
-    @FXML
-    void closeButton(MouseEvent event) {
-    	timerAttivo = false; // FERMO il timer
-    	Stage stage = (Stage) close.getScene().getWindow(); 
-        stage.close(); 
-    }
-
-    @FXML
-    void colorChangeBasic(MouseEvent event) {
-    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #2379be; -fx-border-width: 2px;");
-    }
-
-    @FXML
-    void colorChangeBlue(MouseEvent event) {
-    	terminaCorreggi.setStyle("-fx-background-color: #ADD9F4;-fx-border-color: #2379be"); 
-    }
-
-    @FXML
-    void paginaPrecedente(MouseEvent event) {
-    	timerAttivo = false;
-    	try {
-            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/OutputLivelli.fxml"));
-
-            Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
-
-            Scene vecchiaScena = new Scene(scenaPrecedente);
-            scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.show();  
-        } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
-        }
-    }
-    
-    @FXML
-    void popUpUtente() {
-    	timerAttivo = false;
-    	    try {
-    	        Stage stagePrincipale = (Stage) utente.getScene().getWindow();
-
-    	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/PopUpUtente.fxml"));
-    	        Parent popUp = loader.load();
-    	        
-    	        Stage popUpStage = new Stage();
-    	        popUpStage.setScene(new Scene(popUp));
-    	        popUpStage.initModality(Modality.WINDOW_MODAL); 
-    	        popUpStage.initOwner(stagePrincipale); 
-    	        popUpStage.show();
-    	    } catch (NullPointerException | IOException e) {
-    	        System.out.println("Errore nel caricamento della schermata successiva!");
-    	    }   
-	}
   
     //legge il file e recupera le varie parti dell'esercizio
     //la struttura del file stesso consente la divisione delle parti 
@@ -225,11 +203,9 @@ public class OutputAvanzatoController {
                         codice += codiceLine + "\n"; 
                     }
                 }
-                
                 if (line.startsWith("domanda:")) {
                     domanda = scf.nextLine(); 
                 }
-                
                 if (line.startsWith("opzioni:")) {
                 	opzioni.clear();
                 	while (scf.hasNextLine()) {
@@ -240,11 +216,9 @@ public class OutputAvanzatoController {
                         opzioni.add(opzioniLine);
                     }
                 }
-                
                 if (line.startsWith("risposta:")) {
                     risposta = scf.nextLine(); 
                 }
-                
                 if (line.equals("****")) { //il separatore '****' permette di individuare la domanda successiva
                     if (!codice.isEmpty() && !domanda.isEmpty() && !opzioni.isEmpty()) {
                         DomandaMultipla D = new DomandaMultipla(codice, domanda, opzioni, risposta);

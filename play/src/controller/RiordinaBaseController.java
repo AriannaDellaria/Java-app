@@ -3,7 +3,6 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 import dati.Utente;
 import domanda.DomandaRiordina;
@@ -15,8 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -44,8 +41,42 @@ import sessione.SessioneGioco;
     ArrayList<TextField> risposte = new ArrayList<>();
     
     private int tempoRestante = 240;  
-    private volatile boolean timerAttivo = true;
+    private boolean timerAttivo = true;
     
+    @FXML
+    void closeButton(MouseEvent event) {
+    	timerAttivo = false; //viene fermato il timer quando si chiude la pagina 
+    	Stage stage = (Stage) close.getScene().getWindow(); 
+        stage.close(); 
+    }
+
+    @FXML
+    void colorChangeYellow(MouseEvent event) {
+    	terminaCorreggi.setStyle("-fx-background-color: #fede77;-fx-border-color: #f9943b"); 
+    }
+    
+    @FXML
+    void colorChangeBasic(MouseEvent event) {
+    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #f9943b; -fx-border-width: 2px;");
+    	
+    }
+    @FXML
+    void paginaPrecedente(MouseEvent event) {
+    	timerAttivo = false; //viene fermato il timer quando si torna alla pagina precedente
+    	try {
+            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/RiordinaLivelli.fxml"));
+
+            Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
+
+            Scene vecchiaScena = new Scene(scenaPrecedente);
+            scenaCorrente.setScene(vecchiaScena);
+            scenaCorrente.show();
+        } catch (NullPointerException | IOException e) {
+            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
+        }
+    }
+    
+    //aggiunge all'arrayList i textField e altri arrayList che contengono blocchi di codice 
     @FXML
     public void initialize() {
     	risposte.add(text1); 
@@ -92,8 +123,7 @@ import sessione.SessioneGioco;
     	
     	
         letturaDaFile();  
-        utente.setText(utenteCorrente.getUsername());
-        
+        utente.setText(utenteCorrente.getUsername()); 
         avvioTimer();
     }
 	  
@@ -121,39 +151,6 @@ import sessione.SessioneGioco;
 	    t.setDaemon(true);//consente all'utente di finire l'esercizio anche prima dello scadere del timer
 	    t.start();//consente di avviare il thread secondario
 	}
-	
-    @FXML
-    void closeButton(MouseEvent event) {
-    	timerAttivo = false; // FERMO il timer
-    	Stage stage = (Stage) close.getScene().getWindow(); 
-        stage.close(); 
-    }
-
-    @FXML
-    void colorChangeYellow(MouseEvent event) {
-    	terminaCorreggi.setStyle("-fx-background-color: #fede77;-fx-border-color: #f9943b"); 
-    }
-    
-    @FXML
-    void colorChangeBasic(MouseEvent event) {
-    	terminaCorreggi.setStyle("-fx-background-color: white; -fx-border-color: #f9943b; -fx-border-width: 2px;");
-    	
-    }
-    @FXML
-    void paginaPrecedente(MouseEvent event) {
-    	timerAttivo = false; // FERMO il timer
-    	try {
-            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/RiordinaLivelli.fxml"));
-
-            Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
-
-            Scene vecchiaScena = new Scene(scenaPrecedente);
-            scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.show();
-        } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata precedente!");
-        }
-    }
  
     //legge il file e recupera le varie parti dell'esercizio
     //la struttura del file stesso consente la divisione delle parti 
@@ -185,35 +182,27 @@ import sessione.SessioneGioco;
                 			}
                 	}
                 }
-                
                 if(line.startsWith("risposta:")) {
                 	risposta = scf.nextLine().trim(); 
                 }
-                
                 if(line.startsWith("****")) { 
                 	if (!codici.isEmpty()) {
                         DomandaRiordina D = new DomandaRiordina(codici, risposta);
                         domandeRiordina.add(D);
-
-                         
+ 
                         codici = new ArrayList<>();
                         risposta = "";
                     }
                 }
-                
             }
             scf.close(); 
             aggiornaLabel();
-        }
-            
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Errore nella lettura del file! " + e.getMessage());
         }
     }
-    
-   
 
-        
+    //scrive nelle label i vari codici e le domande recuperate dell'arrayList 
     void aggiornaLabel() {
         for (int i = 0; i < domandeRiordina.size() && i < blocchiCodici.size(); i++) {
             ArrayList<Label> c = blocchiCodici.get(i);
@@ -225,10 +214,10 @@ import sessione.SessioneGioco;
         }
     }
     
-    
+    //se è stata effettuata la correzione, l'utente torna alla pagina dei livelli e visualizza un popUp relativo al punteggio ottenuto 
     @FXML
     void salvaPunteggio(MouseEvent event) {
-    	timerAttivo = false; // FERMO il timer
+    	timerAttivo = false; 
     	int punteggioLocale = 0; 
         for (int i = 0; i < domandeRiordina.size(); i++) {
             DomandaRiordina domanda = domandeRiordina.get(i);
@@ -245,8 +234,8 @@ import sessione.SessioneGioco;
     		utenteCorrente.salvaSuFile();
         } 
 
-        try {
-	           
+        //se è stata effettuata la correzione, l'utente torna alla pagina dei livelli e visualizza un popUp relativo al punteggio ottenuto 
+        try {  
 			Parent paginaPrecedente = FXMLLoader.load(getClass().getResource("/application/RiordinaLivelli.fxml"));
 
             Stage paginaCorrente = (Stage) terminaCorreggi.getScene().getWindow();
@@ -271,25 +260,6 @@ import sessione.SessioneGioco;
             System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage()); 
         }
     }
-    
-    @FXML
-    void popUpUtente() {
-    	timerAttivo = false; // FERMO il timer
-    	    try {
-    	        Stage stagePrincipale = (Stage) utente.getScene().getWindow();
-
-    	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/PopUpUtente.fxml"));
-    	        Parent popUp = loader.load();
-    	        
-    	        Stage popUpStage = new Stage();
-    	        popUpStage.setScene(new Scene(popUp));
-    	        popUpStage.initModality(Modality.WINDOW_MODAL); 
-    	        popUpStage.initOwner(stagePrincipale); 
-    	        popUpStage.show();
-    	    } catch (NullPointerException | IOException e) {
-    	        System.out.println("Errore nel caricamento della schermata successiva!");
-    	    }   
-	}
    
     private TextField getTextField(int indice) {
         if (indice < risposte.size()) {
