@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,9 +33,10 @@ public class PopUpModificaPasswordController {
     void procediAllaModifica(MouseEvent event) {
     	try {
             Stage popUpCorrente = (Stage) conferma.getScene().getWindow();
-            Stage popUpUtente = (Stage) popUpCorrente.getOwner(); 
-            Stage genitore = (Stage) popUpUtente.getOwner(); 
+            Stage popUpUtente = (Stage) popUpCorrente.getOwner(); //viene recuperato il genitore (la scena che ha generato il popUp) 
+            Stage genitore = (Stage) popUpUtente.getOwner(); //genitore del genitore del popUpCorrente
              
+            //vengono chiusi i genitori
             genitore.close();
             popUpUtente.close();
             
@@ -49,6 +49,7 @@ public class PopUpModificaPasswordController {
  	    }   
     }
 
+    //chiude il popUp
     @FXML
     void tornaIndietro(MouseEvent event) {
     	try {

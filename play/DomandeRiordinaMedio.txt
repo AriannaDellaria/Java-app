@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Scanner; 
 public class Esercizio1 { 
 	public static void main(String[] args) { 
-	//viene chiesto l'inserimento di numeri nell'array 
-	//Il ciclo termina quando il numero inserito è < 0 o >100
 	Scanner scan = new Scanner(System.in); 
 	ArrayList<Integer> A = new ArrayList<Integer>(); 
 ////
@@ -72,7 +70,6 @@ for (int j = 0; j < m[i].length; j++) {
 import java.util.Scanner; 
 public class Esercizio3 {
     public static void main(String[] args) {
-    //numero di righe con una somma di elementi => 100
     	int[][] m = {
     		{5,1,2,3},
     		{5,10,20,70},
@@ -128,7 +125,6 @@ int[] A = new int[n];
 import java.util.Scanner; 
 public class Esercizio5{
 	public static void main(String[] args) {
-		//stampa di un array di valori inseriti da tastiera
 		Scanner scan = new Scanner(System.in);
 		System.out.println("dammi un intero");
 		int n = scan.nextInt();

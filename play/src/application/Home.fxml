@@ -16,7 +16,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="@../immagini/close1.png" />
+                  <Image url="@../immagini/close.png" />
                </source>
             </ImageInput>
          </effect>
@@ -25,7 +25,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="@../immagini/frecciaIndietro.png" />
+                  <Image url="@../immagini/indietro.png" />
                </source>
             </ImageInput>
          </effect>
@@ -79,7 +79,7 @@
       </ImageView>
       <ImageView fitHeight="52.0" fitWidth="38.0" layoutX="94.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../immagini/libro.PNG" />
+            <Image url="@../immagini/es1.PNG" />
          </image>
       </ImageView>
       <ImageView fitHeight="52.0" fitWidth="56.0" layoutX="857.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">

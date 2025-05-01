@@ -21,53 +21,15 @@ public class DefinizioniLivelliController {
     @FXML
     private Label utente, erroreEsercizi;
     
-  
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato();
-    
-    
+     
     @FXML
     void closeButton(MouseEvent event) {
     	Stage stage = (Stage) close.getScene().getWindow(); 
         stage.close(); 
     }
-
-    @FXML
-    public void initialize() {
-        utente.setText(utenteCorrente.getUsername());    
-    }
     
-    @FXML
-    void entrata(MouseEvent event) {
-        Button bottone = (Button) event.getSource();
-
-        if (bottone.getId().equals("base")) { // Il base si colora sempre
-            bottone.setStyle("-fx-background-color: #FFC8AE; -fx-border-color: #F64C4C");
-        }
-        else if (bottone.getId().equals("medio") && utenteCorrente.getPg1() >= 0.33) {
-            bottone.setStyle("-fx-background-color: #FFC8AE; -fx-border-color: #F64C4C"); // colore per "medio"
-        }
-        else if (bottone.getId().equals("avanzato") && utenteCorrente.getPg1() >= 0.66) {
-            bottone.setStyle("-fx-background-color: #FFC8AE; -fx-border-color: #F64C4C"); // colore per "avanzato"
-        }
-    }
-
-    @FXML
-    void uscita(MouseEvent event) {
-        Button bottone = (Button) event.getSource();
-
-        if (bottone.getId().equals("base")) { // Il base si colora sempre
-            bottone.setStyle("-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2");
-        }
-        // Ritorna al colore di default solo se aveva il colore cambiato
-        else if (bottone.getId().equals("medio") && utenteCorrente.getPg1() >= 0.33) {
-            bottone.setStyle("-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2"); // Ritorna al colore di default
-        }
-        else if (bottone.getId().equals("avanzato") && utenteCorrente.getPg1() >= 0.66) {
-            bottone.setStyle("-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2");
-        }
-    }
-
     @FXML
     void paginaPrecedente(MouseEvent event) {
     	try {
@@ -84,11 +46,49 @@ public class DefinizioniLivelliController {
     }
 
     @FXML
+    public void initialize() {
+        utente.setText(utenteCorrente.getUsername());    
+    }
+    
+    //l'utente può accedere agli esercizi di livello successivo solo se ha completato quelli del livello precedente 
+    //se l'esercizio è sbloccato il colore del bottone cambia 
+    @FXML
+    void entrata(MouseEvent event) {
+        Button bottone = (Button) event.getSource();
+
+        if (bottone.getId().equals("base")) { 
+            bottone.setStyle("-fx-background-color: #FFC8AE; -fx-border-color: #F64C4C");
+        }
+        else if (bottone.getId().equals("medio") && utenteCorrente.getPg1() >= 0.33) {
+            bottone.setStyle("-fx-background-color: #FFC8AE; -fx-border-color: #F64C4C"); 
+        }
+        else if (bottone.getId().equals("avanzato") && utenteCorrente.getPg1() >= 0.66) {
+            bottone.setStyle("-fx-background-color: #FFC8AE; -fx-border-color: #F64C4C"); 
+        }
+    }
+
+    @FXML
+    void uscita(MouseEvent event) {
+        Button bottone = (Button) event.getSource();
+
+        if (bottone.getId().equals("base")) { 
+            bottone.setStyle("-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2");
+        }
+        else if (bottone.getId().equals("medio") && utenteCorrente.getPg1() >= 0.33) {
+            bottone.setStyle("-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2"); 
+        }
+        else if (bottone.getId().equals("avanzato") && utenteCorrente.getPg1() >= 0.66) {
+            bottone.setStyle("-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2");
+        }
+    }
+
+    //metodo che consente di bloccare l'accesso ai livelli successivi, tramite il punteggio
+    //se si prova a accedere a un livello ancora bloccato viene segnalato un errore 
+    @FXML
     void paginaSuccessiva(MouseEvent event) {
         Button bottoneCliccato = (Button) event.getSource();
         
         String nomeFileFXML = "";
-       
         switch (bottoneCliccato.getId()) { //getId() -> recupera l'fx:id del bottone cliccato 
             case "base":
             	nomeFileFXML = "/application/DefinizioniBase.fxml";
@@ -96,7 +96,6 @@ public class DefinizioniLivelliController {
             case "medio":
             	if(utenteCorrente.getPg1() >= 0.33) { 
             		nomeFileFXML = "/application/DefinizioniMedio.fxml";
-            		medio.setStyle("-fx-background-color:  #FFC8AE");
             	}
             	else { 
             		erroreEsercizi.setVisible(true); 
@@ -116,37 +115,32 @@ public class DefinizioniLivelliController {
                 System.out.println("Nessun livello corrispondente trovato!");
                 return;
         }
-        
-        if(!nomeFileFXML.equals("")) { 
-        	 try {
-                 Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource(nomeFileFXML));
+    	 try {
+             Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource(nomeFileFXML));
 
-                 Stage scenaCorrente = (Stage) bottoneCliccato.getScene().getWindow();
-                 Scene nuovaScena = new Scene(scenaSuccessiva);
-                 scenaCorrente.setScene(nuovaScena);
-                 scenaCorrente.show();
-             } catch (NullPointerException | IOException e) {
-                 System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
-                 e.printStackTrace();
-             }
-        }
+             Stage scenaCorrente = (Stage) bottoneCliccato.getScene().getWindow();
+             Scene nuovaScena = new Scene(scenaSuccessiva);
+             scenaCorrente.setScene(nuovaScena);
+             scenaCorrente.show();
+         } catch (NullPointerException | IOException e) {
+             System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+         }
     }
     
     @FXML
     void popUpUtente() {
-    	    try {
-    	        Stage paginaPrincipale = (Stage) utente.getScene().getWindow();
+	    try {
+	        Stage paginaPrincipale = (Stage) utente.getScene().getWindow();
 
-    	        Parent popUp = FXMLLoader.load(getClass().getResource("/application/PopUpUtente.fxml"));
-    	        
-    	        Stage popUpStage = new Stage();
-    	        popUpStage.setScene(new Scene(popUp));
-    	        popUpStage.initModality(Modality.WINDOW_MODAL); 
-    	        popUpStage.initOwner(paginaPrincipale);
-    	        popUpStage.show(); 
-    	    } catch (NullPointerException | IOException e) {
-    	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
-    	    }   
+	        Parent popUp = FXMLLoader.load(getClass().getResource("/application/PopUpUtente.fxml"));
+	        
+	        Stage popUpStage = new Stage();
+	        popUpStage.setScene(new Scene(popUp));
+	        popUpStage.initModality(Modality.WINDOW_MODAL); 
+	        popUpStage.initOwner(paginaPrincipale);
+	        popUpStage.show(); 
+	    } catch (NullPointerException | IOException e) {
+	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+	    }   
 	}
-
 }

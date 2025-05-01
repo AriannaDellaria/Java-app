@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-
 import dati.Utente;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +28,6 @@ public class HomeController {
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();  //getIstance() -> restituisce una e una sola istanza della classe
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato(); //recupera i dati dell'utente che ha effettuato il login
     
-    
     @FXML
     void closeButton(MouseEvent event) {
     	Stage stage = (Stage) close.getScene().getWindow(); 
@@ -42,6 +40,7 @@ public class HomeController {
     	close.setStyle("");
     }
 
+    //metodi che rendono più grandi o più piccoli i titoli degli esercizi se si passa sopra con il mouse
     @FXML
     void grande(MouseEvent event) {
     	primoEsercizio.setStyle("-fx-font-size: 32px; -fx-font-family: 'Georgia'; -fx-font-weight: bold;");
@@ -67,8 +66,7 @@ public class HomeController {
     	terzoEsercizio.setStyle("-fx-font-size: 30px; -fx-font-family: 'Georgia'; -fx-font-weight: bold;");
     }
     
-    
-
+    //torna alla pagina precedente
     @FXML
     void paginaPrecedente(MouseEvent event) {
     	try {
@@ -84,8 +82,23 @@ public class HomeController {
             System.out.println("Errore nel caricamento della schermata precedente! " +e.getMessage());
         }
     }
- 
     
+    @FXML
+    public void initialize() {
+        aggiornaProgressBar();
+        utente.setText(utenteCorrente.getUsername());     
+    }
+    
+    private void aggiornaProgressBar() {
+        double progresso1 = utenteCorrente.getPg1(); //recupera il punteggio Pg1 -> (Pg indica il punteggio globale)
+        double progresso2 = utenteCorrente.getPg2(); 
+        double progresso3 = utenteCorrente.getPg3(); 
+
+        pb1.setProgress(progresso1); //aggiorna la progress bar pb1
+        pb2.setProgress(progresso2); 
+        pb3.setProgress(progresso3);  
+    }
+ 
     @FXML
     void paginaPrimoEsercizio(MouseEvent event) {
     	try {
@@ -101,23 +114,21 @@ public class HomeController {
         }
     }
      
-
     @FXML
     void paginaSecondoEsercizio(MouseEvent event) {
-    	  try {
-              Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/OutputLivelli.fxml"));
-
-              Stage scenaCorrente = (Stage)secondoEsercizio.getScene().getWindow();
-              
-              Scene nuovaScena = new Scene(scenaSuccessiva);
-              scenaCorrente.setScene(nuovaScena);
-              scenaCorrente.show();
-          } catch (NullPointerException | IOException e) {
-              System.out.println("Errore nel caricamento della schermata successiva!" + e.getMessage());
-          }
+		try {
+		     Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/OutputLivelli.fxml"));
+		
+		     Stage scenaCorrente = (Stage)secondoEsercizio.getScene().getWindow();
+		      
+		     Scene nuovaScena = new Scene(scenaSuccessiva);
+		     scenaCorrente.setScene(nuovaScena);
+		     scenaCorrente.show();
+		 } catch (NullPointerException | IOException e) {
+		     System.out.println("Errore nel caricamento della schermata successiva!" + e.getMessage());
+		 }
     }
 
-    
     @FXML
     void paginaTerzoEsercizio(MouseEvent event) {
     	try {
@@ -159,43 +170,25 @@ public class HomeController {
             scenaCorrente.setScene(nuovaScena);
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata successiva! " +e.getMessage());
+            System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
         }
-    }
-    
-    @FXML
-    public void initialize() {
-        aggiornaProgressBar();
-        utente.setText(utenteCorrente.getUsername()); 
-        
-    }
-
-    private void aggiornaProgressBar() {
-        double progresso1 = utenteCorrente.getPg1(); //recupera il punteggio pg1 -> (pg indica il punteggio globale)
-        double progresso2 = utenteCorrente.getPg2(); 
-        double progresso3 = utenteCorrente.getPg3(); 
-
-        pb1.setProgress(progresso1); //aggiorna la progress bar pb1
-        pb2.setProgress(progresso2); 
-        pb3.setProgress(progresso3);  
-    }
+    } 
     
     @FXML
     void popUpUtente() {
-    	    try {
-    	        Stage paginaCorrente = (Stage) utente.getScene().getWindow();
+	    try {
+	        Stage paginaCorrente = (Stage) utente.getScene().getWindow();
 
-    	        Parent popUp = FXMLLoader.load(getClass().getResource("/application/PopUpUtente.fxml"));
-    	        
-    	        Stage popUpStage = new Stage();
-    	        popUpStage.setScene(new Scene(popUp));
-    	        popUpStage.initModality(Modality.WINDOW_MODAL); 
-    	        popUpStage.initOwner(paginaCorrente); 
-    	        popUpStage.show(); 
-    	    } catch (NullPointerException | IOException e) {
-    	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
-    	        e.printStackTrace(); 
-    	    }   
+	        Parent popUp = FXMLLoader.load(getClass().getResource("/application/PopUpUtente.fxml"));
+	        
+	        Stage popUpStage = new Stage();
+	        popUpStage.setScene(new Scene(popUp));
+	        popUpStage.initModality(Modality.WINDOW_MODAL); 
+	        popUpStage.initOwner(paginaCorrente); 
+	        popUpStage.show(); 
+	    } catch (NullPointerException | IOException e) {
+	        System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+	    }   
 	}
 }
 

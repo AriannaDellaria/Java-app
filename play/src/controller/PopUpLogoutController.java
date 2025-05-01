@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-
 import dati.Utente;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,8 +19,6 @@ public class PopUpLogoutController {
     SessioneGioco sessioneGioco = SessioneGioco.getInstance();  //getIstance() -> restituisce una e una sola istanza della classe
     Utente utenteCorrente = sessioneGioco.getUtenteLoggato(); //recupera i dati dell'utente che ha effettuato il login
     
-    
-
     @FXML
     void colorChangeGreen(MouseEvent event) {
     	conferma.setStyle("-fx-background-color: #A2D8A3;-fx-border-color: #2AAA4A"); 
@@ -42,9 +39,10 @@ public class PopUpLogoutController {
     void procediAlLogout(MouseEvent event) {
     	try {
             Stage popUpCorrente = (Stage) conferma.getScene().getWindow();
-            Stage popUpUtente = (Stage) popUpCorrente.getOwner(); 
-            Stage genitore = (Stage) popUpUtente.getOwner(); 
+            Stage popUpUtente = (Stage) popUpCorrente.getOwner(); //viene recuperato il genitore (la scena che ha generato il popUp)  
+            Stage genitore = (Stage) popUpUtente.getOwner(); //genitore del genitore del popUpCorrente
             
+            //vengono chiusi i genitori
             genitore.close();
             popUpUtente.close();
             
@@ -58,14 +56,14 @@ public class PopUpLogoutController {
  	    }   
     }
 
+    //chiude il popUp
     @FXML
     void tornaIndietro(MouseEvent event) {
     	try {
-            Stage scenaCorrente = (Stage) annulla.getScene().getWindow();
+           Stage scenaCorrente = (Stage) annulla.getScene().getWindow();
            scenaCorrente.close();     
         } catch (NullPointerException e) {
             System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
         }
     }
-
 }

@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.*;
-
 import java.util.Objects;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,14 +36,44 @@ public class RegistrazioneController {
 
     private File file = new File("utenti.csv"); 
 
-    
     // Caricamento immagini
-    private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/foto2.png")));
+    private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioAperto.png")));
     private final Image occhioChiuso = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioChiuso.png")));
+    
+    @FXML
+    void closeButton(MouseEvent event) {
+        Stage stage = (Stage) close.getScene().getWindow();  
+        stage.close(); 
+    }
 
     @FXML
+    void colorChangeBasic(MouseEvent event) {
+    	salvaButton.setStyle("-fx-background-color: white; -fx-border-color: #2AAA4A; -fx-border-width: 2px;");
+    }
+    
+    @FXML
+    void colorChangeGreen(MouseEvent event) {
+    	salvaButton.setStyle("-fx-background-color: #A2D8A3;-fx-border-color: #2AAA4A"); 
+    }
+    
+    @FXML
+    void paginaPrecedente(MouseEvent event) {
+    	try {
+            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
+
+            Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
+
+            Scene vecchiaScena = new Scene(scenaPrecedente);
+            scenaCorrente.setScene(vecchiaScena);
+            scenaCorrente.show();
+        } catch (IOException e) {
+            System.out.println("Errore nel caricamento della schermata precedente! " + e.getMessage());
+        }
+    }
+    
+    @FXML
     private void initialize() {
-        // Crea e imposta l'icona iniziale (occhio chiuso)
+        //crea e imposta l'icona iniziale (occhio chiuso)
         ImageView icon = new ImageView(occhioAperto);
         icon.setFitWidth(20);
         icon.setFitHeight(20);
@@ -63,70 +92,39 @@ public class RegistrazioneController {
         
         nomeUtente.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
-                cognomeUtente.requestFocus(); // Sposta il focus sulla password
+                cognomeUtente.requestFocus();
             }
         });  
+        
         cognomeUtente.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
-                usernameUtente.requestFocus(); // Sposta il focus sulla password
+                usernameUtente.requestFocus();
             }
         });  
+        
         usernameUtente.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
-                passwordUtente.requestFocus(); // Sposta il focus sulla password
+                passwordUtente.requestFocus();
             }
         });  
+    
         passwordUtente.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
-                passwordField.requestFocus(); // Sposta il focus sulla password
+                passwordField.requestFocus(); 
             }
         });  
-    }
-    
-    
-    @FXML
-    void closeButton(MouseEvent event) {
-        Stage stage = (Stage) close.getScene().getWindow();  
-        stage.close(); 
-    }
-
-    @FXML
-    void colorChangeBasic(MouseEvent event) {
-    	salvaButton.setStyle("-fx-background-color: white; -fx-border-color: #2AAA4A; -fx-border-width: 2px;");
-    }
-    
-    @FXML
-    void colorChangeGreen(MouseEvent event) {
-    	salvaButton.setStyle("-fx-background-color: #A2D8A3;-fx-border-color: #2AAA4A"); 
-    }
-    
-  
-    @FXML
-    void paginaPrecedente(MouseEvent event) {
-    	try {
-            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
-
-            Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
-
-            Scene vecchiaScena = new Scene(scenaPrecedente);
-            scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.show();
-        } catch (IOException e) {
-            System.out.println("Errore nel caricamento della schermata precedente!");
-        }
     }
     
     @FXML
     void salvaEContinua(MouseEvent event) { 
-    
-        
+    	//recupera i dati scritti nei vari campi
     	String nome = nomeUtente.getText().trim();
         String cognome = cognomeUtente.getText().trim();
         String username = usernameUtente.getText().trim();
         String password = passwordUtente.getText().trim();
         String confermaPassword = passwordField.getText().trim(); 
         
-        
+        //se uno dei campi è vuoto viene segnalato l'errore all'utente 
         boolean vuoto = false; 
         if (nome.isEmpty() || cognome.isEmpty() || username.isEmpty() || password.isEmpty() || confermaPassword.isEmpty()) {
         	erroreCompilazioneRegistrazione.setVisible(true); 
@@ -135,7 +133,7 @@ public class RegistrazioneController {
         	erroreCompilazioneRegistrazione.setVisible(false); 
         }
        
-        
+        //se la password ha un numero di caratteri inferiore a 8, o le password inserite non corrispondono viene segnalato l'errore all'utente
         boolean uguali = false; 
         if(password.length() <= 7 || !password.equals(confermaPassword)) { 
         	errorePassword.setVisible(true); 
@@ -144,11 +142,10 @@ public class RegistrazioneController {
         	errorePassword.setVisible(false); 
         }
         
-        
+        //se l'username è già esistente, viene segnalato l'errore all'utente
         boolean trovato = false; 
         File file = new File("utenti.csv");	
-        
-        try(BufferedReader reader = new BufferedReader(new FileReader("utenti.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("utenti.csv"))) {
    		 String linea;
             while ((linea = reader.readLine()) != null) {
                 String[] dati = linea.split(",");
@@ -159,24 +156,25 @@ public class RegistrazioneController {
                 	break;
                 }
             }
+        
             if(trovato == false) { 
             	usernameEsistente.setVisible(false);
             }
-        }catch(IOException e) {
-            System.out.println("Errore nella lettura del file!"); 
+            
+        } catch(IOException e) {
+            System.out.println("Errore nella lettura del file! " + e.getMessage()); 
         }
-                
-        
-       if(vuoto == false && uguali == false && trovato == false) {
-				
-    	   try (PrintWriter writer = new PrintWriter(new FileWriter(file, true))) { //scrive sul file
-               //writer.println(); // Aggiungi una nuova riga
+          
+        //se non vengono segnalati errori, la registrazione viene completata e i dati vengono salvati su un file 
+        //i punteggi relativi agli esercizi vengono inizializzati a 0
+        if(vuoto == false && uguali == false && trovato == false) {
+    	   try (PrintWriter writer = new PrintWriter(new FileWriter(file, true))) {
                writer.println(nome + "," + cognome + "," + username + "," + password + "," + 0.0 + "," + 0.0 + "," + 0.0);
-           
     	   } catch(IOException e) {
-           		System.out.println("Errore nel salvataggio");
+           		System.out.println("Errore nel salvataggio! " + e.getMessage());
            }
            
+    	   //se la registra è stata completata con successo, l'utente torna alla pagina del login e viene mostrato il popUp
     	   try {    
 				Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
 
@@ -192,10 +190,9 @@ public class RegistrazioneController {
 	            popUpStage.setScene(new Scene(popUp));
 	            popUpStage.initModality(Modality.WINDOW_MODAL); 
 	            popUpStage.initOwner(scenaCorrente); 
-	            popUpStage.show();
-	            
+	            popUpStage.show();      
 	        } catch (NullPointerException | IOException e) {
-	            System.out.println("Errore nel caricamento della schermata successiva!");
+	            System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
 	        }
         }  	
     }

@@ -72,11 +72,10 @@ public class ModificaPasswordController {
     	login.setStyle("-fx-background-color: #c990f3;-fx-border-color: #77358f"); 
     }
 
-     //carica e inizializza le immagini     
-    private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/foto2.png")));
+    //carica e inizializza le immagini     
+    private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioAperto.png")));
     private final Image occhioChiuso = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioChiuso.png")));
 
-    //initialize -> metodo che viene chiamato automaticamente da javaFX per inizializzare gli elementi dell'interfaccia
     @FXML
     private void initialize() {
     	 utente.setText(utenteCorrente.getUsername());
@@ -98,32 +97,11 @@ public class ModificaPasswordController {
         
         nuovaPassword.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
-                confermaPassword.requestFocus(); // Sposta il focus sulla password
+                confermaPassword.requestFocus();
             }
         });  
     }
     
-    @FXML
-    void visibilita(MouseEvent event) {
-        if(toggle.isSelected()) { 
-        	confermaPassword.setVisible(false); 
-        	 ImageView icon1 = new ImageView(occhioChiuso);
-        	 icon1.setFitWidth(20);
-             icon1.setFitHeight(20);
-        	 toggle.setGraphic(icon1); 
-        	 textField.setVisible(true);
-        }
-        else { 
-        	confermaPassword.setVisible(true); 
-       	 	ImageView icon2 = new ImageView(occhioAperto);
-       	 	icon2.setFitWidth(20);
-            icon2.setFitHeight(20);
-       	 	toggle.setGraphic(icon2); 
-       	 	textField.setVisible(false);
-        }
-    }
-
-
     @FXML
     private void impostaPassword() {
     	String x = nuovaPassword.getText(); 
@@ -132,12 +110,13 @@ public class ModificaPasswordController {
     	List<String> righe = new ArrayList<>();
         boolean trovato = false;
     	
+        //se le password non corrispondano 
+        //se la nuova password è uguale alla precedente e se ha meno di 8 caratteri mostra l'errore corrispondente 
     	if(!x.equals(y) || x.length() <= 7 || x.equals(utenteCorrente.getPassword())){
     		errore.setVisible(true); 
     	}
-    	
+    	//trova l'utente loggato in quel momento e modifica la password nel file 
     	else { 
-    		// Leggi il file e aggiorna l'utente
             File file = new File("utenti.csv");
             try (BufferedReader reader = new BufferedReader(new FileReader("utenti.csv"))) {
                 String linea;
@@ -163,6 +142,7 @@ public class ModificaPasswordController {
                 System.out.println("Errore nella scrittura del file: " + e.getMessage());
             }
             
+            //se la modifica è andata a buon fine, l'utente torna al login e viene mostrato il popUp
         	try {
                 Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
 
@@ -186,21 +166,36 @@ public class ModificaPasswordController {
     
     @FXML
     void tornaAlLogin(MouseEvent event) {
-        
-            try {
-                // Carica la scena di login
-                Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
-                Scene nuovaScena = new Scene(scenaSuccessiva);
-                Stage scenaCorrente = (Stage) login.getScene().getWindow();
-                scenaCorrente.setScene(nuovaScena);
-                scenaCorrente.show();
-            } catch (NullPointerException | IOException e) {
-                System.out.println("Errore nel caricamento della schermata successiva!");
-            }
+        try {
+            Parent scenaSuccessiva = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
+            Scene nuovaScena = new Scene(scenaSuccessiva);
+            Stage scenaCorrente = (Stage) login.getScene().getWindow();
+            scenaCorrente.setScene(nuovaScena);
+            scenaCorrente.show();
+        } catch (NullPointerException | IOException e) {
+            System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
+        }
     }
 
-   
-    
+    @FXML
+    void visibilita(MouseEvent event) {
+        if(toggle.isSelected()) { 
+        	confermaPassword.setVisible(false); 
+        	 ImageView icon1 = new ImageView(occhioChiuso);
+        	 icon1.setFitWidth(20);
+             icon1.setFitHeight(20);
+        	 toggle.setGraphic(icon1); 
+        	 textField.setVisible(true);
+        }
+        else { 
+        	confermaPassword.setVisible(true); 
+       	 	ImageView icon2 = new ImageView(occhioAperto);
+       	 	icon2.setFitWidth(20);
+            icon2.setFitHeight(20);
+       	 	toggle.setGraphic(icon2); 
+       	 	textField.setVisible(false);
+        }
+    }   
 }
     
     

@@ -6,6 +6,7 @@ public class Recensione {
 	private String stelline; 
 	private String commento;
 	
+	//crea l'oggetto recensione
 	public Recensione(String utente, String stelline, String commento) { 
 		this.utente = utente; 
 		this.stelline = stelline;

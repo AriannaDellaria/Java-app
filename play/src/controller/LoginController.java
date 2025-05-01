@@ -41,10 +41,15 @@ public class LoginController {
     @FXML
     private ImageView immagine; 
  
-    
     //carica e inizializza le immagini 
-    private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/foto2.png")));
+    private final Image occhioAperto = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioAperto.png")));
     private final Image occhioChiuso = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/immagini/occhioChiuso.png")));
+    
+    @FXML
+    void closeButton(MouseEvent event) {
+        Stage stage = (Stage) close.getScene().getWindow(); 
+        stage.close(); 
+    }
     
     @FXML
     void colorChangeGreen(MouseEvent event) {
@@ -54,13 +59,27 @@ public class LoginController {
     @FXML
     void colorChangeBasic(MouseEvent event) {
     	login.setStyle("-fx-background-color: white; -fx-border-color: #2AAA4A; -fx-border-width: 2px;");
-    	
+    }
+    
+    //torna alla pagina precedente 
+    @FXML
+    void paginaPrecedente(MouseEvent event) {
+    	try {
+            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/Gioca.fxml"));
+
+            Stage scenaCorrente = (Stage) indietro.getScene().getWindow(); //recupera la pagina in cui si trova il botton
+
+            Scene vecchiaScena = new Scene(scenaPrecedente); //imposta la scena con la pagina precedente
+            scenaCorrente.setScene(vecchiaScena);
+            scenaCorrente.show();
+        } catch (NullPointerException | IOException e) {
+            System.out.println("Errore nel caricamento della schermata precedente! " +e.getMessage());
+        }
     }
     
     //initialize -> metodo che viene chiamato automaticamente da javaFX per inizializzare gli elementi dell'interfaccia
     @FXML
     private void initialize() {
-    	
         ImageView icon = new ImageView(occhioAperto); //ImageView -> consente di visualizzare l'immagine nell'interfaccia 
         icon.setFitWidth(20); //larghezza
         icon.setFitHeight(20); //altezza 
@@ -72,59 +91,36 @@ public class LoginController {
         });
         
         passwordUtente.textProperty().addListener((observable, oldValue, newValue) -> {
-                if (!toggle.isSelected()) {
-                    textField.setText(newValue);
-                }
+            if (!toggle.isSelected()) {
+                textField.setText(newValue);
+            }
         });
         
-        //se l'utente si trova in password field, e preme enter da tastiera, viene richiamato il metodo accesso 
+        //se l'utente si trova in passwordField, e preme enter da tastiera, viene richiamato il metodo accesso 
         passwordUtente.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
                 accesso(null);
             }
         });
         
-        //se l'utente si trova in password field, e preme enter da tastiera, viene richiamato il metodo accesso 
+        //se l'utente si trova in textField, e preme enter da tastiera, viene richiamato il metodo accesso 
         textField.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
                 accesso(null);
             }
         });
         
-        // Quando premi "Enter" in usernameUtente, passa al campo passwordUtente
+        //quando premi "Enter" in usernameUtente, passa al campo passwordUtente
         usernameUtente.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
-                passwordUtente.requestFocus(); // Sposta il focus sulla password
+                passwordUtente.requestFocus(); //sposta il focus sulla password
             }
         });  
-     }
-    
-    @FXML
-    void closeButton(MouseEvent event) {
-        Stage stage = (Stage) close.getScene().getWindow(); 
-        stage.close(); 
-    }
-    
-    //torna alla pagina precedente (Gioca)
-    @FXML
-    void paginaPrecedente(MouseEvent event) {
-    	try {
-            Parent scenaPrecedente = FXMLLoader.load(getClass().getResource("/application/Gioca.fxml"));
-
-            Stage scenaCorrente = (Stage) indietro.getScene().getWindow();
-
-            Scene vecchiaScena = new Scene(scenaPrecedente);
-            scenaCorrente.setScene(vecchiaScena);
-            scenaCorrente.show();
-        } catch (NullPointerException | IOException e) {
-            System.out.println("Errore nel caricamento della schermata precedente!");
-        }
     }
     
     @FXML
     void accesso(MouseEvent event) {
-    
-    	//recuperano username e password scritti nei textField
+    	//vengono recuperati username e password scritti nei textField
         String username = usernameUtente.getText().trim(); 
         String password = passwordUtente.getText().trim();
         
@@ -146,7 +142,7 @@ public class LoginController {
     	}
     	
     	else{
-    		// Login riuscito, crea l'oggetto Utente e salva nella sessione
+    		//login riuscito, crea l'oggetto Utente e salva nella sessione
     	    Utente utente = new Utente(username, password);
     	    //getIstance() -> metodo che restituisce una e una sola istanza della classe 
     	    SessioneGioco sessioneGioco = SessioneGioco.getInstance();
@@ -164,15 +160,14 @@ public class LoginController {
                 scenaCorrente.show();
             } catch (NullPointerException | IOException e) {
                 System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
-                e.printStackTrace(); 
             }
     	}
     }
     
+    //metodo che consente di verificare se password e username corrispondono a quelle salvate nel file al momento della registrazione 
     private boolean autenticazione(String username, String password) {
     	try {
     		Scanner scf = new Scanner(new File("utenti.csv"));
-
     		while(scf.hasNextLine()) {
     			String riga = scf.nextLine();
     			String[] tokens = riga.split(",");
@@ -183,15 +178,14 @@ public class LoginController {
                     return true;
                 }
     		}
-    		scf.close();
-    		
+    		scf.close();	
     	} catch(IOException e) {
-        	System.out.println("Errore nella lettura del file");
+        	System.out.println("Errore nella lettura del file " + e.getMessage());
         }
     	return false;
     }
     
-    
+    //passa alla schermata di registrazione
     @FXML
     void registrazione(MouseEvent event) {
     	try {
@@ -204,7 +198,6 @@ public class LoginController {
             scenaCorrente.show();
         } catch (NullPointerException | IOException e) {
             System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
-            e.printStackTrace(); 
         }
     }
    
@@ -228,12 +221,13 @@ public class LoginController {
         }
     }
     
+    //passa alla popUp che permette di recuperare la password 
     @FXML
     void recuperaPassword(MouseEvent event) {
     	try {
 	        Stage stagePrincipale = (Stage) passwordDimenticata.getScene().getWindow();
 	        
-	        Parent popUp =  FXMLLoader.load(getClass().getResource("/application/PopUpRecuperaPassword.fxml"));// Carica il popUp
+	        Parent popUp =  FXMLLoader.load(getClass().getResource("/application/PopUpRecuperaPassword.fxml")); //carica il popUp
 	       
 	        Stage popUpStage = new Stage();
 	        popUpStage.setScene(new Scene(popUp));
