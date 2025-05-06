@@ -54,7 +54,7 @@
             <Font name="Georgia Bold" size="55.0" />
          </font>
       </Text>
-      <Text layoutX="264.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Avrai a disposizione una serie di definizioni e dovrai scegliere o scriverenel riquadro corrispondente il termine&#10;a cui si riferisce la definizione data, entro un tempo limite.&#10;I livelli veranno considerati superati se e solo se avrai risposto correttamente a 3 domande." textAlignment="CENTER">
+      <Text layoutX="264.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Avrai a disposizione una serie di definizioni e dovrai scegliere o scrivere nel riquadro corrispondente il termine&#10;a cui si riferisce la definizione data, entro un tempo limite.&#10;I livelli verranno considerati superati se e solo se avrai risposto correttamente a 3 domande." textAlignment="CENTER">
          <font>
             <Font size="16.0" />
          </font></Text>
