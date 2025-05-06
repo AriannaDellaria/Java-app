@@ -158,6 +158,7 @@ public class ModificaPasswordController {
  	             popUpStage.initModality(Modality.WINDOW_MODAL); 
  	             popUpStage.initOwner(scenaCorrente); 
  	             popUpStage.show();
+ 	            sessioneGioco.setUtenteLoggato(null);
             } catch (NullPointerException | IOException e) {
                  System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
 	        } 
@@ -172,6 +173,7 @@ public class ModificaPasswordController {
             Stage scenaCorrente = (Stage) login.getScene().getWindow();
             scenaCorrente.setScene(nuovaScena);
             scenaCorrente.show();
+            sessioneGioco.setUtenteLoggato(null);
         } catch (NullPointerException | IOException e) {
             System.out.println("Errore nel caricamento della schermata successiva! " + e.getMessage());
         }

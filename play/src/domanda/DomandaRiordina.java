@@ -13,7 +13,7 @@ public class DomandaRiordina {
 	}
 
 	public boolean verificaRisposta(String rispostaUtente) {
-		return rispostaUtente.equals(this.rispostaCorretta);
+		return rispostaUtente.equalsIgnoreCase(this.rispostaCorretta);
 	}
 
 	public  ArrayList<String> getCodici() {
