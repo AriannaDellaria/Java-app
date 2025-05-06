@@ -54,7 +54,7 @@
             <Font name="Georgia Bold" size="55.0" />
          </font>
       </Text>
-      <Text layoutX="232.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Avrai a disposizione una serie di blocchi di codice (ABCD) da riordinare, inserendo all'interno di un'area predisposta&#10;la sequenza corretta, entro un tempo limite.&#10;I livelli veranno considerati superati se e solo se avrai risposto correttamente a 3 domande.&#10;" textAlignment="CENTER">
+      <Text layoutX="232.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Avrai a disposizione una serie di blocchi di codice (ABCD) da riordinare, inserendo all'interno di un'area predisposta&#10;la sequenza corretta, entro un tempo limite.&#10;I livelli verranno considerati superati se e solo se avrai risposto correttamente a 3 domande.&#10;" textAlignment="CENTER">
          <font>
             <Font size="16.0" />
          </font></Text>

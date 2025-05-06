@@ -54,7 +54,7 @@
             <Font name="Georgia Bold" size="55.0" />
          </font>
       </Text>
-      <Text layoutX="292.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Avrai a disposizione una serie di programmi di cui dovrai prevedere l'output e, una volta letta la domanda, dovrai scegliere tra le opzioni proposte entro un tempo limite.&#10;I livelli veranno considerati superati se e solo se avrai risposto correttamente a 3 domande.&#10; &#10;&#10;" textAlignment="CENTER" wrappingWidth="716.274169921875">
+      <Text layoutX="292.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Avrai a disposizione una serie di programmi di cui dovrai prevedere l'output e, una volta letta la domanda, dovrai scegliere tra le opzioni proposte entro un tempo limite.&#10;I livelli verranno considerati superati se e solo se avrai risposto correttamente a 3 domande.&#10; &#10;&#10;" textAlignment="CENTER" wrappingWidth="716.274169921875">
          <font>
             <Font size="16.0" />
          </font>
