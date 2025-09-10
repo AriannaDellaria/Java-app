@@ -1,0 +1,60 @@
+opzioni: 
+Scanner
+Switch
+If-else
+Variabile
+Println
+////
+domanda: 
+Un contenitore che memorizza dati del suo stesso tipo, che possono essere modificati durante l'esecuzione di un programma
+risposta:
+Variabile
+****
+opzioni: 
+Scanner
+Switch
+If-else
+Variabile
+Println
+////
+domanda:
+Una classe utilizzata per leggere input da tastiera
+risposta: 
+Scanner
+****
+opzioni: 
+Scanner
+Switch
+If-else
+Variabile
+Println
+////
+domanda: 
+Un metodo utilizzato per stampare una linea di testo sulla console introducendo una nuova riga dopo aver visualizzato l'output
+risposta: 
+Println
+****
+opzioni: 
+Scanner
+Switch
+If-else
+Variabile
+Println
+////
+domanda: 
+Un'istruzione che verifica il valore di un'espressione booleana ed effettua un'azione tra le due possibili in base al valore vero o falso dell'espressione
+risposta:
+If-else
+****
+opzioni: 
+Scanner
+Switch
+If-else
+Variabile
+Println
+////
+domanda: 
+Una struttura di controllo multi-ramo che permette di selezionare uno tra molti blocchi di codice da eseguire, in base al valore di una variabile.
+risposta: 
+Switch
+****

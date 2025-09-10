@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" style="-fx-background-color: ffdada;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefinizioniAvanzatoController">
+   <children>
+      <Button fx:id="close" layoutX="1268.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#closeButton" prefHeight="26.0" prefWidth="36.0" text="Button">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@../immagini/close.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <Button fx:id="indietro" layoutX="1225.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#paginaPrecedente" prefHeight="26.0" prefWidth="42.0" text="Button">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@../immagini/indietro.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <ImageView fitHeight="44.0" fitWidth="49.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/user.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="utente" layoutX="67.0" layoutY="13.0" text="Label">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <Text layoutX="272.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Leggi le cinque definzioni fornite e scrivi nell'apposito riquadro i termini corrispondenti">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="37.0" fitWidth="36.0" layoutX="593.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/orologio.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timer" layoutX="643.0" layoutY="87.0" text="timer">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="66.0" layoutY="136.0" prefHeight="543.0" prefWidth="1176.0" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="58.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1182.0" style="-fx-background-color: white;">
+               <children>
+                  <Label fx:id="domanda1" layoutX="74.0" layoutY="44.0" prefWidth="750.0" text="Label" textAlignment="JUSTIFY" wrapText="true" AnchorPane.leftAnchor="74.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="domanda2" layoutX="74.0" layoutY="196.0" prefWidth="750.0" text="Label" textAlignment="JUSTIFY" wrapText="true" AnchorPane.leftAnchor="74.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="domanda3" layoutX="74.0" layoutY="341.0" prefWidth="750.0" text="Label" textAlignment="JUSTIFY" wrapText="true" AnchorPane.leftAnchor="74.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="domanda5" layoutX="68.0" layoutY="618.0" prefWidth="750.0" text="Label" textAlignment="JUSTIFY" translateY="25.0" wrapText="true" AnchorPane.leftAnchor="74.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="domanda4" layoutX="74.0" layoutY="486.0" prefWidth="750.0" text="Label" textAlignment="JUSTIFY" wrapText="true" AnchorPane.leftAnchor="74.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="risposta1" layoutX="921.0" layoutY="39.0" prefHeight="37.0" prefWidth="164.0" promptText="Risposta 1:" style="-fx-background-color: white; -fx-border-color: f64c4c; -fx-border-width: 2;" />
+                  <TextField fx:id="risposta2" layoutX="921.0" layoutY="191.0" prefHeight="37.0" prefWidth="164.0" promptText="Risposta 2:" style="-fx-background-color: white; -fx-border-color: f64c4c; -fx-border-width: 2;" />
+                  <TextField fx:id="risposta3" layoutX="921.0" layoutY="336.0" prefHeight="37.0" prefWidth="164.0" promptText="Risposta 3:" style="-fx-background-color: white; -fx-border-color: f64c4c; -fx-border-width: 2;" />
+                  <TextField fx:id="risposta4" layoutX="921.0" layoutY="481.0" prefHeight="37.0" prefWidth="164.0" promptText="Risposta 4:" style="-fx-background-color: white; -fx-border-color: f64c4c; -fx-border-width: 2;" />
+                  <TextField fx:id="risposta5" layoutX="919.0" layoutY="624.0" prefHeight="37.0" prefWidth="164.0" promptText="Risposta 5:" style="-fx-background-color: white; -fx-border-color: f64c4c; -fx-border-width: 2;" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Button fx:id="terminaCorreggi" layoutX="559.0" layoutY="699.0" mnemonicParsing="false" onMouseClicked="#salvaPunteggio" onMouseEntered="#colorChangeRed" onMouseExited="#colorChangeBasic" style="-fx-background-color: white; -fx-border-color: f64c4c; -fx-border-width: 2;" text="Termina e correggi" textFill="#f64c4c">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Text fill="#f64c4c" layoutX="590.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="max. 1 parola">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

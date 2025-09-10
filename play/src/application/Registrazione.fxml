@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegistrazioneController">
+   <children>
+      <Button fx:id="close" layoutX="1266.0" mnemonicParsing="false" onMouseClicked="#closeButton" prefHeight="26.0" prefWidth="33.0" text="Button">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@../immagini/close.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <Button fx:id="indietro" layoutX="1214.0" layoutY="-4.0" mnemonicParsing="false" onMouseClicked="#paginaPrecedente" prefHeight="33.0" prefWidth="42.0" text="Button">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@../immagini/indietro.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <Text layoutX="553.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrazione">
+         <font>
+            <Font name="Georgia Bold" size="80.0" />
+         </font>
+      </Text>
+      <Text fill="#77358f" layoutX="638.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#77358f" layoutX="633.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cognome:">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#77358f" layoutX="635.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome utente:">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#2617ae" layoutX="642.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password: ">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#2617ae" layoutX="643.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Conferma password: ">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="nomeUtente" layoutX="638.0" layoutY="209.0" prefHeight="32.0" prefWidth="300.0" promptText="EX: Mario" style="-fx-border-color: add9f4; -fx-border-width: 2;" />
+      <TextField fx:id="cognomeUtente" layoutX="638.0" layoutY="299.0" prefHeight="32.0" prefWidth="300.0" promptText="EX: Rossi" style="-fx-border-color: add9f4; -fx-border-width: 2;" />
+      <TextField fx:id="usernameUtente" layoutX="638.0" layoutY="388.0" prefHeight="32.0" prefWidth="300.0" promptText="EX: marioRossi" style="-fx-border-color: add9f4; -fx-border-width: 2;" />
+      <PasswordField fx:id="passwordUtente" layoutX="638.0" layoutY="514.0" prefHeight="32.0" prefWidth="300.0" style="-fx-border-color: add9f4; -fx-border-width: 2;" />
+      <PasswordField fx:id="passwordField" layoutX="642.0" layoutY="607.0" prefHeight="32.0" prefWidth="300.0" style="-fx-border-color: add9f4; -fx-border-width: 2;" />
+      <TextField fx:id="textField" layoutX="642.0" layoutY="607.0" prefHeight="32.0" prefWidth="300.0" style="-fx-border-color: add9f4; -fx-border-width: 2;" visible="false" />
+      <ToggleButton fx:id="toggle" layoutX="903.0" layoutY="609.0" mnemonicParsing="false" onMouseClicked="#visibilita" prefHeight="26.0" prefWidth="34.0" style="-fx-border-color: #77358f; -fx-background-color: white; -fx-border-radius: 15; -fx-background-radius: 15;" />
+      <Button fx:id="salvaButton" layoutX="738.0" layoutY="696.0" mnemonicParsing="false" onMouseClicked="#salvaEContinua" onMouseEntered="#colorChangeGreen" onMouseExited="#colorChangeBasic" prefHeight="20.0" prefWidth="100.0" style="-fx-background-color: white; -fx-border-color: #2aaa4a; -fx-border-width: 2;" text="Salva" textFill="#2aaa4a">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Label fx:id="erroreCompilazioneRegistrazione" layoutX="675.0" layoutY="142.0" text="Tutti i campi devono essere compilati!" textFill="#f64c4c" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="usernameEsistente" layoutX="718.0" layoutY="433.0" text="Username già esistente!" textFill="#f64c4c" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorePassword" layoutX="687.0" layoutY="652.0" text="La password non soddisfa i criteri!" textFill="#f64c4c" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="204.0" fitWidth="272.0" layoutX="985.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/lampadina1.PNG" />
+         </image>
+      </ImageView>
+      <Text layoutX="1003.0" layoutY="567.0" strokeType="OUTSIDE" strokeWidth="0.0" text="                      Attenzione!&#10; - Deve contenere almeno 8 caratteri&#10; - Le due password devono coincidere">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="814.0" fitWidth="480.0" layoutX="-14.0" layoutY="-52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/accedi.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DefinizioniLivelliController">
+   <children>
+      <Button fx:id="close" layoutX="1270.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#closeButton" prefHeight="26.0" prefWidth="31.0" text="Button">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@../immagini/close.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <Button fx:id="indietro" layoutX="1228.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#paginaPrecedente" prefHeight="26.0" prefWidth="41.0" text="Button">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@../immagini/indietro.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <ImageView fitHeight="44.0" fitWidth="49.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/user.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="utente" layoutX="67.0" layoutY="13.0" onMouseClicked="#popUpUtente" text="Label" underline="true">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="391.0" fitWidth="493.0" layoutX="-3.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/livelli1.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="350.0" fitWidth="493.0" layoutX="808.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/livelli11.PNG" />
+         </image>
+      </ImageView>
+      <Text layoutX="334.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assegna le definizioni ">
+         <font>
+            <Font name="Georgia Bold" size="55.0" />
+         </font>
+      </Text>
+<<<<<<< HEAD
+      <Text layoutX="264.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Avrai a disposizione una serie di definizioni e dovrai scegliere o scrivere nel riquadro corrispondente il termine&#10;a cui si riferisce la definizione data, entro un tempo limite.&#10;I livelli veranno considerati superati se e solo se avrai risposto correttamente a 3 domande." textAlignment="CENTER">
+=======
+      <Text layoutX="264.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Avrai a disposizione una serie di definizioni e dovrai scegliere o scrivere nel riquadro corrispondente il termine&#10;a cui si riferisce la definizione data, entro un tempo limite.&#10;I livelli verranno considerati superati se e solo se avrai risposto correttamente a 3 domande." textAlignment="CENTER">
+>>>>>>> branch 'master' of https://github.com/IleniaCata/Progetto23.git
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <Button fx:id="base" layoutX="243.0" layoutY="298.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-border-color: #F64C4C; -fx-border-width: 2; -fx-background-color: white;" text="Livello base">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="medio" layoutX="557.0" layoutY="381.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2;" text="Livello medio">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Label fx:id="erroreEsercizi" layoutX="335.0" layoutY="461.0" text="Per svolgere gli esercizi di livello superiore, è necessario superare con successo gli esercizi precedenti!" textFill="#f64c4c" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Button fx:id="avanzato" layoutX="871.0" layoutY="298.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" style="-fx-background-color: white; -fx-border-color: #F64C4C; -fx-border-width: 2;" text="Livello avanzato ">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="130.0" fitWidth="638.0" layoutX="330.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/esempio_definizioni.PNG" />
+         </image>
+      </ImageView>
+      <Text layoutX="330.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esempio: ">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

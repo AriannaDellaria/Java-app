@@ -1,0 +1,58 @@
+
+utente:
+Mario
+stelline:
+★★★★
+commento:
+carina!
+////
+****
+utente:
+Pippo
+stelline:
+★★★★
+commento:
+
+////
+****
+utente:
+Alice
+stelline:
+★★★★★
+commento:
+Grazie a questa applicazione ho capito come programmare in java!
+////
+****
+utente:
+Bob
+stelline:
+★★★
+commento:
+L'applicazione è molto bella, ma avrei voluto più esercizi!
+////
+****
+utente:
+Trudy
+stelline:
+★★★★★
+commento:
+Stupenda! Grazie a questa applicazione sono riuscita a superare l'esame di programmazione! 
+Peccato non esista per Python
+////
+****
+utente:
+Giacomo
+stelline:
+★★★★
+commento:
+Bella ed è anche senza pubblicità!! 
+////
+utente:
+prova1
+stelline:
+★★★★★
+commento:
+bella
+
+////
+****

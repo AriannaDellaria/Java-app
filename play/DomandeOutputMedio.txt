@@ -1,0 +1,159 @@
+codice:
+import java.util.Scanner;
+class Esercizio1{
+	public static void main (String[] args){
+		int x = 2;
+        
+        for (int i = 1; i <= 3; i++) {
+            x = x * i;
+            System.out.print(x + " ");
+        }
+	}
+}
+////
+domanda:
+Qual è la sequenza stampata? 
+opzioni:
+2 4 12
+2 6 18
+2 3 4
+1 2 3
+++++
+risposta:
+2 4 12
+****
+codice:
+import java.util.Scanner;
+class Esercizio2{
+	public static void main(String[] args) {
+	Scanner scan = new Scanner(System.in);
+	
+	  System.out.println("Inserisci un numero: ");
+	  int x1 = scan.nextInt(); 
+	  System.out.println("Inserisci un altro numero: ");
+	  int x2 = scan.nextInt(); 
+	  
+	  System.out.println("Quanti numeri dispari vuoi generare?");
+      int count = scan.nextInt();
+
+      int numeriGenerati = 0;
+        
+      while (numeriGenerati < count) {
+      	int num_cas = (int) (x1 + Math.random() * (x2 - x1 + 1));
+            
+        if (num_cas % 2 != 0) { 
+      		System.out.println(num_cas);
+            numeriGenerati++; 
+        }
+	  }
+	}
+}
+////
+domanda:
+Se inserico x1=1, x2=10 e count=7, verranno generati:
+opzioni:
+tutti numeri dispari tra 1 e 10 in ordine
+8 6 3 0 1 5 4
+7 numeri dispari casuali
+10 numeri dispari casuali
+++++
+risposta:
+7 numeri dispari casuali
+****
+codice:
+public class Esercizio3 {
+    public static void main(String[] args) {
+        int[][] matrice = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+        
+        matrice[1][2] = 10; 
+
+        for (int i = 0; i < matrice.length; i++) {
+            for (int j = 0; j < matrice[i].length; j++) {
+                System.out.print(matrice[i][j] + " ");
+            }
+            System.out.println(); 
+        }
+    }
+}
+
+////
+domanda:
+Quale matrice viene generata?
+opzioni:
+{{1 2 3}; {4 5 6}; {7 8 9}}
+{{1 2 3}; {4 5 10}; {7 8 9}}
+{{10 2 3}; {4 5 6}; {7 8 9}}
+{{1 5 3}; {4 5 2}; {7 8 9}}
+++++
+risposta:
+{{1 2 3}; {4 5 10}; {7 8 9}}
+****
+codice:
+import java.util.Scanner;
+public class Esercizio4 {
+    public static void main(String[] args) {
+        int a = 5;
+        int b = 10;
+        
+        modificaA(a);
+        b = modificaB(b);
+
+        System.out.println("Finali: a = " + a + ", b = " + b);
+    }
+
+    public static void modificaA(int x) {
+        x = x + 5;
+    }
+
+    public static int modificaB(int y) {
+        y = y * 2;
+        return y;
+    }
+}
+////
+domanda:
+Quale stampa si ottiene con l'uso di questi metodi?
+opzioni:
+Finali: a = 5, b = 20
+Finali: a = 5, b = 10
+Finali: a = x+5, b = y
+Finali: a = 10, b = 20
+++++
+risposta:
+Finali: a = 5, b = 20
+****
+codice:
+public class Esercizio5 {
+    public static void ordineNumerico(int N, int M, int count){
+		if(count >= N)
+			return;
+		if(count % M != 0){
+			System.out.print(count + " ");	
+		}
+		ordineNumerico(N, M, count+1);
+	}
+	public static void ordineNumerico(int N, int M){
+		ordineNumerico(N, M, 1);
+		System.out.println();
+	}
+
+    public static void main(String[] args) {
+    	ordineNumerico(13, 5);
+    }
+}
+////
+domanda:
+Quale sequenza numerica stampa questa ricorsione?
+opzioni:
+12 11 9 8 7 6 4 3 2 1
+1 2 3 4 5 6 7 8 9 10 11 12 13
+5 10
+1 2 3 4 6 7 8 9 11 12
+++++
+risposta:
+1 2 3 4 6 7 8 9 11 12
+****

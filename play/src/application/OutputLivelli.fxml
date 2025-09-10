@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OutputLivelliController">
+   <children>
+      <Button fx:id="close" layoutX="1267.0" layoutY="-1.0" mnemonicParsing="false" onMouseClicked="#closeButton" prefHeight="26.0" prefWidth="38.0" text="Button">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@../immagini/close.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <Button fx:id="indietro" layoutX="1219.0" layoutY="-1.0" mnemonicParsing="false" onMouseClicked="#paginaPrecedente" prefHeight="26.0" prefWidth="38.0" text="Button">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@../immagini/indietro.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <Label fx:id="utente" layoutX="67.0" layoutY="13.0" onMouseClicked="#popUpUtente" text="Label" underline="true">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="44.0" fitWidth="49.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="391.0" fitWidth="493.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/livelli2.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="350.0" fitWidth="493.0" layoutX="827.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/livelli22.PNG" />
+         </image>
+      </ImageView>
+      <Text layoutX="410.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prevedi l'output">
+         <font>
+            <Font name="Georgia Bold" size="55.0" />
+         </font>
+      </Text>
+      <Text layoutX="292.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Avrai a disposizione una serie di programmi di cui dovrai prevedere l'output e, una volta letta la domanda, dovrai scegliere tra le opzioni proposte entro un tempo limite.&#10;I livelli verranno considerati superati se e solo se avrai risposto correttamente a 3 domande.&#10; &#10;&#10;" textAlignment="CENTER" wrappingWidth="716.274169921875">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Button fx:id="base" layoutX="243.0" layoutY="277.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-border-color: #2379be; -fx-background-color: white; -fx-border-width: 2;" text="Livello base">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="avanzato" layoutX="869.0" layoutY="277.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-background-color: white; -fx-border-color: #2379be; -fx-border-width: 2;" text="Livello avanzato">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="medio" layoutX="557.0" layoutY="364.0" mnemonicParsing="false" onMouseClicked="#paginaSuccessiva" onMouseEntered="#entrata" onMouseExited="#uscita" prefHeight="43.0" prefWidth="185.0" style="-fx-background-color: WHITE; -fx-border-color: #2379be; -fx-border-width: 2;" text="Livello medio">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Label fx:id="erroreEsercizi" layoutX="336.0" layoutY="452.0" text="Per svolgere gli esercizi di livello superiore, è necessario superare con successo gli esercizi precedenti!" textFill="#f64c4c" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Text layoutX="371.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Esempio:">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="144.0" fitWidth="558.0" layoutX="371.0" layoutY="535.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../immagini/esempio_output.PNG" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

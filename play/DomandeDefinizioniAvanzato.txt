@@ -1,0 +1,25 @@
+domanda: 
+Una classe che non può essere istanziata e può contenere metodi astratti e metodi concreti
+risposta: 
+Astratta
+****
+domanda:
+La capacità di un oggetto di assumere molte forme.
+risposta: 
+Polimorfismo
+****
+domanda: 
+Un tipo di dato speciale che consente di definire un insieme di costanti nominali.
+risposta: 
+Enumerazione
+****
+domanda: 
+Una struttura che consente di specificare metodi che una classe deve implementare.
+risposta:
+Interfaccia
+****
+domanda: 
+Un principio che consente a una classe di ereditare attributi e metodi da un'altra classe
+risposta: 
+Ereditarietà
+****

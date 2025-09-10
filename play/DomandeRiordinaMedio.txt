@@ -1,0 +1,135 @@
+codice:
+System.out.println("inserisci un numero"); 
+int n = scan.nextInt();
+////
+		A.add(n); 
+			if(n < 0 || n > 100) {
+				break; 
+			} 
+		}
+    }
+}
+////
+import java.util.ArrayList; 
+import java.util.Scanner; 
+public class Esercizio1 { 
+	public static void main(String[] args) { 
+	Scanner scan = new Scanner(System.in); 
+	ArrayList<Integer> A = new ArrayList<Integer>(); 
+////
+while(true) { 
+////
+++++
+risposta:
+CDAB
+****
+codice:
+public class Esercizio2 { 
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in); 
+        Integer numPrecedente = null; 
+        int x;
+////
+		System.out.println("Hai inserito due numeri uguali di seguito");
+    }
+} 
+////
+do { 
+	System.out.println("Inserisci un numero"); 
+    x = scan.nextInt(); 
+            
+	if (numPrecedente != null && x == numPrecedente) {
+		break;
+	} else {
+		numPrecedente = x;
+	}
+}
+////
+while (true);
+////
+++++
+risposta:
+ACDB
+****
+codice:
+int somma = 0;
+////
+for (int j = 0; j < m[i].length; j++) {
+////
+			somma = somma + m[i][j];
+   	    		if (somma >= 100) {
+   	    		contatore++; 
+   	    		break; 
+   	    		}
+   	    	}
+   	    }
+   	    System.out.println(contatore); 
+   	  }
+ }
+////
+import java.util.Scanner; 
+public class Esercizio3 {
+    public static void main(String[] args) {
+    	int[][] m = {
+    		{5,1,2,3},
+    		{5,10,20,70},
+    		{7,7,9,5},
+    		{90,1,5,7}
+   	    };
+   	    
+   	    int contatore = 0; 
+   	    
+   	    for (int i = 0; i < m.length; i++) {
+////
+++++
+risposta:
+DABC
+****
+codice:
+if (i == 5) {
+	break;
+}
+System.out.print(i);
+////
+for(int i = 1; i <= 10; i++) {
+////
+public class Esercizio4 {
+	public static void main(String[] args) {
+		for(int j = 1; j <= 10; j++) {
+////
+			}
+      	System.out.println();
+        System.out.println("Fuori dal ciclo interno");
+    	}
+	System.out.println("Fuori dal ciclo");
+	}
+}
+////
+++++
+risposta:
+CBAD
+****
+codice:
+for (int i = 0; i < A.length; i++) { 
+	A[i] = scan.nextInt();
+}
+////
+int[] A = new int[n];
+////
+		for (int i = 0; i < A.length; i++) { 
+			System.out.print(A[i] + " ");
+		} 
+    }
+}
+////
+import java.util.Scanner; 
+public class Esercizio5{
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("dammi un intero");
+		int n = scan.nextInt();
+////
+++++
+risposta:
+DBAC
+****
